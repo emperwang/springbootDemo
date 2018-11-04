@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>hello client</h1>
+    <span id="message"></span><br/>
+    <input id="text" type="text"/><button onclick="send()">send-message</button>
+    <br>
+    <button onclick="closeWebSocket()">close-connection</button>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/plugins/sockjs.min.js}"></script>
+<script th:src="@{/function.js}"></script>
+</body>
+</html>
