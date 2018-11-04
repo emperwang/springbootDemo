@@ -1,6 +1,9 @@
 ##ignore this file##
 /target/
 /RemoteSystemsTempFiles/
+target
+.class
+classes
 .idea
 .metadata
 .recommenders
