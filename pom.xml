@@ -10,6 +10,7 @@
     <modules>
         <module>websocket</module>
         <module>LogoReplace</module>
+        <module>InterceptorDemo</module>
     </modules>
     <packaging>pom</packaging>
 
