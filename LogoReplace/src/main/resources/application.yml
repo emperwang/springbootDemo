@@ -1,0 +1,8 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /banner
+
+#用于logo显示版本号
+LogoReplace:
+  version: 4.0.0
