@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>thymeleaf base operation-2</title>
+</head>
+<body>
+
+    <!--三种不同的引入方法-->
+    <!--th:insert 是在div中插入代码块   即多了一层div-->
+    <!--这里的footer是文件名字-->
+    <div th:insert="footer :: copy"></div>
+    <!--th:replace 是将代码块代替当前div  其html结构和之前一致-->
+    <div th:replace="footer :: copy"></div>
+    <!--th:include 是将代码块内容插入到div中  少了一层footer-->
+    <div th:include="footer :: copy"></div>
+</body>
+</html>
+
+
+<!--结果:-->
+<!--th:insert-->
+<!--
+<div>
+    <footer>
+    $copyright:2011 The Good Thymes Virtual Grocery
+    </footer>
+</div>
+-->
+<!--th:replace-->
+<!--
+<footer>
+    $copyright:2011 The Good Thymes Virtual Grocery
+</footer>
+-->
+<!--th:include-->
+<!--
+<div>
+    $copyright:2011 The Good Thymes Virtual Grocery
+</div>
+-->

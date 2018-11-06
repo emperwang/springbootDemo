@@ -11,6 +11,7 @@
         <module>websocket</module>
         <module>LogoReplace</module>
         <module>InterceptorDemo</module>
+        <module>ThymeleafDemo</module>
     </modules>
     <packaging>pom</packaging>
 
