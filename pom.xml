@@ -13,6 +13,7 @@
         <module>InterceptorDemo</module>
         <module>ThymeleafDemo</module>
         <module>SwaggerDemo</module>
+        <module>ElasticsearchDemo</module>
     </modules>
     <packaging>pom</packaging>
 

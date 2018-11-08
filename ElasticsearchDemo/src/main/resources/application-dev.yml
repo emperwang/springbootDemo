@@ -1,0 +1,11 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /elasticsearch
+spring:
+  data:
+    elasticsearch:
+      cluster-name: name1          #集群名称
+      cluster-nodes: 192.168.72.18:9300
+      repositories:
+        enabled: true        #es地址
