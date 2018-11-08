@@ -1,0 +1,5 @@
+更多信息可以看一下shire官网：
+http://shiro.apache.org/
+
+这里有一个需要注意的地方：
+    指定schema.sql的位置时，需要使用classpath，不然就会报找不到的错误

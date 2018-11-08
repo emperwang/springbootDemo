@@ -1,0 +1,1 @@
+INSERT INTO user (id,name,age) values(1,'merryYou',10);

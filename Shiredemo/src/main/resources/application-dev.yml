@@ -1,0 +1,22 @@
+server:
+  port: 8888
+  servlet:
+    context-path:  /shire
+spring:
+  jpa:  #jpa的一些属性   和hibernate类似
+    show-sql: true
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate.format_sql: false
+  datasource:  #配置数据源
+    url: jdbc:h2:mem:h2test      #数据库位置
+    platform: h2    #指定平台
+    schema: classpath:sql/schema.sql        #启动运行的脚本   建表
+    data: classpath:sql/data.sql          #启动运行的脚本   插入数据
+logging:
+  level:
+    org.springframework.web: DEBUG   #配置spring web日志级别
+
+
