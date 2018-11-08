@@ -1,0 +1,12 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /rabbit
+spring:
+  rabbitmq:
+    host: 192.168.72.11
+    port: 5672
+    username: admin
+    password: admin
+  application:
+    name: rabbitMQ-demo

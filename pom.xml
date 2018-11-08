@@ -14,6 +14,7 @@
         <module>ThymeleafDemo</module>
         <module>SwaggerDemo</module>
         <module>ElasticsearchDemo</module>
+        <module>RabbitmQDemo</module>
     </modules>
     <packaging>pom</packaging>
 
