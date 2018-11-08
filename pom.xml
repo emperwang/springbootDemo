@@ -12,6 +12,7 @@
         <module>LogoReplace</module>
         <module>InterceptorDemo</module>
         <module>ThymeleafDemo</module>
+        <module>SwaggerDemo</module>
     </modules>
     <packaging>pom</packaging>
 
