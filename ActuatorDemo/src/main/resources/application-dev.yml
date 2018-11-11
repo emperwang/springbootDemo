@@ -1,0 +1,16 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /actuatordemo
+management:
+  endpoints:
+    web:
+      path-mapping:
+        health: rest_health  #把health的访问路径修改为rest_health
+      exposure:
+        include: "*"         #包含所有端点 s
+  endpoint:
+    health:
+      show-details: always    #展示详细信息
+    shutdown:
+      enabled: true   #可以关闭指定的端点

@@ -16,6 +16,7 @@
         <module>ElasticsearchDemo</module>
         <module>RabbitmQDemo</module>
         <module>Shiredemo</module>
+        <module>ActuatorDemo</module>
     </modules>
     <packaging>pom</packaging>
 
