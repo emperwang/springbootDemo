@@ -17,6 +17,7 @@
         <module>RabbitmQDemo</module>
         <module>Shiredemo</module>
         <module>ActuatorDemo</module>
+        <module>UploadDownloadDemo</module>
     </modules>
     <packaging>pom</packaging>
 
