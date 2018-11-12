@@ -18,6 +18,7 @@
         <module>Shiredemo</module>
         <module>ActuatorDemo</module>
         <module>UploadDownloadDemo</module>
+        <module>SafetyDemo</module>
     </modules>
     <packaging>pom</packaging>
 
