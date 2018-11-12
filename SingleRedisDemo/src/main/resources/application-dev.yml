@@ -1,0 +1,19 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /singleredis
+spring:
+  redis:
+    port: 6379
+    host: 192.168.72.18
+    database: 0
+  cache:
+    type: redis
+    redis:
+      cache-null-values: false
+      time-to-live: 3600000ms
+logging:
+  level:
+    root: info
+
+

@@ -20,6 +20,7 @@
         <module>UploadDownloadDemo</module>
         <module>SafetyDemo</module>
         <module>GenerateMybatisDemo</module>
+        <module>SingleRedisDemo</module>
     </modules>
     <packaging>pom</packaging>
 
