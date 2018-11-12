@@ -19,6 +19,7 @@
         <module>ActuatorDemo</module>
         <module>UploadDownloadDemo</module>
         <module>SafetyDemo</module>
+        <module>GenerateMybatisDemo</module>
     </modules>
     <packaging>pom</packaging>
 

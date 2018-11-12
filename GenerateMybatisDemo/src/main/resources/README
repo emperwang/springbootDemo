@@ -1,0 +1,2 @@
+加入mybatis-gernerate plugin时，一定要注意添加的位置
+是和pluginManagement同级别的plugins下，不然就不会生效，在右侧的maven project中不会显示
