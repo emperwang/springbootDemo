@@ -21,6 +21,7 @@
         <module>SafetyDemo</module>
         <module>GenerateMybatisDemo</module>
         <module>SingleRedisDemo</module>
+        <module>SpringbootWebServiceDemo</module>
     </modules>
     <packaging>pom</packaging>
 

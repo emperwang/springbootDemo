@@ -1,0 +1,9 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /webdemo
+
+#这里修改webservice的访问路径,实验发现不管用  修改后仍然为services
+#spring:
+#  webservices:
+#    path: /webservices            #修改webservice的访问路径

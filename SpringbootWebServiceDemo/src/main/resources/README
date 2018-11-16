@@ -1,0 +1,6 @@
+生成调用接口的方法,也可以使用cxf的命令行
+在D:\Programe_files\apacheCxf\apache-cxf-2.7.13\bin中使用:
+
+wsdl2java http://10.4.2.21:8888/webservices/UserService?wsdl
+(wsdl2java是命令,  后面是接口的地址)
+就会生成调用接口的代码...
