@@ -31,6 +31,11 @@ public class WebConfig {
         return new ServletRegistrationBean(new CXFServlet(), "/webservices/*");
     }
 
+    /**
+     * 发布接口    一个接口对应一个endpoint
+     * 发布多个服务 就要实现多个endpoint
+     * @return
+     */
     @Bean
     public Endpoint endpoint(){
         EndpointImpl endpoint = new EndpointImpl(bus, userService);
