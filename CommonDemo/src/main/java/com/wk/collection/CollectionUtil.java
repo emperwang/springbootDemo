@@ -56,7 +56,7 @@ public class CollectionUtil {
         return new LinkedHashMap<>();
     }
 
-    public static <K,V> LinkedHashSet<K,V> newLinkedHashSet(){
+    public static <E> LinkedHashSet<E> newLinkedHashSet(){
         return new LinkedHashSet<>();
     }
 
@@ -77,7 +77,7 @@ public class CollectionUtil {
     public static <E>ConcurrentLinkedQueue<E> newConcurrentLinkedQueue(){
         return  new ConcurrentLinkedQueue<>();
     }
-    
+
     /**
      *  创建一个指定长度的空list
      * @param length
