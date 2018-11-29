@@ -1,5 +1,7 @@
 package com.wk.thread;
 
+import java.util.concurrent.ThreadFactory;
+
 public class ThreadUtil {
 
     public static ThreadGroup currentGroup(){
@@ -22,6 +24,12 @@ public class ThreadUtil {
     public static void runThread(Runnable runnable,String name){
         Thread thread = new Thread(runnable, name);
         thread.start();
+    }
+
+    public  static void runDefaultThread(Runnable runnable){
+        ThreadGroupContatiner instance = ThreadGroupContatiner.getInstance();
+        ThreadFactory factory = instance.defaultFactory();
+        factory.newThread(runnable).start();
     }
 
     public static SimpleThreadFactory createFactory(ThreadGroup group,String prefix){
