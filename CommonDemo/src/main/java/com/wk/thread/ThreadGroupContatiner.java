@@ -56,15 +56,16 @@ public class ThreadGroupContatiner {
         Collection<ThreadGroup> groups = ThreadUtils.findThreadGroupsByName(groupName);
         return groups.isEmpty() ? null : groups.iterator().next();
     }
-    //需要验证一下功能是什么？
+
     //把线程组中的所有线程停止下来
     public void stop(){
         //activeCount 线程组中的线程活跃数量
         Thread[] threads = new Thread[defaultGroup.activeCount()];
-        //这里的enumerate 什么功能
+        //这里的enumerate: 将此线程组中每个活动线程复制到指定的数组中
         int c = defaultGroup.enumerate(threads);
         for(int i=0; i <c; i++){
             Thread thread = threads[i];
+            //interrupt:中断此线程s
             thread.interrupt();
         }
     }
@@ -73,6 +74,7 @@ public class ThreadGroupContatiner {
      * 此线程组和其子线程组中的所有线程都会被停止
      */
     public void destory(){
+        //销毁此线程组及其所有子组
         defaultGroup.destroy();
     }
 
