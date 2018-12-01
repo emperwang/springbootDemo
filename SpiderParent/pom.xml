@@ -5,6 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <packaging>pom</packaging>
+    <modules>
+        <module>SpiderDemo1</module>
+    </modules>
 
     <groupId>com.wk.spider</groupId>
     <artifactId>SpiderParent</artifactId>
