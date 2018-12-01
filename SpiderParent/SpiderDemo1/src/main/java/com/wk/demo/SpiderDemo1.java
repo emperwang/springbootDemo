@@ -7,6 +7,9 @@ import java.net.URLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 爬取一个网站中所有的网站，并保存在一个本地文件中，可以进行离线分析
+ */
 public class SpiderDemo1 {
     public static void main(String[] args) {
         URL url = null;
