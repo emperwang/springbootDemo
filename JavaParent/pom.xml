@@ -13,6 +13,7 @@
         <module>CommonDemo</module>
         <module>CommonModule</module>
         <module>CoreModule</module>
+        <module>KafkaDemo</module>
     </modules>
 
     <properties>
@@ -22,6 +23,7 @@
         <commons-lang3.version>3.5</commons-lang3.version>
         <guave.version>14.0.1</guave.version>
         <gson.version>2.5</gson.version>
+        <kafka.version>0.10.0.1</kafka.version>
     </properties>
 
     <dependencies>
