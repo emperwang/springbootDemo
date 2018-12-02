@@ -9,7 +9,8 @@ import java.util.Map;
 public class KafkaOffsetQueue {
     private static KafkaOffsetQueue INSTANCE = new KafkaOffsetQueue();
     private MessageQueue<Map<TopicPartition,OffsetAndMetadata>> queue;
-    private KafkaOffsetQueue{
+
+    private KafkaOffsetQueue(){
         this.queue = MessageQueue.create();
     }
 
