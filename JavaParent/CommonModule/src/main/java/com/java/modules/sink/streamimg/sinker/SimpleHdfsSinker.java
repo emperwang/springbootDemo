@@ -1,4 +1,4 @@
-package com.java.modules.sink.filesink;
+package com.java.modules.sink.streamimg.sinker;
 
 import com.wk.data.DataWriter;
 import com.wk.hdfs.hadoop.SimpleHdfsFileWriter;
@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 public class SimpleHdfsSinker<T> extends AbstractFileSinker<T> {
     private SimpleHdfsSingleton hdfs;
 
-    public SimpleHdfsSinker(SinkConfig config){
+    public SimpleHdfsSinker(SinkerConfig config){
         super(config);
         this.hdfs = SimpleHdfsSingleton.hdfs();
     }

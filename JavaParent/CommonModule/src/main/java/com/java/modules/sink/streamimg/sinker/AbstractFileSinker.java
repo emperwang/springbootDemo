@@ -1,4 +1,4 @@
-package com.java.modules.sink.filesink;
+package com.java.modules.sink.streamimg.sinker;
 
 import com.java.modules.sink.Coverter;
 import com.java.modules.sink.PipelineSinker;
@@ -16,7 +16,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public abstract class AbstractFileSinker<T> extends PipelineSinker<T> {
     protected static final AtomicInteger id = new AtomicInteger(0);
     protected final ReentrantLock lock;
-    protected final SinkConfig config;
+    protected final SinkerConfig config;
     protected final String tempSuffix = ".tmp";
     protected Coverter<T> converter;
     protected String lastFilePath;
@@ -25,7 +25,7 @@ public abstract class AbstractFileSinker<T> extends PipelineSinker<T> {
     protected long cnt;
     protected long size;
 
-    protected AbstractFileSinker(SinkConfig config){
+    protected AbstractFileSinker(SinkerConfig config){
         this.lock = new ReentrantLock();
         this.metricMap = CollectionUtil.newLinkedHashMap();
         this.config = config;

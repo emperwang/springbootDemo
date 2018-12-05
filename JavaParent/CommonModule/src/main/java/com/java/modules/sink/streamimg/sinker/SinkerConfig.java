@@ -1,8 +1,8 @@
-package com.java.modules.sink.filesink;
+package com.java.modules.sink.streamimg.sinker;
 
 import java.util.Properties;
 
-public class SinkConfig {
+public class SinkerConfig {
     /**
      * Thread Group Name
      */
