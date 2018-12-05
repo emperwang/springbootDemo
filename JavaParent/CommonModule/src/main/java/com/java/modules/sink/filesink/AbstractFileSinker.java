@@ -1,8 +1,9 @@
 package com.java.modules.sink.filesink;
 
-import com.wk.collection.CollectionUtil;
 import com.java.modules.sink.Coverter;
 import com.java.modules.sink.PipelineSinker;
+import com.wk.collection.CollectionUtil;
+import com.wk.data.DataWriter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 

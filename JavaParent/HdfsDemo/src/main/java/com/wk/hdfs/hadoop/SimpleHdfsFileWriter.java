@@ -1,6 +1,6 @@
 package com.wk.hdfs.hadoop;
 
-import com.wk.sink.DataWriter;
+import com.wk.data.DataWriter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.hadoop.fs.Path;
 
