@@ -5,7 +5,7 @@ import com.wk.api.bean.User;
 import com.wk.api.service.UserService;
 import org.springframework.stereotype.Component;
 //此处的service是dubbo用于暴露服务
-//@Service
+@Service
 @Component
 public class UserServiceImpl implements UserService {
 
