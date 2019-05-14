@@ -20,6 +20,10 @@ DubboProvider-bean：使用java-bean进行配置的提供者
 
 DubboProvider-xml：使用xml进行配置的提供者
 
+DubboConsumer-xml-hystrix：使用hystrix实现容错功能。因为hystrix和springboot2.04版本整合有问题，所以按照1.5.10.RELEASE 这个springcloud-Edgware.SR2版本，使用了hystrix1.4.3版本
+
+DubboProvider-xml-hystrix：使用hystrix实现容错功能。因为hystrix和springboot2.04版本整合有问题，所以按照1.5.10.RELEASE 这个springcloud-Edgware.SR2版本，使用了hystrix1.4.3版本
+
 因为使用application配置文件需要配合注解才能，而且有些功能注解没有实现，如对方法进行配置。
 
 

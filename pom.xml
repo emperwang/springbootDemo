@@ -30,7 +30,9 @@
         <module>Dubbo/DubboProvider-bean</module>
         <module>Dubbo/DubboConsumer-bean</module>
         <module>Dubbo/DubboProvider-xml</module>
+        <!--<module>Dubbo/DubboProvider-xml-hystrix</module>-->
         <module>Dubbo/DubboConsumer-xml</module>
+        <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
     <packaging>pom</packaging>
 
