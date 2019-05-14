@@ -24,9 +24,13 @@
         <module>SpringbootWebServiceDemo</module>
         <module>QuartzDemo</module>
         <module>MyBatisDemo</module>
+        <module>Dubbo/DubboAPI</module>
         <module>Dubbo/DubboProvider</module>
         <module>Dubbo/DubboConsumer</module>
-        <module>Dubbo/DubboAPI</module>
+        <module>Dubbo/DubboProvider-bean</module>
+        <module>Dubbo/DubboConsumer-bean</module>
+        <module>Dubbo/DubboProvider-xml</module>
+        <module>Dubbo/DubboConsumer-xml</module>
     </modules>
     <packaging>pom</packaging>
 
