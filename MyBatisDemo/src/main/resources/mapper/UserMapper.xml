@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wk.mapper.UserMapper">
+    <resultMap id="BaseUserResult" type="com.wk.Entity.User">
+        <id column="id" jdbcType="INTEGER" property="int"/>
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+    </resultMap>
+
+    <select id="listAll" resultType="com.wk.Entity.User">
+        select * from user;
+    </select>
+</mapper>
