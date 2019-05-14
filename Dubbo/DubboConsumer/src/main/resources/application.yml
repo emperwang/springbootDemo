@@ -1,0 +1,9 @@
+dubbo:
+  application:
+    name: boot-dubbo-consumer   # dubbo服务名字
+  registry:
+    address: zookeeper://127.0.0.1:2181  #dubbo注册中心地址
+  monitor:
+    protocol: registry  # 监控中心的地址
+server:
+  port: 9000

@@ -23,6 +23,10 @@
         <module>SingleRedisDemo</module>
         <module>SpringbootWebServiceDemo</module>
         <module>QuartzDemo</module>
+        <module>MyBatisDemo</module>
+        <module>Dubbo/DubboProvider</module>
+        <module>Dubbo/DubboConsumer</module>
+        <module>Dubbo/DubboAPI</module>
     </modules>
     <packaging>pom</packaging>
 
