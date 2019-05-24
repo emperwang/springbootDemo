@@ -1,5 +1,6 @@
 package com.security.demo.config1;
 
+import com.security.demo.provider.MytAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,6 +18,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired
     MyPasswordEncoder passwordEncoder;
+    @Autowired
+    MytAuthenticationProvider authenticationProvider;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -37,7 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     //此用于把指定的用户 使用指定的解密方式
     @Autowired
     public void configUser(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
-        auth.eraseCredentials(false);
+        /*auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+        auth.eraseCredentials(false);*/
+        //自定义认证逻辑
+        auth.authenticationProvider(authenticationProvider);
     }
 }

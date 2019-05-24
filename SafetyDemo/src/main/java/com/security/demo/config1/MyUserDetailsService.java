@@ -15,10 +15,10 @@ public class MyUserDetailsService implements UserDetailsService{
         //在此处可以利用用户名去数据库中进行查询，查询到了就封装成一个user对象，返回，不然就返回空。
         //此时前台登陆必须使用admin 123456账户密码才可以
         System.out.println(username);
-        if (username.equals("admin")) {
+        /*if (username.equals("admin")) {
             User user = new User("admin", "123456", AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
             return user;
-        }
-        return null;
+        }*/
+        return new User("admin", "123456", AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }
 }
