@@ -1,5 +1,7 @@
 package com.security.demo.config1;
 
+import com.security.demo.authentication.MyAuthenticationFailHandler;
+import com.security.demo.authentication.MyAuthenticationSuccessHandler;
 import com.security.demo.provider.MytAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +22,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     MyPasswordEncoder passwordEncoder;
     @Autowired
     MytAuthenticationProvider authenticationProvider;
+    @Autowired
+    MyAuthenticationFailHandler failHandler;
+    @Autowired
+    MyAuthenticationSuccessHandler successHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -29,7 +35,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         //successForwardUrl("/success.do")
         //failureUrl("/login-error.do").permitAll()
         http.formLogin()
-                .loginPage("/login").defaultSuccessUrl("/success.do").failureUrl("/login-error.do").permitAll()
+                //.loginPage("/login").defaultSuccessUrl("/success.do").failureUrl("/login-error.do").permitAll()
+                .loginPage("/login").successHandler(successHandler)
+                .failureHandler(failHandler).permitAll()
                 .and()
                 .authorizeRequests().anyRequest().authenticated()  //所有请求需要登陆
                 .and()
