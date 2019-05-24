@@ -2,8 +2,8 @@ server:
   port: 8888
   servlet:
     context-path: /
-spring:
-  security:
-    user:
-      name: user         #设置security的用户
-      password: password     #设置user的用户的密码
+#spring:
+#  security:
+#    user:
+#      name: user         #设置security的用户
+#      password: password     #设置user的用户的密码
