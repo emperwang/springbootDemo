@@ -26,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         //successForwardUrl("/success.do")
         //failureUrl("/login-error.do").permitAll()
         http.formLogin()
+                .loginPage("/login").defaultSuccessUrl("/success.do").failureUrl("/login-error.do").permitAll()
                 .and()
                 .authorizeRequests().anyRequest().authenticated()  //所有请求需要登陆
                 .and()
