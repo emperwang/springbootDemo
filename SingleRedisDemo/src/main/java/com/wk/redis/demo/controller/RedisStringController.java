@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * string 类型操作
  */
-public class RedisController {
+public class RedisStringController {
 
     @Autowired
     RedisTemplate redisTemplate;
