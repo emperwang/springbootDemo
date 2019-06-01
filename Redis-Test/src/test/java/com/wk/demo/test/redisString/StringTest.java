@@ -37,16 +37,16 @@ public class StringTest {
 
     @Test
     public void testGet(){
-        String value = (String) redisTemplate.boundValueOps("stringValue").get();
+        String value = (String) redisTemplate.boundValueOps("stringValue2").get();
         System.out.println(value);
     }
     @Test
     public void testUpdate(){
-        String value = (String) redisTemplate.boundValueOps("stringValue").getAndSet("new Value");
+        String value = (String) redisTemplate.boundValueOps("stringValue2").getAndSet("new Value");
         System.out.println(value);
     }
     @Test
     public void testDelete(){
-        redisTemplate.delete("stringValue");
+        redisTemplate.delete("stringValue2");
     }
 }
