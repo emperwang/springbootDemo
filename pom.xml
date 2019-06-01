@@ -33,6 +33,7 @@
         <!--<module>Dubbo/DubboProvider-xml-hystrix</module>-->
         <module>Dubbo/DubboConsumer-xml</module>
         <module>Redis-Test</module>
+        <module>solr-demo</module>
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
     <packaging>pom</packaging>
