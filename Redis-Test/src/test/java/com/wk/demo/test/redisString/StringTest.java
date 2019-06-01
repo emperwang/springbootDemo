@@ -1,5 +1,8 @@
 package com.wk.demo.test.redisString;
 
+import com.wk.demo.config.redisConf;
+import com.wk.demo.service.getTemplate;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,17 +14,24 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
-@ActiveProfiles
+@ActiveProfiles   //启用application.properties配置文件
 @RunWith(SpringRunner.class)
 public class StringTest {
 
     @Autowired
+    private getTemplate getTemplatel;
+
     private RedisTemplate redisTemplate;
+
+    @Before
+    public void init(){
+        redisTemplate = getTemplatel.getRedisTemplate();
+        System.out.println(redisTemplate);
+    }
 
     @Test
     public void testInsert(){
-        System.out.println(redisTemplate);
-        redisTemplate.boundValueOps("stringValue").set("嘻哈",6, TimeUnit.MINUTES);
+        redisTemplate.boundValueOps("stringValue2").set("value",6, TimeUnit.MINUTES);
         System.out.println("Success");
     }
 
@@ -29,5 +39,14 @@ public class StringTest {
     public void testGet(){
         String value = (String) redisTemplate.boundValueOps("stringValue").get();
         System.out.println(value);
+    }
+    @Test
+    public void testUpdate(){
+        String value = (String) redisTemplate.boundValueOps("stringValue").getAndSet("new Value");
+        System.out.println(value);
+    }
+    @Test
+    public void testDelete(){
+        redisTemplate.delete("stringValue");
     }
 }
