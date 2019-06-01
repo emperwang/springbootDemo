@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Configuration
 public class redisConf {
 
-    //@Bean
+    @Bean
     public RedisTemplate<String,Object> redisTemplate(RedisConnectionFactory redisConnectionFactory){
         Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
         ObjectMapper objectMapper = new ObjectMapper();
@@ -35,7 +35,7 @@ public class redisConf {
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
-    @Bean
+    //@Bean
     public RedisTemplate<Serializable,Serializable> redisTemplate2(RedisConnectionFactory redisConnectionFactory){
         RedisTemplate<Serializable, Serializable> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory);
