@@ -33,7 +33,8 @@ public class SolrController {
         item.setGoodsId(1L);
         item.setSeller("华为2号手机专卖店");
         item.setTitle("华为 Meta9");
-        //item.setPrice(new BigDecimal(2000))        solrTemplate.saveBean(Collection,item);
+        //item.setPrice(new BigDecimal(2000))
+        solrTemplate.saveBean(Collection,item);
         solrTemplate.commit(Collection);
         return "Add success";
     }
