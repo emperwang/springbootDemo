@@ -1,6 +1,7 @@
 package com.wk.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.wk.util.Coder;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -57,11 +58,13 @@ public class DruidConfig {
 
     @Bean("druidDataSource")
     //@Primary   // 多个数据源时  添加上此配置
-    public DataSource masterDataSource(){
+    public DataSource masterDataSource() throws IOException {
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setUrl(url);
         dataSource.setUsername(userName);
-        dataSource.setPassword(password);
+        byte[] bytes = Coder.decryptBASE64(password);
+        String decrptyPass = new String(bytes);
+        dataSource.setPassword(decrptyPass);
         dataSource.setDriverClassName(className);
 
         // 配置
@@ -92,7 +95,7 @@ public class DruidConfig {
         return dataSource;
     }
     @Bean
-    public DataSourceTransactionManager transactionManager(){
+    public DataSourceTransactionManager transactionManager() throws IOException {
         return new DataSourceTransactionManager(masterDataSource());
     }
     @Bean
