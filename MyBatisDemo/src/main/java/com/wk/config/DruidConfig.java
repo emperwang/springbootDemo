@@ -86,8 +86,10 @@ public class DruidConfig {
         }
         Properties properties = new Properties();
         try {
-            properties.load(new ByteArrayInputStream(connectionProperties.split(";")[0].getBytes()));
-            properties.load(new ByteArrayInputStream(connectionProperties.split(";")[1].getBytes()));
+            String[] split = connectionProperties.split(";");
+            for (String str:split) {
+                properties.load(new ByteArrayInputStream(str.getBytes()));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
