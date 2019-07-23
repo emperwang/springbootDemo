@@ -1,7 +1,6 @@
 package com.wk.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.wk.util.Coder;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -62,9 +61,10 @@ public class DruidConfig {
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setUrl(url);
         dataSource.setUsername(userName);
-        byte[] bytes = Coder.decryptBASE64(password);
-        String decrptyPass = new String(bytes);
-        dataSource.setPassword(decrptyPass);
+        // 手动加密方案的解密
+        /*byte[] bytes = Coder.decryptBASE64(password);
+        String decrptyPass = new String(bytes);*/
+        dataSource.setPassword(password);
         dataSource.setDriverClassName(className);
 
         // 配置

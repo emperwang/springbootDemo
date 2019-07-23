@@ -1,3 +1,4 @@
+public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIp1PrijV6/nARUpoOSnk0xv1OrcJmV1snmmHCmBXybKfDFM6QtlFlXr3SfTqg+0ucI+nr5vr4O3bCAnE8ZPJPECAwEAAQ==
 spring:
   application:
     name: mybatis
@@ -7,26 +8,41 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource  #config db pool
     username: root
     #password: admin
-    password: YWRtaW4=
+    #password: YWRtaW4=
+    password: NxEOf5eWuCFYMEjMwbwcH8QayunurgWsPVdKqPPFuvVg//hjPp/lJOLcWSoaWtMLvpxkfy5gOAJKvflCxUhGLw==
+    # 初始化大小
     initialSize: 10
+    # 最小空闲连接数
     minIdle: 10
+    # 最大连接数
     maxActive: 200
     # 配置获取连接等待超时时间
     maxWait: 60000
     # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接
     timeBetweenEvictionRunsMills: 60000
-    # 配置一个连接在池中最小的生存时间，单位毫秒
+    # 配置一个连接在池中最小，最大的生存时间，单位毫秒
     minEvictableIdleTimeMillis: 30000
+    maxEvictableIdleTimeMillis: 60000
+    # 是否自动回收超时连接
+    removeAbandoned: true
+    # 指定连接应该被废弃的时间 秒
+    removeAbandonedTimeOut: 1800
+    # 建议配置为true,不影响性能,并且保证安全性.申请连接的时候检测,如果空间时间大于timeBetweenEvictionRunsMills,
+    # 执行validationQuery检测连接是否有效
     testWhileIdle: true
+    # 申请连接时,执行执行validationQuery检测连接是否有效,做这个配置会降低性能
     testOnBorrow: false
+    # 归还连接时执行执行validationQuery检测连接是否有效,这个配置降低性能
     testOnReturn: false
     # 打开psCache，并指定每个连接上PSCache的大小
+    # PSCache对支持游标的数据库性能提升巨大,比如说oracle,mysql建议关闭
     poolPreparedStatements: true
     maxPoolPreparedStatementPerConnectionSize: 20
     # 配置监控统计拦截的filters
-    filters: stat,wall,slf4j
+    # 通过别名的方式配置扩展插件
+    filters: stat,wall,slf4j,config
     # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
-    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    connectionProperties: config.decrypt=true;config.decrypt.key=${public-key};druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
 server:
   port: 8080
   servlet:
