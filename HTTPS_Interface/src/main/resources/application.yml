@@ -1,0 +1,10 @@
+server:
+  port: 9999
+  ssl:
+    key-alias: tomcat
+    key-store: classpath:tomcat.keystore
+    key-password: 123456
+    key-store-password: 123456
+    key-store-provider: SUN
+    key-store-type: jks
+    enabled: true

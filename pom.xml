@@ -24,6 +24,7 @@
         <module>SpringbootWebServiceDemo</module>
         <module>QuartzDemo</module>
         <module>MyBatisDemo</module>
+        <module>HTTPS_Interface</module>
         <module>Dubbo/DubboAPI</module>
         <module>Dubbo/DubboProvider</module>
         <module>Dubbo/DubboConsumer</module>
