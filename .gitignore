@@ -2,6 +2,8 @@
 /target/
 /RemoteSystemsTempFiles/
 target
+logs
+log
 .class
 classes
 .idea
@@ -11,7 +13,7 @@ Servers
 .classpath
 .project
 .settings     
- ##filter databfile¡¢sln file##
+ ##filter databfileï¿½ï¿½sln file##
 *.iml
 *.mdb  
 *.ldb  
