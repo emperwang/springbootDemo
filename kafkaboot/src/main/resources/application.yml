@@ -1,0 +1,23 @@
+server:
+  port: 8888
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: 192.168.72.18:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      bootstrap-servers: 192.168.72.18:9092
+      auto-offset-reset: earliest
+      group-id: wk-boot-test
+      enable-auto-commit: true
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+logpath:
+  runtime:
+    path: ./logs
+  event:
+    path: ./logs
+  access:
+    path: ./logs
