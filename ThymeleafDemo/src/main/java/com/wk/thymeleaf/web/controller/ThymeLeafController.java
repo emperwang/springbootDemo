@@ -1,6 +1,8 @@
-package com.wk.thymeleaf.controller;
+package com.wk.thymeleaf.web.controller;
 
 import com.wk.thymeleaf.bean.Student;
+import com.wk.thymeleaf.web.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,6 +12,16 @@ import java.util.Map;
 
 @Controller
 public class ThymeLeafController {
+
+    @Autowired
+    private IUserService userService;
+
+    @GetMapping("finduser.do")
+    @ResponseBody
+    public String findUser(){
+        userService.findList();
+        return "success";
+    }
 
     @GetMapping("test.do")
     @ResponseBody
