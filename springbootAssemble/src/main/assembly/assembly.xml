@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly>
+    <!--指定项目环境-->
+    <id>${profileActive}-${project.version}</id>
+    <!--打包格式-->
+    <formats>
+        <format>tar.gz</format>
+        <format>zip</format>
+    </formats>
+
+    <includeBaseDirectory>true</includeBaseDirectory>
+    <fileSets>
+        <!--0755 用户拥有读写执行权限，组和其他用户 读执行
+            0644 用户拥有读写权限，组和其他拥有读
+        -->
+        <!--将src/bin 目录下的所有文件输出到打包后的bin目录中-->
+        <fileSet>
+            <directory>${build.outputDirectory}/bin</directory>
+            <outputDirectory>bin</outputDirectory>
+            <fileMode>0755</fileMode>
+        </fileSet>
+        <!--配置文件放到config目录-->
+        <fileSet>
+            <directory>${build.outputDirectory}/config</directory>
+            <outputDirectory>config</outputDirectory>
+            <fileMode>0644</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>${build.outputDirectory}/logs</directory>
+            <outputDirectory>logs</outputDirectory>
+            <fileMode>0644</fileMode>
+        </fileSet>
+        <!--第三方依赖jar包放入lib目录下-->
+        <fileSet>
+            <directory>${build.directory}/lib</directory>
+            <outputDirectory>lib</outputDirectory>
+            <fileMode>0755</fileMode>
+        </fileSet>
+
+        <!--启动jar包放到boot目录下-->
+        <fileSet>
+            <directory>${build.directory}</directory>
+            <outputDirectory>boot</outputDirectory>
+            <fileMode>0755</fileMode>
+            <includes>
+                <include>${project.build.finalName}.jar</include>
+            </includes>
+        </fileSet>
+
+        <!--包含根目录下的文件-->
+        <fileSet>
+            <directory>${basedir}</directory>
+            <includes>
+                <include>NOTICE</include>
+                <include>LICENSE</include>
+                <include>**.md</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+</assembly>
