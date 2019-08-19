@@ -1,17 +1,17 @@
 #!/bin/bash
-
 BASE=`pwd`
-# 把config配置文件设置到环境变量
-JAR_NAME=${BASE}/../boot/spring-boot-assembly.jar
-CONFIG_PATH=${BASE}/../config
+JAR_NAME=${BASE}/../boot/fcaps-controller.jar
+MPATH=${BASE}/../config
 LIB=${BASE}/../lib
-
-# 把jar包设置到环境变量中
-for i in `ls ${LIB}/*.jar`
+# 设置配置文件
+CONFIG_FILE=${BASE}/../config/CollectorResourceConfig.properties
+# application.yml  配置文件外置
+APP_FILE=${BASE}/../config/
+LOG=logs/runtime.log
+for i in `ls ${LIB}`
 do
-        CONFIG_PATH=$CONFIG_PATH:$i
+        MPATH=${MPATH}:$i
 done
+JAVA_ARG="-Xmx512m -Xms512m -server -Dconfig.path=${CONFIG_FILE} -cp "${MPATH}
 
-JAVA_ARGS="-cp "${CONFIG_PATH}
-# 后续需要修改此配置文件路径设置
-java ${JAVA_ARGS} -jar ${JAR_NAME} --spring.config.location=${BASE}/../config/application.yml
+nohup java ${JAVA_ARG} -jar ${JAR_NAME} -Dspring.profile.active=pro --spring.config.location=${APP_FILE} > ${LOG} 2>&1 &

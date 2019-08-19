@@ -29,6 +29,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
         </dependency>
+        <!--配置文件外置的话  此包需要配置上-->
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
@@ -38,6 +39,7 @@
     <build>
         <finalName>spring-boot-assembly</finalName>
         <resources>
+            <!--打包到业务包内-->
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
@@ -142,7 +144,7 @@
                         </goals>
                         <configuration>
                             <outputDirectory>target/lib</outputDirectory>
-<!--                            <overWriteRelease>false</overWriteRelease>-->
+                            <overWriteReleases>false</overWriteReleases>
                             <overWriteSnapshots>false</overWriteSnapshots>
                             <overWriteIfNewer>true</overWriteIfNewer>
                             <includeScope>compile</includeScope>
