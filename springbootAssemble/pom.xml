@@ -101,6 +101,8 @@
                             <artifactId>non-exists</artifactId>
                         </include>
                     </includes>
+                    <addResources>true</addResources>
+                    <outputDirectory>${project.build.directory}/config</outputDirectory>
                 </configuration>
             </plugin>
             <!--自定义maven jar打包内容-->
