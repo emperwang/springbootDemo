@@ -8,3 +8,9 @@ server:
     key-store-provider: SUN
     key-store-type: jks
     enabled: true
+    client-auth: want     # 控制是否是双向认证
+    trust-store: classpath:serverTrust.key
+    trust-store-password: 123456
+spring:
+  profiles:
+    active: pro
