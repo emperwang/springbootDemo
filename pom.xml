@@ -9,7 +9,6 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>websocket</module>
-        <module>WebSocket2</module>
         <module>LogoReplace</module>
         <module>InterceptorDemo</module>
         <module>ThymeleafDemo</module>
