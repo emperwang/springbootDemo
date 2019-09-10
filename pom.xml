@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>websocket</module>
+        <module>webSocket2</module>
         <module>LogoReplace</module>
         <module>InterceptorDemo</module>
         <module>ThymeleafDemo</module>
@@ -37,6 +38,7 @@
         <module>solr-demo</module>
         <module>kafkaboot</module>
         <module>springbootAssemble</module>
+
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
     <packaging>pom</packaging>

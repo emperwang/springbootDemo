@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>socket</title>
+</head>
+<body>
+    <h3>hello web socket</h3>
+    <div>
+        <label>Please Input Your Name</label>
+        <input type="text" id="name">
+        <button id="send" onclick="sendMsg();">Send Msg</button>
+        <button id="send2" onclick="sendMsg2();">Send Msg</button>
+        <button id="close" onclick="disconnect();">Close Connect</button>
+    </div>
+    <p id="response"></p>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/plugins/sockjs.min.js}"></script>
+<script th:src="@{/plugins/stomp.js}"></script>
+<script th:src="@{/function/socketfunction.js}"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+server:
+  port: 8989
+spring:
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: /static/**,/templates/**/,src/java/main
