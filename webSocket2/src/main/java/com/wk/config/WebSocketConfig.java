@@ -18,6 +18,8 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 @Configuration
+// 注解开启使用STOMP协议来传输基于代理(message broker)的消息
+// 这时控制器支持使用@Mesagemapping进行配置
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
     private static Logger log = LoggerFactory.getLogger(WebSocketConfig.class);
@@ -37,8 +39,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
     // 配置消息代理
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
+        // topic对应广播消息
+        // user对应点对点配置
         registry.enableSimpleBroker("/topic","/user");
-
         registry.setUserDestinationPrefix("/user");
     }
 
