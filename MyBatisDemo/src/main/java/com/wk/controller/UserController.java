@@ -31,6 +31,19 @@ public class UserController {
         return beanService.getAllUserBean();
     }
 
+    @RequestMapping(value = "/insert.do",method=RequestMethod.GET)
+    @ResponseBody
+    public String insertUserBean(){
+        UserBean userBean = new UserBean();
+        userBean.setAddress("gd-bj");
+        userBean.setAge(10);
+        userBean.setName("wk");
+
+        beanService.insertAndDelete(userBean);
+        return userBean.toString();
+    }
+
+
     @RequestMapping(value = "/test",method = RequestMethod.GET)
     @ResponseBody
     public String index(){
