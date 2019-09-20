@@ -99,7 +99,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.wk.Entity.UserBean" >
+  <insert id="insert" parameterType="com.wk.Entity.UserBean" useGeneratedKeys="true" keyProperty="id">
     insert into user (id, NAME, age, 
       address)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
