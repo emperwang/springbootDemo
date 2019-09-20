@@ -18,6 +18,7 @@ public class UserBeanServiceImpl implements UserBeanService {
 
     /**
      *  同一个事务内 先插入再删除
+     *  经验证: 同一个事务先插入 后 删除，是可以操作的。
      * @param user
      * @return
      */
