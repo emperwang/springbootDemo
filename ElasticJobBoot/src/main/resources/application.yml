@@ -1,0 +1,12 @@
+server:
+  port: 8989
+
+
+regCenter:
+  serverList: 127.0.0.1:2181
+  namespace: elastic-job-list-boot
+
+stock:
+  cron: 0/5 * * * * ?
+  shardingTotalCount: 2
+  shardingItemParamrters: 0=0,1=1,2=0,3=1
