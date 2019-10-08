@@ -12,7 +12,24 @@ public class QuartzUtil {
 
     @Autowired
     private Scheduler sched;
-
+    /**
+     *  间隔多少秒来执行任务
+     * @param jobClass
+     * @param jobName
+     * @param jobGroupName
+     * @param seconds  间隔多少秒
+     * @throws SchedulerException
+     */
+    public void addSimpleJob(Class<? extends Job> jobClass,String jobName,String jobGroupName,int seconds) throws SchedulerException {
+        JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(jobName, jobGroupName).build();
+        SimpleTrigger simpleTrigger = TriggerBuilder.newTrigger().withIdentity(jobName, jobGroupName)
+                .withSchedule(SimpleScheduleBuilder.repeatSecondlyForever(seconds))
+                .startNow().build();
+        sched.scheduleJob(jobDetail,simpleTrigger);
+        if (!sched.isShutdown()){
+            sched.start();
+        }
+    }
     /**
      * 添加一个job到队列中
      * @param jobclass 任务实现类

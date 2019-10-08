@@ -15,7 +15,11 @@ public class QuartzTrigger implements ApplicationRunner{
     @Override
     public void run(ApplicationArguments args) throws Exception {
         System.out.println("启动quarta任务");
+        // cron Job
         quartzUtil.addOrUpadteJob(TestQuartz.class,
                 "testQuartz","testGroup","0/20 * * * * ? *");
+
+        // simpleJob
+        quartzUtil.addSimpleJob(TestSimpleJob.class,"simple","simpleGroup",90);
     }
 }
