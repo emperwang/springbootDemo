@@ -39,6 +39,11 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>${mybatis-spring.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
