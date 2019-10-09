@@ -8,6 +8,8 @@ spring:
     url: jdbc:mysql://localhost:3306/ffy
     username: root
     password: admin
+  thymeleaf:
+    cache: false
 
 mybatis:
   mapper-locations: classpath:/mapper/*.xml
