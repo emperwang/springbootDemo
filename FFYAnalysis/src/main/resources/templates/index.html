@@ -1,15 +1,20 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script th:src="@{/easyui/jquery.min.js}" charset="utf-8"></></script>
-    <link id="easyuiTheme" rel="stylesheet" type="text/css" th:src="@{/easyui/themes/gray/easyui.css}">
-    <link id="easyuiCss" rel="stylesheet" type="text/css" th:src="@{/easyui/themes/icon.css}">
-    <script type="text/javascript" th:src="@{/easyui/jquery.easyui.min.js}" charset="utf-8"></script>
-    <script type="text/javascript" th:src="@{/easyui/locale/easyui-lang-zh_CN.js}" charset="utf-8"></script>
+    <script src="/easyui/jquery.min.js" charset="utf-8"></script>
+    <link id="easyuiTheme" rel="stylesheet" type="text/css" href="/easyui/themes/gray/easyui.css">
+    <link id="easyuiCss" rel="stylesheet" type="text/css" href="/easyui/themes/icon.css">
+    <script type="text/javascript" src="/easyui/jquery.easyui.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/easyui/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
 </head>
-<body>
-    <h2>test</h2>
+<body class="easyui-layout">
+    <div data-options="region:'north',title:'North Title',split:true" style="height:100px;"></div>
+    <div data-options="region:'south',title:'South Title',split:true" style="height:100px;"></div>
+    <div data-options="region:'east',iconCls:'icon-reload',title:'East',split:true" style="width:100px;"></div>
+    <div data-options="region:'west',title:'West',split:true" style="width:100px;"></div>
+    <div data-options="region:'center',title:'center title'" style="padding:5px;background:#eee;"></div>
 </body>
+
 </html>
