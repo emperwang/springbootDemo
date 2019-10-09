@@ -3,3 +3,12 @@ server:
 spring:
   application:
     name: FFAnalisys
+
+
+log:
+  runtime:
+    level: DEBUG
+
+logpath:
+  runtime:
+    path: ./log
