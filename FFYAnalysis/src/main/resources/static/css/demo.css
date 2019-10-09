@@ -1,0 +1,48 @@
+.grid {
+	border-collapse: collapse;
+	width: 99%;
+	margin-top: 5px;
+	border: 1px solid #eee;
+}
+
+.grid .firstTr {
+	background: #E5F0C9;
+}
+
+.grid .firstTr td{
+	color:#000;
+	font-weight: bold;
+}
+
+.grid td {
+	padding: 10px 5px;
+	border: 1px solid #eee;
+}
+
+input, select {
+	border: 1px solid #D3D3D3;
+	border-radius: 2px;
+	padding: 3px;
+}
+
+select {
+	width: 134px;
+}
+
+.datagrid-body table tr.datagrid-row-selected {
+	background: #E8F2FE;
+	color:black;
+}
+
+.datagrid-btable tr td .btn {
+	font-weight: bold;
+	background: none;
+	border:none;
+}
+
+.datagrid-btable tr td .btn i {
+	color:#00A65A;
+	font-size:16px;
+	font-weight: bold;
+	line-height: 16px;
+}

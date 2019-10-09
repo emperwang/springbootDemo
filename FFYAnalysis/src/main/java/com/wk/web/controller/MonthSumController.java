@@ -22,4 +22,10 @@ public class MonthSumController {
 
         return all;
     }
+
+    @GetMapping(value = "index.do")
+    public String index(){
+
+        return "index";
+    }
 }

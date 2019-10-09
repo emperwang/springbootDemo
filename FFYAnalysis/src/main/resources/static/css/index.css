@@ -1,0 +1,50 @@
+.content {
+	padding: 1px;
+}
+
+#logo {
+	background: url("../images/logo.gif") no-repeat;
+	backgroud-size: cover;
+}
+
+#logo p {
+	float: right;
+	margin-top: 34px;
+}
+
+#logo p a {
+	color: green;
+	font-weight: bold;
+	text-decoration: none;
+	padding: 5px 10px;
+	font-size: 14px;
+}
+
+#aa {
+	text-align: center;
+}
+
+#aa a{
+	display: block;
+	text-indent: 4em;
+	text-decoration: none;
+	margin:8px 0;
+	color:#000;
+	background: url("IconsExtension/application_view_list.png") no-repeat;
+	background-position: 27px 0;
+}
+
+#aa a:hover {
+	color:blue;
+}
+
+#aa div.panel-header {
+	background: #E5F0C9;
+}
+
+#aa div.panel-title {
+	color:black;
+	text-indent: 2em;
+	line-height: 1em;
+}
+
