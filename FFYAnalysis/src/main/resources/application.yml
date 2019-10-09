@@ -3,7 +3,14 @@ server:
 spring:
   application:
     name: FFAnalisys
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ffy
+    username: root
+    password: admin
 
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
 
 log:
   runtime:
@@ -12,3 +19,4 @@ log:
 logpath:
   runtime:
     path: ./log
+
