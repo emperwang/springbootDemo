@@ -17,7 +17,8 @@ function addTabs(title,url){
         $('#dataTab').tabs('add',{
             title: title,
             href: url,
-            closable: true
+            closable: true,
+            fit: true
         })
     }
 }
