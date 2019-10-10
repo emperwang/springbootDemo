@@ -1,6 +1,8 @@
 package com.wk.bean;
 
-public class MonthSum {
+import java.io.Serializable;
+
+public class MonthSum implements Serializable{
     private Integer id;
 
     private String groupName;
