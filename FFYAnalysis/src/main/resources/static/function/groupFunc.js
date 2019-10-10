@@ -5,10 +5,15 @@ $(function () { // 页面加载执行
     $('#groupdata').datagrid({
         fitColumns:true,
         pagination:true,
+        pageSize: 10,
+        pageList: [10, 20, 50, 100, 150, 200],
         toolbar: '#group-toolbar',
         columns:[[
-            {field:'code',title:'代码',width:100,align:'centor'},
-            {field:'name',title:'名称',width:100,align:'centor'},
-            {field:'price',title:'价格',width:100,align:'centor'}]]
+            {field:'id',title:'编号',width:100,align:'centor'},
+            {field:'groupName',title:'组名',width:100,align:'centor'},
+            {field:'month',title:'月份',width:100,align:'centor'},
+            {field:'personCount',title:'人数',width:100,align:'centor'}]],
+        method: "GET",
+        url: "/groupdata/getDataGride.do"
     });
 })
