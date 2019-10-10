@@ -12,4 +12,8 @@ public interface MonthSumService {
     DataGradeView<MonthSum> dataGradeList();
 
     int getTotal();
+
+    int addGroup(MonthSum monthSum);
+
+    int batchDeleteGroup(List<Integer> integers);
 }

@@ -1,6 +1,7 @@
 package com.wk.web.service.impl;
 
 import com.wk.bean.MonthSum;
+import com.wk.bean.MonthSumExample;
 import com.wk.bean.views.DataGradeView;
 import com.wk.web.mapper.MonthSumMapper;
 import com.wk.web.service.MonthSumService;
@@ -39,6 +40,23 @@ public class MonthSumServiceImpl implements MonthSumService {
     @Transactional(isolation = Isolation.DEFAULT,readOnly = true)
     public int getTotal() {
         int count = sumMapper.countByExample(null);
+        return count;
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.DEFAULT)
+    public int addGroup(MonthSum monthSum) {
+        int count = sumMapper.insert(monthSum);
+        return count;
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.DEFAULT)
+    public int batchDeleteGroup(List<Integer> ids) {
+        MonthSumExample example = new MonthSumExample();
+        MonthSumExample.Criteria criteria = example.createCriteria();
+        criteria.andIdIn(ids);
+        int count = sumMapper.deleteByExample(example);
         return count;
     }
 }
