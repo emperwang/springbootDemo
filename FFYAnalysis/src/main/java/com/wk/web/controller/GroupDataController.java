@@ -1,6 +1,7 @@
 package com.wk.web.controller;
 
 import com.wk.bean.MonthSum;
+import com.wk.bean.views.DataGradeView;
 import com.wk.web.service.MonthSumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,5 +21,11 @@ public class GroupDataController {
         List<MonthSum> all = monthSumService.findAll();
 
         return all;
+    }
+
+    @GetMapping(value = "getDataGride.do")
+    public DataGradeView<MonthSum> getDataGride(){
+        DataGradeView<MonthSum> gradeView = monthSumService.dataGradeList();
+        return gradeView;
     }
 }
