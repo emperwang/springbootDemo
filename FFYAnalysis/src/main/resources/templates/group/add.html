@@ -23,13 +23,18 @@
         $('#groupform').form({
             url: "/group/groupAdd.do",
             success: function (data) {
-                alert(data);
+                if (data == 'success'){
+                    alert("success");
+                    $('#addOrUpdateWin').window('close');
+                    $('#groupdata').datagrid('reload');
+                }else{
+                    alert("failed");
+                }
             }
         })
     })
     // 确认添加或更新
     $('#group-add-confirm').click(function () {
-        alert("ok....");
         $('#groupform').form('submit');
     });
     // 取消,复位数据

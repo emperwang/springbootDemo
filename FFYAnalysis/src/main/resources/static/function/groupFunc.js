@@ -49,17 +49,25 @@ $('#group-delete-btn').click(function () {
         idsArr.push(ids[i].id);
         console.log(idsArr);
     }
+    batchDeleteGroup(idsArr);
+});
 
+function batchDeleteGroup(idsArr) {
     $.ajax({
         url: "/group/groupDelete.do",
+        type: "POST",
         data: {'ids':idsArr+''},
-        dataType: "json",
-        success: function (data) {
-            console.log("delete msg :"+data)
+        dataType: "text",
+        async: false,
+        success: function (date) {
+            console.log("delete msg :"+date);
+            $('#groupdata').datagrid('reload');
         },
-        type: "POST"
+        error: function (date) {
+            alert("delete error");
+        }
     });
-});
+}
 
 // 重新加载
 $('#group-reload-btn').click(function () {
