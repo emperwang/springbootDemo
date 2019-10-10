@@ -1,0 +1,40 @@
+<div align="centor" style="text-align: center;margin-top: 20px;">
+<form id="groupform" method="post">
+    <div>
+        <label for="name">组名:</label>
+        <input class="easyui-validatebox" name="groupName" type="text" id="name" data-options="required:true" />
+    </div>
+    <div>
+        <label for="month">月份:</label>
+        <input class="easyui-validatebox" type="text" name="month" id="month" data-options="required:true" />
+    </div>
+    <div>
+        <label for="personCount">人数:</label>
+        <input class="easyui-validatebox" type="text" name="personCount" id="personCount" data-options="required:true" />
+    </div>
+    <div style="text-align: right;">
+    <a href="#" id="group-add-confirm" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true"/>
+    <a href="#" id="group-add-cancel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true"/>
+    </div>
+</form>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#groupform').form({
+            url: "/group/groupAdd.do",
+            success: function (data) {
+                alert(data);
+            }
+        })
+    })
+    // 确认添加或更新
+    $('#group-add-confirm').click(function () {
+        alert("ok....");
+        $('#groupform').form('submit');
+    });
+    // 取消,复位数据
+    $('#group-add-cancel').click(function () {
+        $('#groupform').form('reset');
+       // $('#addOrUpdateWin').window('destroy');
+    });
+</script>
