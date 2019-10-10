@@ -59,4 +59,18 @@ public class MonthSumServiceImpl implements MonthSumService {
         int count = sumMapper.deleteByExample(example);
         return count;
     }
+
+    @Override
+    @Transactional(isolation = Isolation.DEFAULT,readOnly = true)
+    public MonthSum selectById(Integer id) {
+        MonthSum monthSum = sumMapper.selectByPrimaryKey(id);
+        return monthSum;
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.DEFAULT)
+    public int updateGroupInfo(MonthSum monthSum) {
+        int count = sumMapper.updateByPrimaryKey(monthSum);
+        return count;
+    }
 }

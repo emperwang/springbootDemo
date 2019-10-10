@@ -16,4 +16,8 @@ public interface MonthSumService {
     int addGroup(MonthSum monthSum);
 
     int batchDeleteGroup(List<Integer> integers);
+
+    MonthSum selectById(Integer id);
+
+    int updateGroupInfo(MonthSum monthSum);
 }

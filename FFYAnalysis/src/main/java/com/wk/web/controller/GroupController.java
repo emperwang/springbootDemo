@@ -5,6 +5,7 @@ import com.wk.web.service.MonthSumService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -30,10 +31,15 @@ public class GroupController {
     }
     @PostMapping("groupAdd.do")
     @ResponseBody
-    public String groupAddAction(String groupName,Integer month,Integer personCount){
-        log.info("receive param groupName="+groupName+", month="+month+", personCount="+personCount);
-        MonthSum monthSum = new MonthSum(groupName, month, personCount);
-        monthSumService.addGroup(monthSum);
+    public String groupAddAction(Integer id,String groupName,Integer month,Integer personCount){
+        log.info("receive param id="+ id+ ", groupName="+groupName+", month="+month+", personCount="+personCount);
+        if (id == null) {
+            MonthSum monthSum = new MonthSum(groupName, month, personCount);
+            monthSumService.addGroup(monthSum);
+        }else{
+            MonthSum monthSum = new MonthSum(id,groupName, month, personCount);
+            monthSumService.updateGroupInfo(monthSum);
+        }
         return "success";
     }
 
@@ -45,9 +51,12 @@ public class GroupController {
         return "success";
     }
 
-    @GetMapping("update.do")
-    public String groupUpdate(){
-
-        return "group/add";
+    @GetMapping("toUpdate.do")
+    public String toGroupUpdate(Model model,Integer id){
+        log.info("toGroupUpdate receive param id = "+id);
+        MonthSum monthSum = monthSumService.selectById(id);
+        model.addAttribute("item",monthSum);
+        return "group/update";
     }
+
 }
