@@ -1,7 +1,9 @@
 package com.wk.bean;
 
-import java.io.Serializable;
+import lombok.ToString;
 
+import java.io.Serializable;
+@ToString
 public class MonthSum implements Serializable{
     private Integer id;
 
