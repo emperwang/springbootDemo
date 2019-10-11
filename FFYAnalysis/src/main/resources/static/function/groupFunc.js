@@ -16,6 +16,21 @@ $(function () { // 页面加载执行
         method: "GET",
         url: "/groupdata/getDataGride.do"
     });
+
+    $('#group-search').form({
+        url: "/groupdata/searchDataGride.do",
+        success: function (json) { // 这里虽然返回是json串,但是仍然需要转换为json对象
+            var jsonObj = $.parseJSON(json);
+            console.log(jsonObj)
+            $('#groupdata').datagrid('loadData',jsonObj);
+        }
+    });
+})
+/**
+ *  搜索在第 month 月满足人数的小组
+ */
+$('#group-search-btn').click(function () {
+    $('#group-search').form('submit');
 })
 // 添加操作
 $('#group-add-btn').click(function () {

@@ -4,6 +4,13 @@
     <a href="#" id="group-edit-btn" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:false"/>
     <a href="#" id="group-delete-btn" class="easyui-linkbutton" data-options="iconCls:'icon-delete',plain:true"/>
     <a href="#" id="group-reload-btn" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true"/>
+    <form id="group-search" method="post">
+        <label for="month">月份:</label>
+        <input class="easyui-validatebox" type="text" name="month" id="month" data-options="required:true" />
+        <label for="personCount">人数:</label>
+        <input class="easyui-validatebox" type="text" name="personCount" id="personCount" data-options="required:true" />
+        <a href="#" id="group-search-btn" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true"/>
+    </form>
 </div>
 <div id="groupdata"></div>
 <div id="addOrUpdateWin"></div>
