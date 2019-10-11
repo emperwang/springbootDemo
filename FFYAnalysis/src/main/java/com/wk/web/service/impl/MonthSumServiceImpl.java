@@ -92,26 +92,41 @@ public class MonthSumServiceImpl implements MonthSumService {
         criteria.andMonthEqualTo(month);
         criteria.andPersonCountGreaterThanOrEqualTo(personCount);
         List<MonthSum> monthSums = sumMapper.selectByExample(example);
+        List<String> names = getNames(monthSums);
         List<Integer> ids = getIds(monthSums);
         if (log.isDebugEnabled()){
-            log.debug("month 月满足的小组: {}",month.toString());
-            log.debug("month 月满足的小组 ids: {}",ids.toString());
+            log.debug("month 月满足的小组: {}",monthSums.toString());
+            log.debug("month 月满足的小组 ids: {}",names.toString());
         }
 
         // 再查找month月达到条件的小组在 month-1月人数也满足的小组
-        MonthSumExample example2 = new MonthSumExample();
-        MonthSumExample.Criteria example2Criteria = example2.createCriteria();
-        example2Criteria.andMonthEqualTo(month);
-        example2Criteria.andPersonCountGreaterThanOrEqualTo(personCount);
-        example2Criteria.andIdIn(ids);
-        List<MonthSum> monthSums1 = sumMapper.selectByExample(example2);
+        if (names != null && ids!=null && names!=null && names.size() > 0) {
+            MonthSumExample example2 = new MonthSumExample();
+            MonthSumExample.Criteria example2Criteria = example2.createCriteria();
+            example2Criteria.andMonthEqualTo(month-1);
+            example2Criteria.andPersonCountGreaterThanOrEqualTo(personCount);
+            example2Criteria.andGroupNameIn(names);
+            example2Criteria.andIdNotIn(ids);
+            List<MonthSum> monthSums1 = sumMapper.selectByExample(example2);
 
-        // 两个小组求差集,即是结果
-        monthSums.removeAll(monthSums1);
+            // 两个小组求差集,即是结果
+            monthSums.removeAll(monthSums1);
+        }
         DataGradeView<MonthSum> dataGradeView = new DataGradeView<>();
         dataGradeView.setRows(monthSums);
         dataGradeView.setTotal(monthSums.size());
         return dataGradeView;
+    }
+
+    private List<String> getNames(List<MonthSum> monthSums){
+        List<String> ids = new ArrayList<>();
+        if (monthSums != null && monthSums.size() > 0){
+            monthSums.forEach(sum ->{
+                String name = sum.getGroupName();
+                ids.add(name);
+            });
+        }
+        return ids;
     }
 
     private List<Integer> getIds(List<MonthSum> monthSums){
