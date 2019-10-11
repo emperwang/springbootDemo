@@ -20,4 +20,6 @@ public interface MonthSumService {
     MonthSum selectById(Integer id);
 
     int updateGroupInfo(MonthSum monthSum);
+
+    DataGradeView<MonthSum> searchFirstMonthSatisifyCount(Integer month, Integer personCount);
 }
