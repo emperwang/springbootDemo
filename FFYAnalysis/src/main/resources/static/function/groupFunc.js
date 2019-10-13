@@ -135,7 +135,7 @@ $('#group-output-excel-btn').click(function () {
     downLoadExcel("post","/groupdata/downloadExcel.do",jsonData);
 });
 
-function downLoadExcel(method,url,data){
+function downLoadExcel(method,url,data,fileName){
     var url = url;
     printMsg("url = "+url);
     var xhr = new XMLHttpRequest();
@@ -147,11 +147,12 @@ function downLoadExcel(method,url,data){
         // 请求成功
         if (this.status == 200 || this.status == 201){
             var blog = this.response;
+            printMsg(this.response);
             var reader = new FileReader();
             reader.readAsDataURL(blog);
             reader.onload = function (ev2) { // 放到一个 连接标签中下载
                 var a = document.createElement("a");
-                a.download = "export.txt";
+                a.download = fileName;
                 a.href = ev2.target.result;
                 $("body").append(a);
                 a.click();

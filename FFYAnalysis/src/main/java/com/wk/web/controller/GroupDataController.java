@@ -58,6 +58,7 @@ public class GroupDataController {
         log.info("receive msg is:{}",ids);
         try {
             BufferedOutputStream outputStream = new BufferedOutputStream(response.getOutputStream());
+            response.setHeader("Content-Disposition","demoFile.txt");
             byte[] bytes = ids.getBytes();
             outputStream.write(bytes,0,bytes.length);
             outputStream.flush();
