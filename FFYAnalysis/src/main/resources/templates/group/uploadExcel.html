@@ -1,0 +1,64 @@
+<div>
+    <form id="groupUploadExcel" enctype="multipart/form-data" method="post">
+        <input id="exceFile" name="excelName">
+        <a href="#" id="group-upload-confirm-btn" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:false">确定</a>
+        <a href="#" id="group-upload-cancel-btn" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:false">取消</a>
+    </form>
+</div>
+<script type="text/javascript" charset="UTF-8">
+    $(function () {
+        $('#groupUploadExcel').form({
+            url: '/groupdata/uploadexcel.do',
+            onSubmit: function () {
+                var inputValue = $('#exceFile').filebox('getText');
+                // 获取文件后缀,进行文件类型的校验
+                var names = inputValue.split(".");
+                var suffix = names[names.length-1];
+                printMsg(suffix);
+                // 必须选择一个文件
+                if (inputValue == ''){
+                    showMsg('通知','please input a file')
+                    return false;
+                }
+                // 选择文件必须为excel格式
+                if (suffix != 'xlsx' && suffix != 'xls') {
+                    showMsg("提示","please input a excel file");
+                    return false;
+                 }
+                return true;
+            },
+            success: function (response) {
+                alert(response);
+                // 关闭window，并刷新数据
+                $('#addOrUpdateWin').window('close');
+                $('#groupdata').datagrid('reload');
+            }
+        });
+
+        $('#exceFile').filebox({
+            buttonText: 'ChooseFile',
+            multiple: false,
+            accept:'xls,xlsx'
+        });
+    })
+    // 提交
+    $('#group-upload-confirm-btn').click(function () {
+        $('#groupUploadExcel').form('submit');
+    });
+    // 关闭window框
+    $('#group-upload-cancel-btn').click(function () {
+        $('#addOrUpdateWin').window('close');
+    });
+
+function printMsg(msg){
+    console.log(msg);
+}
+
+function showMsg(title,msg) {
+    $.messager.show({
+        title: title,
+        msg: msg,
+        showType: 'show'
+    });
+}
+</script>

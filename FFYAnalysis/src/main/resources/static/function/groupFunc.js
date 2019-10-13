@@ -37,6 +37,7 @@ $('#group-add-btn').click(function () {
     $('#addOrUpdateWin').window({
         title:'添加',
         closable: true,
+        draggable: true,
         modal: true,
         width: 600,
         height:400,
@@ -85,7 +86,7 @@ $('#group-delete-btn').click(function () {
     }
     batchDeleteGroup(idsArr);
 });
-
+// 批量删除操作
 function batchDeleteGroup(idsArr) {
     $.ajax({
         url: "/group/groupDelete.do",
@@ -106,4 +107,17 @@ function batchDeleteGroup(idsArr) {
 // 重新加载
 $('#group-reload-btn').click(function () {
     $('#groupdata').datagrid('reload');
+});
+
+// 上传excel文件
+$('#group-import-excel-btn').click(function () {
+    $('#addOrUpdateWin').window({
+        title:'上传excel文件',
+        closable: true,
+        draggable: true,
+        modal: true,
+        width: 600,
+        height:400,
+        href: "/group/toUploadExcel.do"
+    });
 });
