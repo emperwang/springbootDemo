@@ -18,17 +18,34 @@ public class GroupController {
     @Autowired
     private MonthSumService monthSumService;
 
+    /**
+     *  返回group首页
+     * @return
+     */
     @GetMapping("index.do")
     public String groupIndex(){
 
         return "group/index";
     }
 
+    /**
+     *  返回添加的页面
+     * @return
+     */
     @GetMapping("toAdd.do")
     public String groupToAdd(){
 
         return "group/add";
     }
+
+    /**
+     *  真正的添加操作
+     * @param id
+     * @param groupName
+     * @param month
+     * @param personCount
+     * @return
+     */
     @PostMapping("groupAdd.do")
     @ResponseBody
     public String groupAddAction(Integer id,String groupName,Integer month,Integer personCount){
@@ -43,6 +60,11 @@ public class GroupController {
         return "success";
     }
 
+    /**
+     *  删除操作
+     * @param ids
+     * @return
+     */
     @PostMapping(value = "groupDelete.do")
     @ResponseBody
     public String groupdelete(@RequestParam(required = true) Integer[] ids){
@@ -51,6 +73,12 @@ public class GroupController {
         return "success";
     }
 
+    /**
+     *  返回 数据更新的页面
+     * @param model
+     * @param id
+     * @return
+     */
     @GetMapping("toUpdate.do")
     public String toGroupUpdate(Model model,Integer id){
         log.info("toGroupUpdate receive param id = "+id);
@@ -59,4 +87,13 @@ public class GroupController {
         return "group/update";
     }
 
+    /**
+     *  返回 上传 excel的页面
+     * @return
+     */
+    @GetMapping(value = "uploadExcel.do")
+    public String toUploadExcel(){
+
+        return "group/uploadExcel";
+    }
 }
