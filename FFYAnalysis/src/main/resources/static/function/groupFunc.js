@@ -132,7 +132,8 @@ $('#group-output-excel-btn').click(function () {
     var jsonData = JSON.stringify(ids);
     printMsg(jsonData);
     // 这里使用XMLHttpRequest 进行请求
-    downLoadFile("post","/groupdata/downloadExcel.do",jsonData);
+    // downLoadFile("post","/groupdata/downloadExcel.do",jsonData);
+    downFileExcel("post","/groupdata/downloadExcel.do","data.xls","2007",jsonData)
 });
 
 function downLoadFile(method,url,data,fileName){
@@ -162,15 +163,38 @@ function downLoadFile(method,url,data,fileName){
     }
     xhr.send(data);
 }
+// 下载excel文件
+function downFileExcel(method,url, fileName, type,data) {
+    var xhr = new XMLHttpRequest();
+    xhr.open(method,url,true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.responseType = "blob";
+    xhr.addEventListener("load",function (ev) {
+        if(type == "2003"){
+            type = "application/vnd.ms-excel";
+        }else{
+            type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+        }
+        if (this.status == 200 || this.status == 201){
+            var blob = this.response;
+            var browser = getBrowser();
+            if (browser == "Chrome"){
+                var link = document.createElement("a");
+                var file = new Blob([blob],{type:type});
+                link.href = window.URL.createObjectURL(file);
+                link.download = fileName;
+                link.click();
+                window.URL.revokeObjectURL(link.href);
+            }else if(browser == "Firefox"){
+                var file = new File([blob],fileName,{type:type});
+                var url = URL.createObjectURL(file);
+                parent.location.href = url;
+                window.URL.revokeObjectURL(url);
+            }
+        }
 
-function printMsg(msg) {
-    console.log(msg);
-}
-
-function showMsg(title,msg) {
-    $.messager.show({
-       title: title,
-       msg: msg,
-       showType:"slide"
     });
+    xhr.addEventListener("loaded",function (ev) {  });
+    xhr.addEventListener("error",function (ev) {  });
+    xhr.send(data);
 }

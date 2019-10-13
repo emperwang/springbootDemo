@@ -3,6 +3,7 @@ package com.wk.web.controller;
 import com.wk.bean.MonthSum;
 import com.wk.bean.views.DataGradeView;
 import com.wk.web.service.MonthSumService;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -59,8 +62,10 @@ public class GroupDataController {
         try {
             BufferedOutputStream outputStream = new BufferedOutputStream(response.getOutputStream());
             response.setHeader("Content-Disposition","demoFile.txt");
-            byte[] bytes = ids.getBytes();
-            outputStream.write(bytes,0,bytes.length);
+            FileInputStream inputStream = new FileInputStream(new File("F:\\FTPTest\\output.xls"));
+            IOUtils.copy(inputStream,outputStream);
+/*            byte[] bytes = ids.getBytes();
+            outputStream.write(bytes,0,bytes.length);*/
             outputStream.flush();
             response.flushBuffer();
         } catch (IOException e) {
