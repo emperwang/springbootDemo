@@ -121,3 +121,55 @@ $('#group-import-excel-btn').click(function () {
         href: "/group/toUploadExcel.do"
     });
 });
+// 导出数据到excel
+$('#group-output-excel-btn').click(function () {
+    var ids = $('#groupdata').datagrid('getSelections');
+    printMsg(JSON.stringify(ids));
+    if (ids == '' || ids.length == 0){
+        showMsg("提示","please select row to download");
+        return;
+    }
+    var jsonData = JSON.stringify(ids);
+    printMsg(jsonData);
+    // 这里使用XMLHttpRequest 进行请求
+    downLoadExcel("post","/groupdata/downloadExcel.do",jsonData);
+});
+
+function downLoadExcel(method,url,data){
+    var url = url;
+    printMsg("url = "+url);
+    var xhr = new XMLHttpRequest();
+    xhr.open(method,url,true);
+    // 设置POST请求的请求头
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.responseType = "blob";
+    xhr.onload = function (ev) {
+        // 请求成功
+        if (this.status == 200 || this.status == 201){
+            var blog = this.response;
+            var reader = new FileReader();
+            reader.readAsDataURL(blog);
+            reader.onload = function (ev2) { // 放到一个 连接标签中下载
+                var a = document.createElement("a");
+                a.download = "export.txt";
+                a.href = ev2.target.result;
+                $("body").append(a);
+                a.click();
+                $(a).remove();
+            }
+        }
+    }
+    xhr.send(data);
+}
+
+function printMsg(msg) {
+    console.log(msg);
+}
+
+function showMsg(title,msg) {
+    $.messager.show({
+       title: title,
+       msg: msg,
+       showType:"slide"
+    });
+}

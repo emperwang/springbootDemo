@@ -11,6 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -48,5 +51,19 @@ public class GroupDataController {
         String originalFilename = file.getOriginalFilename();
         log.info("get originfileName is :{}",originalFilename);
         return originalFilename;
+    }
+
+    @PostMapping(value = "downloadExcel.do")
+    public void downLoadExcel(@RequestBody String ids, HttpServletResponse response){
+        log.info("receive msg is:{}",ids);
+        try {
+            BufferedOutputStream outputStream = new BufferedOutputStream(response.getOutputStream());
+            byte[] bytes = ids.getBytes();
+            outputStream.write(bytes,0,bytes.length);
+            outputStream.flush();
+            response.flushBuffer();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
