@@ -40,6 +40,7 @@
         <module>springbootAssemble</module>
         <module>ElasticJobBoot</module>
         <module>FFYAnalysis</module>
+        <module>springbootLogback</module>
 
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
