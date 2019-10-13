@@ -91,7 +91,7 @@ public class GroupController {
      *  返回 上传 excel的页面
      * @return
      */
-    @GetMapping(value = "uploadExcel.do")
+    @GetMapping(value = "toUploadExcel.do")
     public String toUploadExcel(){
 
         return "group/uploadExcel";

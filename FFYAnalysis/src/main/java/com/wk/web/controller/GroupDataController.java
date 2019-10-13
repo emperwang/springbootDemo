@@ -6,11 +6,11 @@ import com.wk.web.service.MonthSumService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -39,5 +39,14 @@ public class GroupDataController {
         DataGradeView<MonthSum> dataGradeView = monthSumService.searchFirstMonthSatisifyCount(month,personCount);
 
         return dataGradeView;
+    }
+    @ResponseBody
+    @PostMapping(value = "uploadexcel.do")
+    public String uploadFile(HttpServletRequest request){
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        MultipartFile file = multipartRequest.getFile("excelName");
+        String originalFilename = file.getOriginalFilename();
+        log.info("get originfileName is :{}",originalFilename);
+        return originalFilename;
     }
 }
