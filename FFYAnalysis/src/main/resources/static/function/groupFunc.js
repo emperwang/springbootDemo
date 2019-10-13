@@ -132,10 +132,10 @@ $('#group-output-excel-btn').click(function () {
     var jsonData = JSON.stringify(ids);
     printMsg(jsonData);
     // 这里使用XMLHttpRequest 进行请求
-    downLoadExcel("post","/groupdata/downloadExcel.do",jsonData);
+    downLoadFile("post","/groupdata/downloadExcel.do",jsonData);
 });
 
-function downLoadExcel(method,url,data,fileName){
+function downLoadFile(method,url,data,fileName){
     var url = url;
     printMsg("url = "+url);
     var xhr = new XMLHttpRequest();
