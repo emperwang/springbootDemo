@@ -3,6 +3,7 @@ package com.wk.web.service.impl;
 import com.wk.bean.MonthSum;
 import com.wk.bean.MonthSumExample;
 import com.wk.bean.views.DataGradeView;
+import com.wk.web.mapper.MonthSumMapper;
 import com.wk.web.service.MonthSumService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,7 +90,7 @@ public class MonthSumServiceImpl implements MonthSumService {
         MonthSumExample example = new MonthSumExample();
         MonthSumExample.Criteria criteria = example.createCriteria();
         criteria.andMonthEqualTo(month);
-        criteria.andPersonCountGreaterThanOrEqualTo(personCount);
+        // criteria.and(personCount);
         List<MonthSum> monthSums = sumMapper.selectByExample(example);
         List<String> names = getNames(monthSums);
         List<Integer> ids = getIds(monthSums);
@@ -103,7 +104,7 @@ public class MonthSumServiceImpl implements MonthSumService {
             MonthSumExample example2 = new MonthSumExample();
             MonthSumExample.Criteria example2Criteria = example2.createCriteria();
             example2Criteria.andMonthEqualTo(month-1);
-            example2Criteria.andPersonCountGreaterThanOrEqualTo(personCount);
+            // example2Criteria.andPersonCountGreaterThanOrEqualTo(personCount);
             example2Criteria.andGroupNameIn(names);
             example2Criteria.andIdNotIn(ids);
             List<MonthSum> monthSums1 = sumMapper.selectByExample(example2);

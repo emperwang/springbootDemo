@@ -51,10 +51,12 @@ public class GroupController {
     public String groupAddAction(Integer id,String groupName,Integer month,Integer personCount){
         log.info("receive param id="+ id+ ", groupName="+groupName+", month="+month+", personCount="+personCount);
         if (id == null) {
-            MonthSum monthSum = new MonthSum(groupName, month, personCount);
+            // MonthSum monthSum = new MonthSum(groupName, month, personCount);
+            MonthSum monthSum = new MonthSum();
             monthSumService.addGroup(monthSum);
         }else{
-            MonthSum monthSum = new MonthSum(id,groupName, month, personCount);
+            // MonthSum monthSum = new MonthSum(id,groupName, month, personCount);
+            MonthSum monthSum = new MonthSum();
             monthSumService.updateGroupInfo(monthSum);
         }
         return "success";
