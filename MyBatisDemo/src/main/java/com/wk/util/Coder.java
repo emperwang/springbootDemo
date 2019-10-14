@@ -1,4 +1,4 @@
-package com.wk.util;
+package com.wk.common.util;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
