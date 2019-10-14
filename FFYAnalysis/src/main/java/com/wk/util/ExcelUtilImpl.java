@@ -4,10 +4,7 @@ import com.wk.bean.bo.GroupExcelReadbean;
 import com.wk.util.abstruct.Excelutil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,10 +12,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Slf4j
 /**
@@ -27,6 +22,8 @@ import java.util.Map;
 public abstract class ExcelUtilImpl implements Excelutil {
     private static final String suffixXls = "xls";
     private static final String suffixXlsx = "xlsx";
+    SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+    private boolean isTitle = true;
     /**
      *  读取指定的excel文件
      * @param filePath
@@ -69,6 +66,7 @@ public abstract class ExcelUtilImpl implements Excelutil {
                 }
                 // 遍历数据列
                 for (int rowNum=firstRowNum+2;rowNum <= lastRowNum;rowNum++){
+                    isTitle = false;
                     Row rowTmp = sheetCur.getRow(rowNum);
                     if (rowTmp == null){
                         continue;
@@ -105,6 +103,13 @@ public abstract class ExcelUtilImpl implements Excelutil {
         if (cell == null){
             return cellValue;
         }
+        // 读取时间时,时间列的title格式也是时间格式;所以当读取title时,无论是不是时间格式,都不按照时间读取
+        if (!isTitle) {
+            String dataFromExcel = getDataFromExcel(cell);
+            if (dataFromExcel != null && !"".equals(dataFromExcel)){
+                return dataFromExcel;
+            }
+        }
         if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC){
             cell.setCellType(Cell.CELL_TYPE_STRING);
         }
@@ -130,6 +135,31 @@ public abstract class ExcelUtilImpl implements Excelutil {
             default:
                 cellValue = "Unknown";
                 break;
+        }
+        return cellValue;
+    }
+
+    /**
+     * 读取excel中的时间
+     * @return
+     */
+    public String getDataFromExcel(Cell cell){
+        String cellValue = "";
+        if (cell == null){
+            return cellValue;
+        }
+        String dataFormatString = cell.getCellStyle().getDataFormatString();
+        // 符合下面任意一个规则，则说明是data模式
+        if ("m/d/yy".equals(dataFormatString) ||
+                "yyyy/mm;@".equals(dataFormatString)||
+                "yy/m/d".equals(dataFormatString) ||
+                "mm/dd/yy".equals(dataFormatString) ||
+                "dd-mmm-yy".equals(dataFormatString) ||
+                "yyyy/m/d".equals(dataFormatString)){
+            if (DateUtil.isCellDateFormatted(cell)){
+                Date dateCellValue = cell.getDateCellValue();
+                cellValue = this.formater.format(dateCellValue);
+            }
         }
         return cellValue;
     }

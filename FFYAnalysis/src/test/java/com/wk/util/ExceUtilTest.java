@@ -7,11 +7,11 @@ public class ExceUtilTest {
 
     @Test
     public void readTest(){
-        String filePath = "H:\\ffy-excel\\eexcel\\test.xlsx";
+        String filePath = "F:\\FTPTest\\test.xlsx";
         GroupExcelUtil groupExcelUtil = GroupExcelUtil.getInstance();
         groupExcelUtil.readDataFromExcel(filePath);
         GroupExcelReadbean groupExcelReadbean = groupExcelUtil.getGroupExcelReadbean();
-
+        System.out.println("**********************************************************************");
         System.out.println(groupExcelReadbean);
     }
 

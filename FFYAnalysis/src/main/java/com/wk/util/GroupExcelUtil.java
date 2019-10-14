@@ -4,9 +4,12 @@ import com.wk.bean.bo.Depementbean;
 import com.wk.bean.bo.GroupExcelReadbean;
 import com.wk.bean.bo.Regionsbean;
 import com.wk.bean.bo.Shopbean;
+import com.wk.constant.MonthConstant;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,19 +31,12 @@ public class GroupExcelUtil extends ExcelUtilImpl {
     public void exportValueIntoBean(List<String> values,Map<Integer,String> titleFields) {
         if (values != null && values.size() > 0){
             log.info(values.toString());
-            Regionsbean regionsbean = exportValueIntoRegionbean(values.subList(0,4));
-            Depementbean depementbean = exportValueIntoDepementbean(values.subList(5,13));
-            Shopbean shopbean = exportValueIntoShopbean(values.subList(14,values.size()),titleFields);
-
-
+            // Sublist包括开头,不包括结尾
+            Regionsbean regionsbean = exportValueIntoRegionbean(values.subList(0,5));
+            Depementbean depementbean = exportValueIntoDepementbean(values.subList(5,10));
+            Shopbean shopbean = exportValueIntoShopbean(values.subList(10,values.size()-1),titleFields);
+            putShopIntoBean(regionsbean,depementbean,shopbean);
         }
-    }
-
-    /**
-     *  把最终的数据封装到 groupExcelReadbean中
-     */
-    public void putRegionIntoExcelBeanData(Regionsbean regionsbean){
-        groupExcelReadbean.getRegions().put(regionsbean.getRegionName(),regionsbean);
     }
 
     /**
@@ -48,16 +44,45 @@ public class GroupExcelUtil extends ExcelUtilImpl {
      * @param depementbean
      * @param shopbean
      */
-    public void putShopIntoDepement(Depementbean depementbean,Shopbean shopbean){
+    public void putShopIntoBean(Regionsbean regionsbean,Depementbean depementbean,Shopbean shopbean){
+        String depetName = depementbean.getDepetName();
+        // 大区对应的店组
+        Map<String, Shopbean> shops = depementbean.getShops().get(depetName);
+        if (shops == null){
+            shops = new HashMap<>();
+            // 店组名  -- 店组
+            shops.put(shopbean.getShopTeam(),shopbean);
+            depementbean.getShops().put(depetName,shops);
+        }else {
+            shops.put(shopbean.getShopTeam(),shopbean);
+        }
 
-    }
+        String regionName = regionsbean.getRegionName();
+        if (this.groupExcelReadbean.getRegions().containsKey(regionName)){
+            Regionsbean region = this.groupExcelReadbean.getRegions().get(regionName);
+            String regionName1 = region.getRegionName();
+            Map<String, Depementbean> depents = region.getDepets().get(regionName1);
 
-    /**
-     *  添加 shop 到对应的大区
-     * @param regionsbean
-     * @param depementbean
-     */
-    public void putDepementIntoRegion(Regionsbean regionsbean,Depementbean depementbean){
+            if (depents == null){
+                depents = new HashMap<>();
+                depents.put(depetName,depementbean);
+                region.getDepets().put(regionName1,depents);
+            }else {
+                depents.put(depetName,depementbean);
+            }
+
+        }else {
+            String regionName1 = regionsbean.getRegionName();
+            Map<String, Depementbean> depents = regionsbean.getDepets().get(regionName1);
+            if (depents == null){
+                depents = new HashMap<>();
+                depents.put(depetName,depementbean);
+                regionsbean.getDepets().put(regionName1,depents);
+            }else {
+                depents.put(depetName,depementbean);
+            }
+            this.groupExcelReadbean.getRegions().put(regionName1,regionsbean);
+        }
 
     }
 
@@ -86,11 +111,11 @@ public class GroupExcelUtil extends ExcelUtilImpl {
         shopbean.setDirectlyNum(strings.get(10));
         shopbean.setDirectlyName(strings.get(11));
         shopbean.setStartManagerTime(strings.get(12)); // 27 到这里是第27列
-
-        for (int i=13;i <= strings.size()-1;i++) {
-            setShopbeanMonth(shopbean,titleFields);
+        // 此处的 传递进入的 i 应该加上 之前的列,为9
+        int size = strings.size();
+        for (int i=13;i < size-1;i++) {
+            setShopbeanMonth(shopbean,titleFields,strings.get(i),i+10);
         }
-
         return shopbean;
     }
 
@@ -99,8 +124,95 @@ public class GroupExcelUtil extends ExcelUtilImpl {
      * @param shopbean
      * @param titleFields
      */
-    private void setShopbeanMonth(Shopbean shopbean, Map<Integer, String> titleFields) {
-        
+    private void setShopbeanMonth(Shopbean shopbean, Map<Integer, String> titleFields,String value,int index) {
+        String title = titleFields.get(index);
+        log.info("title:{}",title);
+        if (title == null || title.length() <= 0){
+            log.error(title + "  is not a valid title");
+            return;
+        }
+        if (value == null || "invalid char".equals(value)){
+            value = "";
+            return;
+        }
+        int personCount = Integer.parseInt(value);
+        switch (title){
+            case MonthConstant.januaryStart:
+                shopbean.setJanuaryStart(personCount);
+                break;
+            case MonthConstant.januaryEnd:
+                shopbean.setJanuaryEnd(personCount);
+                break;
+            case MonthConstant.februayStart:
+                shopbean.setFebruayStart(personCount);
+                break;
+            case MonthConstant.februayEnd:
+                shopbean.setFebruayEnd(personCount);
+                break;
+            case MonthConstant.marchStart:
+                shopbean.setMarchStart(personCount);
+                break;
+            case MonthConstant.marchEnd:
+                shopbean.setMarchEnd(personCount);
+                break;
+            case MonthConstant.aprilStart:
+                shopbean.setAprilStart(personCount);
+                break;
+            case MonthConstant.aprilEnd:
+                shopbean.setAprilEnd(personCount);
+                break;
+            case MonthConstant.mayStart:
+                shopbean.setMayStart(personCount);
+                break;
+            case MonthConstant.mayEnd:
+                shopbean.setMarchEnd(personCount);
+                break;
+            case MonthConstant.julyStart:
+                shopbean.setJulyStart(personCount);
+                break;
+            case MonthConstant.julyEnd:
+                shopbean.setJulyEnd(personCount);
+                break;
+            case MonthConstant.juneStart:
+                shopbean.setJuneStart(personCount);
+                break;
+            case MonthConstant.juneEnd:
+                shopbean.setJuneEnd(personCount);
+                break;
+            case MonthConstant.augustStart:
+                shopbean.setAugustStart(personCount);
+                break;
+            case MonthConstant.augustEnd:
+                shopbean.setAugustEnd(personCount);
+                break;
+            case MonthConstant.septemberStart:
+                shopbean.setSeptemberStart(personCount);
+                break;
+            case MonthConstant.septemberEnd:
+                shopbean.setSeptemberEnd(personCount);
+                break;
+            case MonthConstant.octoberStart:
+                shopbean.setOctoberStart(personCount);
+                break;
+            case MonthConstant.octoberEnd:
+                shopbean.setOctoberEnd(personCount);
+                break;
+            case MonthConstant.novemberStart:
+                shopbean.setNovemberStart(personCount);
+                break;
+            case MonthConstant.novemberEnd:
+                shopbean.setNovemberEnd(personCount);
+                break;
+            case MonthConstant.decemberStart:
+                shopbean.setDecemberStart(personCount);
+                break;
+            case MonthConstant.decemberEnd:
+                shopbean.setDecemberEnd(personCount);
+                break;
+            default:
+                log.error(title + " invalid ");
+                break;
+        }
     }
 
     /**
