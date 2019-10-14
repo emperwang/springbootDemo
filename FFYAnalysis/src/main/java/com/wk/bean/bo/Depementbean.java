@@ -27,7 +27,7 @@ public class Depementbean implements Serializable {
     // 大区对应的人数
     private Integer personCount;
 
-    // 下辖的店铺,<大区名,对应的店铺>
-    private Map<String,List<Shopbean>> shops = new HashMap<>();
+    // 下辖的店铺,<大区名,<店组名,对应的店组>
+    private Map<String,Map<String,Shopbean>> shops = new HashMap<>();
 
 }

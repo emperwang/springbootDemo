@@ -26,6 +26,6 @@ public class Regionsbean implements Serializable {
     private String vicePresidentStartTime;
     // 大部总人数
     private int totalNumberPerson;
-    // 大部下辖的大区 <大部名字,对应的大区>
-    private Map<String,List<Depementbean>> depets = new HashMap<>();
+    // 大部下辖的大区 <大部名字,<大区名,对应的大区>>
+    private Map<String,Map<String,Depementbean>> depets = new HashMap<>();
 }
