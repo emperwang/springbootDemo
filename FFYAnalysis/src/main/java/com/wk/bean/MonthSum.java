@@ -16,7 +16,9 @@ public class MonthSum implements Serializable{
 
     private Integer month;
 
-    private Integer personCount;
+    private Integer firstPersonCount;
+
+    private Integer endPersonCount;
 
     private Integer depentsId;
 

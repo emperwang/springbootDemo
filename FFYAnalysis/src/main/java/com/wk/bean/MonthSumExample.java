@@ -294,63 +294,123 @@ public class MonthSumExample {
             return (Criteria) this;
         }
 
-        public Criteria andPersonCountIsNull() {
-            addCriterion("person_count is null");
+        public Criteria andFirstPersonCountIsNull() {
+            addCriterion("first_person_count is null");
             return (Criteria) this;
         }
 
-        public Criteria andPersonCountIsNotNull() {
-            addCriterion("person_count is not null");
+        public Criteria andFirstPersonCountIsNotNull() {
+            addCriterion("first_person_count is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPersonCountEqualTo(Integer value) {
-            addCriterion("person_count =", value, "personCount");
+        public Criteria andFirstPersonCountEqualTo(Integer value) {
+            addCriterion("first_person_count =", value, "firstPersonCount");
             return (Criteria) this;
         }
 
-        public Criteria andPersonCountNotEqualTo(Integer value) {
-            addCriterion("person_count <>", value, "personCount");
+        public Criteria andFirstPersonCountNotEqualTo(Integer value) {
+            addCriterion("first_person_count <>", value, "firstPersonCount");
             return (Criteria) this;
         }
 
-        public Criteria andPersonCountGreaterThan(Integer value) {
-            addCriterion("person_count >", value, "personCount");
+        public Criteria andFirstPersonCountGreaterThan(Integer value) {
+            addCriterion("first_person_count >", value, "firstPersonCount");
             return (Criteria) this;
         }
 
-        public Criteria andPersonCountGreaterThanOrEqualTo(Integer value) {
-            addCriterion("person_count >=", value, "personCount");
+        public Criteria andFirstPersonCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("first_person_count >=", value, "firstPersonCount");
             return (Criteria) this;
         }
 
-        public Criteria andPersonCountLessThan(Integer value) {
-            addCriterion("person_count <", value, "personCount");
+        public Criteria andFirstPersonCountLessThan(Integer value) {
+            addCriterion("first_person_count <", value, "firstPersonCount");
             return (Criteria) this;
         }
 
-        public Criteria andPersonCountLessThanOrEqualTo(Integer value) {
-            addCriterion("person_count <=", value, "personCount");
+        public Criteria andFirstPersonCountLessThanOrEqualTo(Integer value) {
+            addCriterion("first_person_count <=", value, "firstPersonCount");
             return (Criteria) this;
         }
 
-        public Criteria andPersonCountIn(List<Integer> values) {
-            addCriterion("person_count in", values, "personCount");
+        public Criteria andFirstPersonCountIn(List<Integer> values) {
+            addCriterion("first_person_count in", values, "firstPersonCount");
             return (Criteria) this;
         }
 
-        public Criteria andPersonCountNotIn(List<Integer> values) {
-            addCriterion("person_count not in", values, "personCount");
+        public Criteria andFirstPersonCountNotIn(List<Integer> values) {
+            addCriterion("first_person_count not in", values, "firstPersonCount");
             return (Criteria) this;
         }
 
-        public Criteria andPersonCountBetween(Integer value1, Integer value2) {
-            addCriterion("person_count between", value1, value2, "personCount");
+        public Criteria andFirstPersonCountBetween(Integer value1, Integer value2) {
+            addCriterion("first_person_count between", value1, value2, "firstPersonCount");
             return (Criteria) this;
         }
 
-        public Criteria andPersonCountNotBetween(Integer value1, Integer value2) {
-            addCriterion("person_count not between", value1, value2, "personCount");
+        public Criteria andFirstPersonCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("first_person_count not between", value1, value2, "firstPersonCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndPersonCountIsNull() {
+            addCriterion("end_person_count is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndPersonCountIsNotNull() {
+            addCriterion("end_person_count is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndPersonCountEqualTo(Integer value) {
+            addCriterion("end_person_count =", value, "endPersonCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndPersonCountNotEqualTo(Integer value) {
+            addCriterion("end_person_count <>", value, "endPersonCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndPersonCountGreaterThan(Integer value) {
+            addCriterion("end_person_count >", value, "endPersonCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndPersonCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("end_person_count >=", value, "endPersonCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndPersonCountLessThan(Integer value) {
+            addCriterion("end_person_count <", value, "endPersonCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndPersonCountLessThanOrEqualTo(Integer value) {
+            addCriterion("end_person_count <=", value, "endPersonCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndPersonCountIn(List<Integer> values) {
+            addCriterion("end_person_count in", values, "endPersonCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndPersonCountNotIn(List<Integer> values) {
+            addCriterion("end_person_count not in", values, "endPersonCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndPersonCountBetween(Integer value1, Integer value2) {
+            addCriterion("end_person_count between", value1, value2, "endPersonCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndPersonCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("end_person_count not between", value1, value2, "endPersonCount");
             return (Criteria) this;
         }
 
