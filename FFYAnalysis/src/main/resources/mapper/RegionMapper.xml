@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.wk.web.MonthSumMapper" >
-  <resultMap id="BaseResultMap" type="com.wk.bean.MonthSum" >
+<mapper namespace="com.wk.web.RegionMapper" >
+  <resultMap id="BaseResultMap" type="com.wk.bean.Region" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="group_name" property="groupName" jdbcType="VARCHAR" />
-    <result column="month" property="month" jdbcType="INTEGER" />
-    <result column="person_count" property="personCount" jdbcType="INTEGER" />
-    <result column="depents_id" property="depentsId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,16 +64,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, group_name, month, person_count, depents_id
+    id, name
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wk.bean.MonthSumExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wk.bean.RegionExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from month_sum
+    from region
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,85 +84,56 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from month_sum
+    from region
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from month_sum
+    delete from region
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.wk.bean.MonthSumExample" >
-    delete from month_sum
+  <delete id="deleteByExample" parameterType="com.wk.bean.RegionExample" >
+    delete from region
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.wk.bean.MonthSum" >
-    insert into month_sum (id, group_name, month, 
-      person_count, depents_id)
-    values (#{id,jdbcType=INTEGER}, #{groupName,jdbcType=VARCHAR}, #{month,jdbcType=INTEGER}, 
-      #{personCount,jdbcType=INTEGER}, #{depentsId,jdbcType=INTEGER})
+  <insert id="insert" parameterType="com.wk.bean.Region" >
+    insert into region (id, name)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.wk.bean.MonthSum" >
-    insert into month_sum
+  <insert id="insertSelective" parameterType="com.wk.bean.Region" >
+    insert into region
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="groupName != null" >
-        group_name,
-      </if>
-      <if test="month != null" >
-        month,
-      </if>
-      <if test="personCount != null" >
-        person_count,
-      </if>
-      <if test="depentsId != null" >
-        depents_id,
+      <if test="name != null" >
+        name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="groupName != null" >
-        #{groupName,jdbcType=VARCHAR},
-      </if>
-      <if test="month != null" >
-        #{month,jdbcType=INTEGER},
-      </if>
-      <if test="personCount != null" >
-        #{personCount,jdbcType=INTEGER},
-      </if>
-      <if test="depentsId != null" >
-        #{depentsId,jdbcType=INTEGER},
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.wk.bean.MonthSumExample" resultType="java.lang.Integer" >
-    select count(*) from month_sum
+  <select id="countByExample" parameterType="com.wk.bean.RegionExample" resultType="java.lang.Integer" >
+    select count(*) from region
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update month_sum
+    update region
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.groupName != null" >
-        group_name = #{record.groupName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.month != null" >
-        month = #{record.month,jdbcType=INTEGER},
-      </if>
-      <if test="record.personCount != null" >
-        person_count = #{record.personCount,jdbcType=INTEGER},
-      </if>
-      <if test="record.depentsId != null" >
-        depents_id = #{record.depentsId,jdbcType=INTEGER},
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -173,40 +141,25 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update month_sum
+    update region
     set id = #{record.id,jdbcType=INTEGER},
-      group_name = #{record.groupName,jdbcType=VARCHAR},
-      month = #{record.month,jdbcType=INTEGER},
-      person_count = #{record.personCount,jdbcType=INTEGER},
-      depents_id = #{record.depentsId,jdbcType=INTEGER}
+      name = #{record.name,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wk.bean.MonthSum" >
-    update month_sum
+  <update id="updateByPrimaryKeySelective" parameterType="com.wk.bean.Region" >
+    update region
     <set >
-      <if test="groupName != null" >
-        group_name = #{groupName,jdbcType=VARCHAR},
-      </if>
-      <if test="month != null" >
-        month = #{month,jdbcType=INTEGER},
-      </if>
-      <if test="personCount != null" >
-        person_count = #{personCount,jdbcType=INTEGER},
-      </if>
-      <if test="depentsId != null" >
-        depents_id = #{depentsId,jdbcType=INTEGER},
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.wk.bean.MonthSum" >
-    update month_sum
-    set group_name = #{groupName,jdbcType=VARCHAR},
-      month = #{month,jdbcType=INTEGER},
-      person_count = #{personCount,jdbcType=INTEGER},
-      depents_id = #{depentsId,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="com.wk.bean.Region" >
+    update region
+    set name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

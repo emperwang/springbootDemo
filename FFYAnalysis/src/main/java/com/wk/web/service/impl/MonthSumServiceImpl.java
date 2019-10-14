@@ -3,7 +3,6 @@ package com.wk.web.service.impl;
 import com.wk.bean.MonthSum;
 import com.wk.bean.MonthSumExample;
 import com.wk.bean.views.DataGradeView;
-import com.wk.web.mapper.MonthSumMapper;
 import com.wk.web.service.MonthSumService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

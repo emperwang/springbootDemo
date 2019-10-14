@@ -2,9 +2,8 @@ package com.wk.web.mapper;
 
 import com.wk.bean.MonthSum;
 import com.wk.bean.MonthSumExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface MonthSumMapper {
     int countByExample(MonthSumExample example);

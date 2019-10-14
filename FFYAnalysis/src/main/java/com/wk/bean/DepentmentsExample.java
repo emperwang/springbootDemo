@@ -3,14 +3,14 @@ package com.wk.bean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MonthSumExample {
+public class DepentmentsExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public MonthSumExample() {
+    public DepentmentsExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -164,253 +164,133 @@ public class MonthSumExample {
             return (Criteria) this;
         }
 
-        public Criteria andGroupNameIsNull() {
-            addCriterion("group_name is null");
+        public Criteria andDeptNameIsNull() {
+            addCriterion("dept_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andGroupNameIsNotNull() {
-            addCriterion("group_name is not null");
+        public Criteria andDeptNameIsNotNull() {
+            addCriterion("dept_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andGroupNameEqualTo(String value) {
-            addCriterion("group_name =", value, "groupName");
+        public Criteria andDeptNameEqualTo(String value) {
+            addCriterion("dept_name =", value, "deptName");
             return (Criteria) this;
         }
 
-        public Criteria andGroupNameNotEqualTo(String value) {
-            addCriterion("group_name <>", value, "groupName");
+        public Criteria andDeptNameNotEqualTo(String value) {
+            addCriterion("dept_name <>", value, "deptName");
             return (Criteria) this;
         }
 
-        public Criteria andGroupNameGreaterThan(String value) {
-            addCriterion("group_name >", value, "groupName");
+        public Criteria andDeptNameGreaterThan(String value) {
+            addCriterion("dept_name >", value, "deptName");
             return (Criteria) this;
         }
 
-        public Criteria andGroupNameGreaterThanOrEqualTo(String value) {
-            addCriterion("group_name >=", value, "groupName");
+        public Criteria andDeptNameGreaterThanOrEqualTo(String value) {
+            addCriterion("dept_name >=", value, "deptName");
             return (Criteria) this;
         }
 
-        public Criteria andGroupNameLessThan(String value) {
-            addCriterion("group_name <", value, "groupName");
+        public Criteria andDeptNameLessThan(String value) {
+            addCriterion("dept_name <", value, "deptName");
             return (Criteria) this;
         }
 
-        public Criteria andGroupNameLessThanOrEqualTo(String value) {
-            addCriterion("group_name <=", value, "groupName");
+        public Criteria andDeptNameLessThanOrEqualTo(String value) {
+            addCriterion("dept_name <=", value, "deptName");
             return (Criteria) this;
         }
 
-        public Criteria andGroupNameLike(String value) {
-            addCriterion("group_name like", value, "groupName");
+        public Criteria andDeptNameLike(String value) {
+            addCriterion("dept_name like", value, "deptName");
             return (Criteria) this;
         }
 
-        public Criteria andGroupNameNotLike(String value) {
-            addCriterion("group_name not like", value, "groupName");
+        public Criteria andDeptNameNotLike(String value) {
+            addCriterion("dept_name not like", value, "deptName");
             return (Criteria) this;
         }
 
-        public Criteria andGroupNameIn(List<String> values) {
-            addCriterion("group_name in", values, "groupName");
+        public Criteria andDeptNameIn(List<String> values) {
+            addCriterion("dept_name in", values, "deptName");
             return (Criteria) this;
         }
 
-        public Criteria andGroupNameNotIn(List<String> values) {
-            addCriterion("group_name not in", values, "groupName");
+        public Criteria andDeptNameNotIn(List<String> values) {
+            addCriterion("dept_name not in", values, "deptName");
             return (Criteria) this;
         }
 
-        public Criteria andGroupNameBetween(String value1, String value2) {
-            addCriterion("group_name between", value1, value2, "groupName");
+        public Criteria andDeptNameBetween(String value1, String value2) {
+            addCriterion("dept_name between", value1, value2, "deptName");
             return (Criteria) this;
         }
 
-        public Criteria andGroupNameNotBetween(String value1, String value2) {
-            addCriterion("group_name not between", value1, value2, "groupName");
+        public Criteria andDeptNameNotBetween(String value1, String value2) {
+            addCriterion("dept_name not between", value1, value2, "deptName");
             return (Criteria) this;
         }
 
-        public Criteria andMonthIsNull() {
-            addCriterion("month is null");
+        public Criteria andRegionIdIsNull() {
+            addCriterion("region_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andMonthIsNotNull() {
-            addCriterion("month is not null");
+        public Criteria andRegionIdIsNotNull() {
+            addCriterion("region_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMonthEqualTo(Integer value) {
-            addCriterion("month =", value, "month");
+        public Criteria andRegionIdEqualTo(Integer value) {
+            addCriterion("region_id =", value, "regionId");
             return (Criteria) this;
         }
 
-        public Criteria andMonthNotEqualTo(Integer value) {
-            addCriterion("month <>", value, "month");
+        public Criteria andRegionIdNotEqualTo(Integer value) {
+            addCriterion("region_id <>", value, "regionId");
             return (Criteria) this;
         }
 
-        public Criteria andMonthGreaterThan(Integer value) {
-            addCriterion("month >", value, "month");
+        public Criteria andRegionIdGreaterThan(Integer value) {
+            addCriterion("region_id >", value, "regionId");
             return (Criteria) this;
         }
 
-        public Criteria andMonthGreaterThanOrEqualTo(Integer value) {
-            addCriterion("month >=", value, "month");
+        public Criteria andRegionIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("region_id >=", value, "regionId");
             return (Criteria) this;
         }
 
-        public Criteria andMonthLessThan(Integer value) {
-            addCriterion("month <", value, "month");
+        public Criteria andRegionIdLessThan(Integer value) {
+            addCriterion("region_id <", value, "regionId");
             return (Criteria) this;
         }
 
-        public Criteria andMonthLessThanOrEqualTo(Integer value) {
-            addCriterion("month <=", value, "month");
+        public Criteria andRegionIdLessThanOrEqualTo(Integer value) {
+            addCriterion("region_id <=", value, "regionId");
             return (Criteria) this;
         }
 
-        public Criteria andMonthIn(List<Integer> values) {
-            addCriterion("month in", values, "month");
+        public Criteria andRegionIdIn(List<Integer> values) {
+            addCriterion("region_id in", values, "regionId");
             return (Criteria) this;
         }
 
-        public Criteria andMonthNotIn(List<Integer> values) {
-            addCriterion("month not in", values, "month");
+        public Criteria andRegionIdNotIn(List<Integer> values) {
+            addCriterion("region_id not in", values, "regionId");
             return (Criteria) this;
         }
 
-        public Criteria andMonthBetween(Integer value1, Integer value2) {
-            addCriterion("month between", value1, value2, "month");
+        public Criteria andRegionIdBetween(Integer value1, Integer value2) {
+            addCriterion("region_id between", value1, value2, "regionId");
             return (Criteria) this;
         }
 
-        public Criteria andMonthNotBetween(Integer value1, Integer value2) {
-            addCriterion("month not between", value1, value2, "month");
-            return (Criteria) this;
-        }
-
-        public Criteria andPersonCountIsNull() {
-            addCriterion("person_count is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPersonCountIsNotNull() {
-            addCriterion("person_count is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPersonCountEqualTo(Integer value) {
-            addCriterion("person_count =", value, "personCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andPersonCountNotEqualTo(Integer value) {
-            addCriterion("person_count <>", value, "personCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andPersonCountGreaterThan(Integer value) {
-            addCriterion("person_count >", value, "personCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andPersonCountGreaterThanOrEqualTo(Integer value) {
-            addCriterion("person_count >=", value, "personCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andPersonCountLessThan(Integer value) {
-            addCriterion("person_count <", value, "personCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andPersonCountLessThanOrEqualTo(Integer value) {
-            addCriterion("person_count <=", value, "personCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andPersonCountIn(List<Integer> values) {
-            addCriterion("person_count in", values, "personCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andPersonCountNotIn(List<Integer> values) {
-            addCriterion("person_count not in", values, "personCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andPersonCountBetween(Integer value1, Integer value2) {
-            addCriterion("person_count between", value1, value2, "personCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andPersonCountNotBetween(Integer value1, Integer value2) {
-            addCriterion("person_count not between", value1, value2, "personCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepentsIdIsNull() {
-            addCriterion("depents_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepentsIdIsNotNull() {
-            addCriterion("depents_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepentsIdEqualTo(Integer value) {
-            addCriterion("depents_id =", value, "depentsId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepentsIdNotEqualTo(Integer value) {
-            addCriterion("depents_id <>", value, "depentsId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepentsIdGreaterThan(Integer value) {
-            addCriterion("depents_id >", value, "depentsId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepentsIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("depents_id >=", value, "depentsId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepentsIdLessThan(Integer value) {
-            addCriterion("depents_id <", value, "depentsId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepentsIdLessThanOrEqualTo(Integer value) {
-            addCriterion("depents_id <=", value, "depentsId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepentsIdIn(List<Integer> values) {
-            addCriterion("depents_id in", values, "depentsId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepentsIdNotIn(List<Integer> values) {
-            addCriterion("depents_id not in", values, "depentsId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepentsIdBetween(Integer value1, Integer value2) {
-            addCriterion("depents_id between", value1, value2, "depentsId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepentsIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("depents_id not between", value1, value2, "depentsId");
+        public Criteria andRegionIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("region_id not between", value1, value2, "regionId");
             return (Criteria) this;
         }
     }

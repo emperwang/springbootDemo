@@ -5,19 +5,12 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-
 @ToString
 @Setter
 @Getter
-public class MonthSum implements Serializable{
+public class Region implements Serializable{
     private Integer id;
 
-    private String groupName;
-
-    private Integer month;
-
-    private Integer personCount;
-
-    private Integer depentsId;
+    private String name;
 
 }
