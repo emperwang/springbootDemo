@@ -84,10 +84,10 @@ function batchDeleteGroup(idsArr) {
         success: function (date) {
             console.log("delete msg :"+date);
             showMsg("提示",date);
-            $('#groupdata').datagrid('reload');
+            $('#deptShowdata').datagrid('reload');
         },
         error: function (date) {
-            alert("delete error");
+            showMsg("提示","delete error");
         }
     });
 }
