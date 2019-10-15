@@ -2,6 +2,8 @@ package com.wk.web.service;
 
 import com.wk.bean.Depentments;
 import com.wk.bean.bo.Regionsbean;
+import com.wk.bean.views.DataGradeView;
+import com.wk.bean.views.DepentmentVo;
 
 import java.util.Collection;
 import java.util.List;
@@ -14,4 +16,6 @@ public interface DepentmentService {
     int insertDepentmentFromExcel(Collection<Regionsbean> regionsbeans);
 
     List<Depentments> selectByName(String name);
+
+    DataGradeView<DepentmentVo> getDataGride();
 }

@@ -4,10 +4,13 @@ import com.wk.bean.Depentments;
 import com.wk.bean.DepentmentsExample;
 import com.wk.bean.bo.Depementbean;
 import com.wk.bean.bo.Regionsbean;
+import com.wk.bean.views.DataGradeView;
+import com.wk.bean.views.DepentmentVo;
 import com.wk.web.mapper.DepentmentsMapper;
 import com.wk.web.service.DepentmentService;
 import com.wk.web.service.RegionService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -85,5 +88,26 @@ public class DepentmentServiceImpl implements DepentmentService{
             lists.addAll(depentmentsMapper.selectByExample(example));
         }
         return lists;
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.DEFAULT,readOnly = true)
+    public DataGradeView<DepentmentVo> getDataGride() {
+        DataGradeView<DepentmentVo> dataGradeView = new DataGradeView<>();
+        List<DepentmentVo> lists=  new ArrayList<>();
+
+        Map<Integer, String> regMap = regionService.nameToId();
+        List<Depentments> depentments = depentmentsMapper.selectByExample(null);
+        if (depentments != null && depentments.size() > 0){
+            for (Depentments depentment : depentments) {
+                DepentmentVo depentmentVo = new DepentmentVo();
+                BeanUtils.copyProperties(depentment,depentmentVo);
+                depentmentVo.setRegionName(regMap.get(depentmentVo.getRegionId()));
+                lists.add(depentmentVo);
+            }
+        }
+        dataGradeView.setTotal(lists.size());
+        dataGradeView.setRows(lists);
+        return dataGradeView;
     }
 }
