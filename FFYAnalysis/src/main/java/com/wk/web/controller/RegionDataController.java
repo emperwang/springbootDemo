@@ -38,15 +38,23 @@ public class RegionDataController {
     @PostMapping(value = "regionAdd.do")
     public String regionAdd(String name){
         log.info("regionAdd.do receive parame is:name = {}",name);
-
-        return ResponseMsg.Success;
+        int count = regionService.insertRecord(name);
+        if (count > 0) {
+            return ResponseMsg.Success;
+        } else {
+            return ResponseMsg.Failed;
+        }
     }
 
     @PostMapping(value = "regionUpdate.do")
-    public String regionUpdate(String id,String name){
+    public String regionUpdate(Integer id,String name){
         log.info("regionUpdate.do receive parame is:name = {},id = {}",name,id);
-
-        return ResponseMsg.Success;
+        int count = regionService.updateRecord(id, name);
+        if (count > 0) {
+            return ResponseMsg.Success;
+        } else {
+            return ResponseMsg.Failed;
+        }
     }
 
     @GetMapping(value = "regionCombo.do")

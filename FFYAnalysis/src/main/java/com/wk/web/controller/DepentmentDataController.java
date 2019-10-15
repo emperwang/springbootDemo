@@ -2,6 +2,7 @@ package com.wk.web.controller;
 
 import com.wk.bean.views.DataGradeView;
 import com.wk.bean.views.DepentmentVo;
+import com.wk.constant.ResponseMsg;
 import com.wk.web.service.DepentmentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,29 @@ public class DepentmentDataController {
             String message = msg.get("message");
             return message;
         }
-        return "success";
+        return ResponseMsg.Success;
+    }
+
+    @PostMapping(value = "deptAdd.do")
+    public String deptAdd(String deptName,Integer regionId){
+        log.info("deptAdd receive parameter,deprName = {},regionId = {}", deptName,regionId);
+
+        int count = depentmentService.insertRecord(deptName,regionId);
+        if (count > 0){
+            return ResponseMsg.Success;
+        }else{
+            return ResponseMsg.Failed;
+        }
+    }
+
+    @PostMapping(value = "deptUpdate.do")
+    public String deptUpdate(Integer id,String deptName,Integer regionId) {
+        log.info("deptUpdate receive parameter,deptName = {},regionId = {},id = {}", deptName, regionId, id);
+        int count = depentmentService.updateRecord(id, deptName, regionId);
+        if (count > 0) {
+            return ResponseMsg.Success;
+        } else {
+            return ResponseMsg.Failed;
+        }
     }
 }

@@ -109,6 +109,19 @@ public class DepentmentServiceImpl implements DepentmentService{
 
     @Override
     @Transactional(isolation = Isolation.DEFAULT,readOnly = true)
+    public DepentmentVo selectByid(Integer id) {
+        DepentmentVo depentments = new DepentmentVo();
+        if (id != null){
+            Map<Integer, String> regionsMap = regionService.nameToId();
+            Depentments depts = depentmentsMapper.selectByPrimaryKey(id);
+            BeanUtils.copyProperties(depts,depentments);
+            depentments.setRegionName(regionsMap.get(depts.getRegionId()));
+        }
+        return depentments;
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.DEFAULT,readOnly = true)
     public DataGradeView<DepentmentVo> getDataGride() {
         DataGradeView<DepentmentVo> dataGradeView = new DataGradeView<>();
         List<DepentmentVo> lists=  new ArrayList<>();
@@ -202,5 +215,36 @@ public class DepentmentServiceImpl implements DepentmentService{
             }
         }
         return false;
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.DEFAULT)
+    public int insertRecord(String deptName, Integer regionId) {
+        int count = 0 ;
+
+        if (deptName != null && regionId != null && deptName.length() > 0){
+            Depentments depentments = new Depentments();
+            depentments.setRegionId(regionId);
+            depentments.setDeptName(deptName);
+            count += depentmentsMapper.insert(depentments);
+        }
+
+        return count;
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.DEFAULT)
+    public int updateRecord(Integer id, String deptName, Integer regionId) {
+        int count = 0 ;
+
+        if (id != null && deptName != null && regionId != null && deptName.length() > 0){
+            Depentments depentments = new Depentments();
+            depentments.setRegionId(regionId);
+            depentments.setDeptName(deptName);
+            depentments.setId(id);
+            count += depentmentsMapper.updateByPrimaryKey(depentments);
+        }
+
+        return count;
     }
 }

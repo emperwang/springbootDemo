@@ -23,6 +23,8 @@ public interface RegionService {
 
     int insertRecord(Region region);
 
+    int insertRecord(String name);
+
     DataGradeView<Region> getAllForDataGride();
 
     Map<String,String> batchDeleteReturnMsg(List<Integer> ids);
@@ -32,4 +34,6 @@ public interface RegionService {
     boolean checkIdIsInUser(Integer id);
 
     List<ComboVo> getRegionCombo();
+
+    int updateRecord(Integer id, String name);
 }

@@ -19,6 +19,8 @@ public interface DepentmentService {
 
     List<Depentments> selectByName(String name);
 
+    DepentmentVo selectByid(Integer id);
+
     DataGradeView<DepentmentVo> getDataGride();
 
     List<Depentments> selectByRegionId(Integer id);
@@ -28,4 +30,8 @@ public interface DepentmentService {
     int deleteByPrimaryKey(Integer id);
 
     boolean checkIdIsInUser(Integer id);
+
+    int insertRecord(String deptName, Integer regionId);
+
+    int updateRecord(Integer id, String deptName, Integer regionId);
 }

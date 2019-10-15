@@ -119,6 +119,18 @@ public class RegionServiceImpl implements RegionService {
         return count;
     }
 
+    @Override
+    @Transactional(isolation = Isolation.DEFAULT)
+    public int insertRecord(String name) {
+        int count = 0;
+        if (name != null && name.length() > 0){
+            Region region = new Region();
+            region.setName(name);
+            count += regionMapper.insert(region);
+        }
+        return count;
+    }
+
     /**
      *  查询datagride的数据
      * @return
@@ -211,6 +223,20 @@ public class RegionServiceImpl implements RegionService {
             }
         }
         return lists;
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.DEFAULT)
+    public int updateRecord(Integer id, String name) {
+        int count = 0;
+        if (id != null && name != null && name.length() > 0){
+            Region region = new Region();
+            region.setId(id);
+            region.setName(name);
+            count += regionMapper.updateByPrimaryKey(region);
+        }
+
+        return count;
     }
 
 
