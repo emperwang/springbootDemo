@@ -1,4 +1,5 @@
 /* 创建小组表 */
+DROP TABLE IF EXISTS month_sum;
 CREATE TABLE `month_sum` (
   `id` int(11) NOT NULL auto_increment,
   `group_name` varchar(100) default NULL COMMENT '小组名字',
@@ -12,6 +13,7 @@ CREATE TABLE `month_sum` (
 /**
  流失率表
  */
+ DROP TABLE IF EXISTS lossrate;
 CREATE TABLE `lossrate` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL COMMENT '人名',
@@ -23,6 +25,7 @@ CREATE TABLE `lossrate` (
 /**
 大部表
  */
+ DROP TABLE IF EXISTS region;
 CREATE TABLE `region` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `name` varchar(100) NOT NULL COMMENT '大部名字',
@@ -32,6 +35,7 @@ CREATE TABLE `region` (
 /**
 大区表
  */
+ DROP TABLE IF EXISTS depents;
 CREATE TABLE `depents` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `dept_name` varchar(100) NOT NULL COMMENT '大区名字',
