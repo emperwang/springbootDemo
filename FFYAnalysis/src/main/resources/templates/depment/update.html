@@ -11,8 +11,8 @@
             <input  type="hidden" th:value="${item.regionId}" id="deptUpdateMonthVal"/>
         </div>
         <div style="text-align: right;">
-            <a href="#" id="depent-update-confirm" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true"/>
-            <a href="#" id="depent-update-cancel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true"/>
+            <a href="#" id="depent-update-confirm" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true">确定</a>
+            <a href="#" id="depent-update-cancel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">取消</a>
         </div>
     </form>
 </div>
@@ -22,11 +22,11 @@
             url: "/deptdata/deptUpdate.do",
             success: function (data) {
                 if (data == 'success'){
-                    alert("success");
+                    showMsg("提示","success");
                     $('#addOrUpdateDeptWin').window('close');
                     $('#deptShowdata').datagrid('reload');
                 }else{
-                    alert("failed");
+                    showMsg("提示","failed");
                 }
             }
         });

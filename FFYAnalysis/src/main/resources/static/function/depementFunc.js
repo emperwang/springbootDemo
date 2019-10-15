@@ -41,7 +41,7 @@ $('#depentment-edit-btn').click(function () {
         console.log("into length = 1")
         toUpdate(ids);
     }else{
-        showMsg("Please select one item");
+        showMsg("提示","Please select one item");
     }
 });
 
