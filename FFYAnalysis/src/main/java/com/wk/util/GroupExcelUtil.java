@@ -8,7 +8,6 @@ import com.wk.constant.MonthConstant;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +34,7 @@ public class GroupExcelUtil extends ExcelUtilImpl {
             Regionsbean regionsbean = exportValueIntoRegionbean(values.subList(0,5));
             Depementbean depementbean = exportValueIntoDepementbean(values.subList(5,10));
             Shopbean shopbean = exportValueIntoShopbean(values.subList(10,values.size()-1),titleFields);
-            putShopIntoBean(regionsbean,depementbean,shopbean);
+            putDataIntoBean(regionsbean,depementbean,shopbean);
         }
     }
 
@@ -44,46 +43,70 @@ public class GroupExcelUtil extends ExcelUtilImpl {
      * @param depementbean
      * @param shopbean
      */
-    public void putShopIntoBean(Regionsbean regionsbean,Depementbean depementbean,Shopbean shopbean){
-        String depetName = depementbean.getDepetName();
-        // 大区对应的店组
-        Map<String, Shopbean> shops = depementbean.getShops().get(depetName);
-        if (shops == null){
-            shops = new HashMap<>();
-            // 店组名  -- 店组
-            shops.put(shopbean.getShopTeam(),shopbean);
-            depementbean.getShops().put(depetName,shops);
-        }else {
-            shops.put(shopbean.getShopTeam(),shopbean);
-        }
+    public void putDataIntoBean(Regionsbean regionsbean,Depementbean depementbean,Shopbean shopbean){
+        putRegion(regionsbean,depementbean,shopbean);
+        putDepement(regionsbean,depementbean,shopbean);
+        putShop(regionsbean,depementbean,shopbean);
+    }
 
-        String regionName = regionsbean.getRegionName();
-        if (this.groupExcelReadbean.getRegions().containsKey(regionName)){
-            Regionsbean region = this.groupExcelReadbean.getRegions().get(regionName);
-            String regionName1 = region.getRegionName();
-            Map<String, Depementbean> depents = region.getDepets().get(regionName1);
+    private void putShop(Regionsbean regionsbean,Depementbean depementbean,Shopbean shopbean){
+        if (shopbean != null && shopbean.getShopTeam() != null && shopbean.getShopTeam().length() > 0){
+            String regionName = regionsbean.getRegionName();
+            String depetName = depementbean.getDepetName();
+            String shopTeamName = shopbean.getShopTeam();
+            Map<String, Regionsbean> regions = this.groupExcelReadbean.getRegions();
+            if (regions.containsKey(regionName)){
+                // 获取到 region对应的大区
+                Map<String, Depementbean> depementbeanMap = regions.get(regionName).getDepets().get(regionName);
+                if (depementbeanMap.containsKey(depetName)){
+                    // 获取大区对应的店铺
+                    Map<String, Shopbean> shopbeanMap = depementbeanMap.get(depetName).getShops().get(depetName);
+                    if (shopbeanMap == null){
+                        shopbeanMap = new HashMap<>();
+                        shopbeanMap.put(shopTeamName,shopbean);
+                        depementbeanMap.get(depetName).getShops().put(depetName,shopbeanMap);
+                    }else if (!shopbeanMap.containsKey(shopTeamName)){
+                        shopbeanMap.put(shopTeamName,shopbean);
+                    }else{ // 已经包含，则什么也不做
 
-            if (depents == null){
-                depents = new HashMap<>();
-                depents.put(depetName,depementbean);
-                region.getDepets().put(regionName1,depents);
-            }else {
-                depents.put(depetName,depementbean);
+                    }
+
+                }else{
+                    log.error("putShop but  "+ depetName +"  not exist");
+                }
+            }else{
+                log.error("putShop but  "+regionName +"  not exist");
             }
-
-        }else {
-            String regionName1 = regionsbean.getRegionName();
-            Map<String, Depementbean> depents = regionsbean.getDepets().get(regionName1);
-            if (depents == null){
-                depents = new HashMap<>();
-                depents.put(depetName,depementbean);
-                regionsbean.getDepets().put(regionName1,depents);
-            }else {
-                depents.put(depetName,depementbean);
-            }
-            this.groupExcelReadbean.getRegions().put(regionName1,regionsbean);
         }
+    }
 
+    private void putDepement(Regionsbean regionsbean,Depementbean depementbean,Shopbean shopbean){
+        if (depementbean != null && depementbean.getDepetName() != null && depementbean.getDepetName().length()>0){
+            String regionName = regionsbean.getRegionName();
+            String depetName = depementbean.getDepetName();
+            if(this.groupExcelReadbean.getRegions().containsKey(regionName)){
+                Regionsbean regionsbean1 = this.groupExcelReadbean.getRegions().get(regionName);
+                Map<String, Depementbean> depementbeanMap = regionsbean1.getDepets().get(regionName);
+                if (depementbeanMap == null){
+                    depementbeanMap = new HashMap<>();
+                    depementbeanMap.put(depetName,depementbean);
+                    regionsbean1.getDepets().put(regionName,depementbeanMap);
+                } else if (!depementbeanMap.containsKey(depetName)){
+                    depementbeanMap.put(depetName,depementbean);
+                }
+            }else{
+                log.error("putDepement but  "+regionName + " not exists");
+            }
+        }
+    }
+
+    private void putRegion(Regionsbean regionsbean,Depementbean depementbean,Shopbean shopbean){
+        if (regionsbean != null && regionsbean.getRegionName() != null && regionsbean.getRegionName().length()>0) {
+            String regionName = regionsbean.getRegionName();
+            if (!this.groupExcelReadbean.getRegions().containsKey(regionName)) {
+                this.groupExcelReadbean.getRegions().put(regionName, regionsbean);
+            }
+        }
     }
 
     /**
