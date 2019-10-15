@@ -2,6 +2,7 @@ package com.wk.web.controller;
 
 import com.wk.bean.Region;
 import com.wk.bean.views.DataGradeView;
+import com.wk.constant.ResponseMsg;
 import com.wk.web.service.RegionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,20 @@ public class RegionDataController {
         if (msg.containsKey("message")){
             return msg.get("message");
         }
-        return "success";
+        return ResponseMsg.Success;
     }
 
+    @PostMapping(value = "regionAdd.do")
+    public String regionAdd(String name){
+        log.info("regionAdd.do receive parame is:name = {}",name);
+
+        return ResponseMsg.Success;
+    }
+
+    @PostMapping(value = "regionUpdate.do")
+    public String regionUpdate(String id,String name){
+        log.info("regionUpdate.do receive parame is:name = {},id = {}",name,id);
+
+        return ResponseMsg.Success;
+    }
 }

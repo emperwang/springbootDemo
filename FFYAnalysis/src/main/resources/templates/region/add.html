@@ -1,0 +1,39 @@
+<div align="centor" style="text-align: center;margin-top: 20px;">
+    <form id="regionform" method="post">
+        <div>
+            <label for="regionName">大区名:</label>
+            <input class="easyui-validatebox" type="text" name="name" id="regionName" data-options="required:true" />
+        </div>
+        <div style="text-align: right;">
+            <a href="#" id="depentment-add-confirm" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true">确定</a>
+            <a href="#" id="depentment-add-cancel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">复位</a>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="/function/util/util.js" charset="utf-8"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#regionform').form({
+            url: "/regiondata/regionAdd.do",
+            success: function (data) {
+                if (data == 'success'){
+                    showMsg("提示","success");
+                    $('#addOrUpdateRegionWin').window('close');
+                    $('#regionShowdata').datagrid('reload');
+                }else{
+                    showMsg("提示","failed");
+                }
+            }
+        })
+    })
+    // 确认添加或更新
+    $('#depentment-add-confirm').click(function () {
+        $('#regionform').form('submit');
+    });
+    // 取消,复位数据
+    $('#depentment-add-cancel').click(function () {
+        $('#regionform').form('reset');
+        // $('#addOrUpdateWin').window('destroy');
+    });
+</script>

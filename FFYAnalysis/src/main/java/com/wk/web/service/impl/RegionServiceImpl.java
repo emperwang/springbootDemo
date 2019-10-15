@@ -98,6 +98,17 @@ public class RegionServiceImpl implements RegionService {
     }
 
     @Override
+    @Transactional(isolation = Isolation.DEFAULT,readOnly = true)
+    public Region selectById(Integer id) {
+        Region region = new Region();
+        if (id == null){
+            return region;
+        }
+        region = regionMapper.selectByPrimaryKey(id);
+        return region;
+    }
+
+    @Override
     @Transactional(isolation = Isolation.DEFAULT,readOnly = false)
     public int insertRecord(Region region) {
         int count = 0;

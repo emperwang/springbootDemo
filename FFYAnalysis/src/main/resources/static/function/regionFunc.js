@@ -17,6 +17,51 @@ $(function () {
 })
 
 
+// 添加操作
+$('#region-add-btn').click(function () {
+    $('#addOrUpdateRegionWin').window({
+        title:'添加',
+        closable: true,
+        draggable: true,
+        modal: true,
+        width: 600,
+        height:400,
+        href: "/region/toAdd.do"
+    });
+});
+
+// 修改操作
+$('#region-edit-btn').click(function () {
+    var ids = $('#regionShowdata').datagrid('getSelections');
+    console.log("edit "+ids);
+    if(ids.length == 1){
+        console.log("into length = 1")
+        toUpdate(ids);
+    }else{
+        alert("Please select one item");
+    }
+});
+
+function toUpdate(ids){
+    $('#addOrUpdateRegionWin').window({
+        title:'修改',
+        closable: true,
+        draggable: true,
+        modal: true,
+        width: 600,
+        height:400,
+        href: "/region/toUpdate.do?id="+ids[0].id,
+        onCollapse: function () {
+            console.log("into showUpdateData");
+            $('#groupUpdateId').val(ids[0].id);
+            $('#updateName').val(ids[0].groupName);
+            $('#updateMonth').val(ids[0].month);
+            $('#updatePersonCount').val(ids[0].personCount);
+        }
+    });
+}
+
+
 
 // 删除操作
 $('#region-delete-btn').click(function () {

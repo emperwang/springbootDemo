@@ -18,6 +18,8 @@ public interface RegionService {
 
     List<Region> selectByName(String name);
 
+    Region selectById(Integer id);
+
     int insertRecord(Region region);
 
     DataGradeView<Region> getAllForDataGride();
