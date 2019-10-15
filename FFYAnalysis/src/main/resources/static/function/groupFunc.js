@@ -53,7 +53,7 @@ $('#group-edit-btn').click(function () {
         console.log("into length = 1")
         toUpdate(ids);
     }else{
-        alert("Please select one item");
+        showMsg("Please select one item");
     }
 });
 
@@ -103,7 +103,7 @@ function batchDeleteGroup(idsArr) {
             $('#groupdata').datagrid('reload');
         },
         error: function (date) {
-            alert("delete error");
+            showMsg("delete error");
         }
     });
 }
