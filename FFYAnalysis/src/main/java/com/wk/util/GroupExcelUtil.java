@@ -17,7 +17,6 @@ import java.util.Map;
 public class GroupExcelUtil extends ExcelUtilImpl {
 
     private GroupExcelReadbean groupExcelReadbean = new GroupExcelReadbean();
-    private static GroupExcelUtil Instance = new GroupExcelUtil();
     private GroupExcelUtil(){}
 
     /**
@@ -282,6 +281,6 @@ public class GroupExcelUtil extends ExcelUtilImpl {
     }
 
     public static GroupExcelUtil getInstance() {
-        return Instance;
+        return new GroupExcelUtil();
     }
 }
