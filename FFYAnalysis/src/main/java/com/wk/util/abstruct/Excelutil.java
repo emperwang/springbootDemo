@@ -9,7 +9,7 @@ public interface Excelutil {
 
     void readDataFromExcel(String filePath);
 
-    <T> List<T> readDataFromExcel(MultipartFile file);
+    void readDataFromExcel(MultipartFile file);
 
     Workbook writeDataToExcel(String json);
 

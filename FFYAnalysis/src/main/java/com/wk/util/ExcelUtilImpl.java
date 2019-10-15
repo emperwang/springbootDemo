@@ -1,6 +1,5 @@
 package com.wk.util;
 
-import com.wk.bean.bo.GroupExcelReadbean;
 import com.wk.util.abstruct.Excelutil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -8,10 +7,7 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -192,6 +188,29 @@ public abstract class ExcelUtilImpl implements Excelutil {
         return workbook;
     }
 
+    private Workbook getWorkbook(MultipartFile file) throws IOException {
+        if (file == null){
+            log.error("getWorkbook but parameter can't be null");
+            throw new IOException("getWorkbook but parameter can't be null");
+        }
+        String name = file.getOriginalFilename();
+        log.info("file name is :{}",name);
+        Workbook workbook = null;
+        try {
+            InputStream inputStream = file.getInputStream();
+            if (name.endsWith(suffixXls)){
+                workbook = new HSSFWorkbook(inputStream);
+            }else{
+                workbook = new XSSFWorkbook(inputStream);
+            }
+        } catch (FileNotFoundException e) {
+            log.error("getWorkbook FileNotFoundException,msg is:{}",e.getMessage());
+        } catch (IOException e) {
+            log.error("getWorkbook IOException,msg is:{}",e.getMessage());
+        }
+        return workbook;
+    }
+
     /**
      *  检查文件
      * @param file
@@ -216,11 +235,17 @@ public abstract class ExcelUtilImpl implements Excelutil {
      * @return
      */
     @Override
-    public List<GroupExcelReadbean> readDataFromExcel(MultipartFile file) {
+    public void readDataFromExcel(MultipartFile file) {
         if (file == null){
             throw new RuntimeException("readDataFromExcel parameter can't be null");
         }
-        return null;
+        try {
+            Workbook workbook = getWorkbook(file);
+            doReadData(workbook);
+        } catch (IOException e) {
+            log.error("readDataFromExcel IOException,msg is : {}",e.getMessage());
+            return;
+        }
     }
 
     /**

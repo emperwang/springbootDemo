@@ -2,6 +2,8 @@ package com.wk.web.controller;
 
 import com.wk.bean.MonthSum;
 import com.wk.bean.views.DataGradeView;
+import com.wk.constant.MonthConstant;
+import com.wk.util.GroupExcelUtil;
 import com.wk.web.service.MonthSumService;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.slf4j.Logger;
@@ -53,6 +55,9 @@ public class GroupDataController {
         MultipartFile file = multipartRequest.getFile("excelName");
         String originalFilename = file.getOriginalFilename();
         log.info("get originfileName is :{}",originalFilename);
+        GroupExcelUtil instance = GroupExcelUtil.getInstance();
+        instance.readDataFromExcel(file);
+        instance.printTotalNum(MonthConstant.juneEnd);
         return originalFilename;
     }
 
