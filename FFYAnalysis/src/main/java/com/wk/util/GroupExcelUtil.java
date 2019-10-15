@@ -295,7 +295,7 @@ public class GroupExcelUtil extends ExcelUtilImpl {
         for (Regionsbean value : values) {
             Map<String, Depementbean> depementbeanMap = value.getDepets().get(value.getRegionName());
             printDepetment(depementbeanMap,month);
-            log.info(value.getRegionName()+" {} month  num is :{}",month,value.calcTotalNumberPerson(month));
+            log.info(value.getRegionName()+" {} month  num is :{}",month,value.getTotalNumberPerson(month));
         }
     }
     // 打印大区信息
