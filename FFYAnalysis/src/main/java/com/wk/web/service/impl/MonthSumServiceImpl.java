@@ -8,6 +8,7 @@ import com.wk.bean.bo.GroupExcelReadbean;
 import com.wk.bean.bo.Regionsbean;
 import com.wk.bean.bo.Shopbean;
 import com.wk.bean.views.DataGradeView;
+import com.wk.bean.views.MonthSumVo;
 import com.wk.util.GroupExcelUtil;
 import com.wk.web.mapper.MonthSumMapper;
 import com.wk.web.service.DepentmentService;
@@ -15,6 +16,7 @@ import com.wk.web.service.MonthSumService;
 import com.wk.web.service.RegionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -46,12 +48,23 @@ public class MonthSumServiceImpl implements MonthSumService {
 
     @Override
     @Transactional(isolation = Isolation.DEFAULT,readOnly = true)
-    public DataGradeView<MonthSum> dataGradeList() {
-        DataGradeView<MonthSum> dataGradeView = new DataGradeView<>();
-        int total = getTotal();
+    public DataGradeView<MonthSumVo> dataGradeList() {
+        DataGradeView<MonthSumVo> dataGradeView = new DataGradeView<>();
+        Map<Integer, String> deptMaps = depentmentService.idToName();
+        List<MonthSumVo> lists = new ArrayList<>();
         List<MonthSum> all = findAll();
-        dataGradeView.setTotal(total);
-        dataGradeView.setRows(all);
+
+        if (all != null && all.size() > 0){
+            for (MonthSum monthSum : all) {
+                MonthSumVo monthSumVo = new MonthSumVo();
+                BeanUtils.copyProperties(monthSum,monthSumVo);
+                monthSumVo.setDeptName(deptMaps.get(monthSumVo.getDepentsId()));
+                lists.add(monthSumVo);
+            }
+        }
+
+        dataGradeView.setTotal(lists.size());
+        dataGradeView.setRows(lists);
         return dataGradeView;
     }
 

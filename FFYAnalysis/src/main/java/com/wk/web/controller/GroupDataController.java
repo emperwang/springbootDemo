@@ -2,6 +2,7 @@ package com.wk.web.controller;
 
 import com.wk.bean.MonthSum;
 import com.wk.bean.views.DataGradeView;
+import com.wk.bean.views.MonthSumVo;
 import com.wk.constant.MonthConstant;
 import com.wk.util.GroupExcelUtil;
 import com.wk.web.service.MonthSumService;
@@ -36,8 +37,8 @@ public class GroupDataController {
     }
 
     @GetMapping(value = "getDataGride.do")
-    public DataGradeView<MonthSum> getDataGride(){
-        DataGradeView<MonthSum> gradeView = monthSumService.dataGradeList();
+    public DataGradeView<MonthSumVo> getDataGride(){
+        DataGradeView<MonthSumVo> gradeView = monthSumService.dataGradeList();
         return gradeView;
     }
 

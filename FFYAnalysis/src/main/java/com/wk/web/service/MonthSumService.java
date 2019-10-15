@@ -2,6 +2,7 @@ package com.wk.web.service;
 
 import com.wk.bean.MonthSum;
 import com.wk.bean.views.DataGradeView;
+import com.wk.bean.views.MonthSumVo;
 import com.wk.util.GroupExcelUtil;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public interface MonthSumService {
 
     List<MonthSum> findAll();
 
-    DataGradeView<MonthSum> dataGradeList();
+    DataGradeView<MonthSumVo> dataGradeList();
 
     int getTotal();
 

@@ -10,9 +10,12 @@ $(function () { // 页面加载执行
         toolbar: '#group-toolbar',
         columns:[[
             {field:'id',title:'编号',width:100,align:'centor',checkbox:'true'},
-            {field:'groupName',title:'组名',width:100,align:'centor'},
-            {field:'month',title:'月份',width:100,align:'centor'},
-            {field:'personCount',title:'人数',width:100,align:'centor'}]],
+            {field:'groupName',title:'组名',width:50,align:'centor'},
+            {field:'month',title:'月份',width:50,align:'centor'},
+            {field:'endPersonCount',title:'人数',width:50,align:'centor'},
+            {field:'depentsId',title:'regionId',width:50,align:'centor',hidden:'false'},
+            {field:'deptName',title:'大区',width:50,align:'centor'}
+            ]],
         method: "GET",
         url: "/groupdata/getDataGride.do"
     });
