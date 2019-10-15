@@ -58,6 +58,7 @@ public class GroupDataController {
         GroupExcelUtil instance = GroupExcelUtil.getInstance();
         instance.readDataFromExcel(file);
         instance.printTotalNum(MonthConstant.juneEnd);
+        monthSumService.addGroupFromExcel(instance);
         return originalFilename;
     }
 
