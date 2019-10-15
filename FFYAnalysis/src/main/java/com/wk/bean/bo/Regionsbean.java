@@ -29,7 +29,7 @@ public class Regionsbean implements Serializable {
     private Map<String,Map<String,Depementbean>> depets = new HashMap<>();
 
     public int getTotalNumberPerson(String month) {
-        if (month == null){
+        if (totalNumberPerson == null){
             int res = calcTotalNumberPerson(month);
             totalNumberPerson = res;
             return totalNumberPerson;
