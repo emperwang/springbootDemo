@@ -80,6 +80,10 @@ function toUpdate(ids){
 $('#group-delete-btn').click(function () {
     var ids = $('#groupdata').datagrid('getSelections');
     var idsArr = new Array();
+    if (ids == undefined || ids.length <= 0){
+        showMsg("提示","At least select one");
+        return;
+    }
     for (var i=0; i<ids.length;i++) {
         idsArr.push(ids[i].id);
         console.log(idsArr);
