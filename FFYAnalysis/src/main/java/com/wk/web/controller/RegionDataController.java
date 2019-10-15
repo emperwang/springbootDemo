@@ -1,6 +1,7 @@
 package com.wk.web.controller;
 
 import com.wk.bean.Region;
+import com.wk.bean.views.ComboVo;
 import com.wk.bean.views.DataGradeView;
 import com.wk.constant.ResponseMsg;
 import com.wk.web.service.RegionService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -45,5 +47,10 @@ public class RegionDataController {
         log.info("regionUpdate.do receive parame is:name = {},id = {}",name,id);
 
         return ResponseMsg.Success;
+    }
+
+    @GetMapping(value = "regionCombo.do")
+    public List<ComboVo> getRegionCombo(){
+        return regionService.getRegionCombo();
     }
 }
