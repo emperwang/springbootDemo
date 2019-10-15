@@ -1,13 +1,15 @@
 /* 创建小组表 */
 DROP TABLE IF EXISTS month_sum;
 CREATE TABLE `month_sum` (
-  `id` int(11) NOT NULL auto_increment,
-  `group_name` varchar(100) default NULL COMMENT '小组名字',
-  `month` int(11) default NULL COMMENT '月份',
-  `person_count` int(11) default NULL COMMENT '月末人数',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_name` varchar(100) DEFAULT NULL COMMENT '小组名字',
+  `month` int(11) DEFAULT NULL COMMENT '月份',
+  `first_person_count` int(11) DEFAULT NULL COMMENT '月初人数',
+  `end_person_count` int(11) DEFAULT NULL COMMENT '月末人数',
   `depents_id` int(11) NOT NULL COMMENT '所属的大区',
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
 
 
 /**
