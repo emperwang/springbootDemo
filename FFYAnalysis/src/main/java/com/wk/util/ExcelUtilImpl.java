@@ -143,7 +143,7 @@ public abstract class ExcelUtilImpl implements Excelutil {
      * 读取excel中的时间
      * @return
      */
-    public String getDataFromExcel(Cell cell){
+    private String getDataFromExcel(Cell cell){
         String cellValue = "";
         if (cell == null){
             return cellValue;
