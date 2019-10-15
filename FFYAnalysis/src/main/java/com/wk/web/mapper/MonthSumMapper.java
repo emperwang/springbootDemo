@@ -2,8 +2,9 @@ package com.wk.web.mapper;
 
 import com.wk.bean.MonthSum;
 import com.wk.bean.MonthSumExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface MonthSumMapper {
     int countByExample(MonthSumExample example);
@@ -15,6 +16,8 @@ public interface MonthSumMapper {
     int insert(MonthSum record);
 
     int insertSelective(MonthSum record);
+
+    int batchInsert(List<MonthSum> list);
 
     List<MonthSum> selectByExample(MonthSumExample example);
 
