@@ -2,6 +2,7 @@ package com.wk.web.service;
 
 import com.wk.bean.Region;
 import com.wk.bean.bo.Regionsbean;
+import com.wk.bean.views.ComboVo;
 import com.wk.bean.views.DataGradeView;
 
 import java.util.Collection;
@@ -29,4 +30,6 @@ public interface RegionService {
     int deleteByPrimaryKey(Integer id);
 
     boolean checkIdIsInUser(Integer id);
+
+    List<ComboVo> getRegionCombo();
 }

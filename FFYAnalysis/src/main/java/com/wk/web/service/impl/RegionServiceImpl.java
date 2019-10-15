@@ -4,6 +4,7 @@ import com.wk.bean.Depentments;
 import com.wk.bean.Region;
 import com.wk.bean.RegionExample;
 import com.wk.bean.bo.Regionsbean;
+import com.wk.bean.views.ComboVo;
 import com.wk.bean.views.DataGradeView;
 import com.wk.web.mapper.RegionMapper;
 import com.wk.web.service.DepentmentService;
@@ -194,6 +195,22 @@ public class RegionServiceImpl implements RegionService {
             }
         }
         return false;
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.DEFAULT,readOnly = true)
+    public List<ComboVo> getRegionCombo() {
+        ArrayList<ComboVo> lists = new ArrayList<>();
+        List<Region> regions = regionMapper.selectByExample(null);
+        if (regions != null && regions.size() > 0){
+            for (Region region : regions) {
+                ComboVo comboVo = new ComboVo();
+                comboVo.setId(region.getId());
+                comboVo.setText(region.getName());
+                lists.add(comboVo);
+            }
+        }
+        return lists;
     }
 
 
