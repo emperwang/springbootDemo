@@ -8,6 +8,7 @@ import com.wk.constant.MonthConstant;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -282,5 +283,26 @@ public class GroupExcelUtil extends ExcelUtilImpl {
 
     public static GroupExcelUtil getInstance() {
         return new GroupExcelUtil();
+    }
+
+    public void printBeanInfo(){
+        log.info(this.groupExcelReadbean.toString());
+    }
+    // 打印总的总数信息
+    public void printTotalNum(String month){
+        Map<String, Regionsbean> regions = groupExcelReadbean.getRegions();
+        Collection<Regionsbean> values = regions.values();
+        for (Regionsbean value : values) {
+            Map<String, Depementbean> depementbeanMap = value.getDepets().get(value.getRegionName());
+            printDepetment(depementbeanMap,month);
+            log.info(value.getRegionName()+" {} month  num is :{}",month,value.calcTotalNumberPerson(month));
+        }
+    }
+    // 打印大区信息
+    public void printDepetment(Map<String, Depementbean> depementbeanMap,String month){
+        for (Depementbean depementbean : depementbeanMap.values()) {
+            int personCount = depementbean.getPersonCount(month);
+            log.info("depetment: {} ;personCount is: {} ,month is:{}",depementbean.getDepetName(),personCount,month);
+        }
     }
 }
