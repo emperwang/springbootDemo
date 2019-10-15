@@ -3,6 +3,7 @@ package com.wk.web.service.impl;
 import com.wk.bean.Region;
 import com.wk.bean.RegionExample;
 import com.wk.bean.bo.Regionsbean;
+import com.wk.bean.views.DataGradeView;
 import com.wk.web.mapper.RegionMapper;
 import com.wk.web.service.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,23 @@ public class RegionServiceImpl implements RegionService {
         if (regions != null && regions.size() > 0){
             for (Region region : regions) {
                 maps.put(region.getName(),region.getId());
+            }
+        }
+        return maps;
+    }
+
+    /**
+     *  <name,id>
+     * @return
+     */
+    @Override
+    @Transactional(isolation = Isolation.DEFAULT,readOnly = true)
+    public Map<Integer, String> nameToId() {
+        Map<Integer, String> maps = new HashMap<>();
+        List<Region> regions = regionMapper.selectByExample(null);
+        if (regions != null && regions.size() > 0){
+            for (Region region : regions) {
+                maps.put(region.getId(),region.getName());
             }
         }
         return maps;
@@ -74,12 +92,25 @@ public class RegionServiceImpl implements RegionService {
     }
 
     @Override
+    @Transactional(isolation = Isolation.DEFAULT,readOnly = false)
     public int insertRecord(Region region) {
         int count = 0;
         if (region != null){
             count += regionMapper.insert(region);
         }
         return count;
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.DEFAULT,readOnly = true)
+    public DataGradeView<Region> getAllForDataGride() {
+        DataGradeView<Region> datas = new DataGradeView<>();
+        List<Region> regions = regionMapper.selectByExample(null);
+        if (regions != null && regions.size() > 0){
+            datas.setTotal(regions.size());
+            datas.setRows(regions);
+        }
+        return datas;
     }
 
 
