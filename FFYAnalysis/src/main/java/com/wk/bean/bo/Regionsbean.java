@@ -6,7 +6,6 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @ToString
@@ -28,4 +27,22 @@ public class Regionsbean implements Serializable {
     private int totalNumberPerson;
     // 大部下辖的大区 <大部名字,<大区名,对应的大区>>
     private Map<String,Map<String,Depementbean>> depets = new HashMap<>();
+
+    public int calcTotalNumberPerson(String month){
+        if (depets == null || depets.size() <=0 ||
+                this.regionName == null || this.regionName.length()<=0){
+            this.totalNumberPerson = 0;
+            return totalNumberPerson;
+        }
+
+        Map<String, Depementbean> depements = depets.get(this.getRegionName());
+        if (depements == null || depements.size() <= 0){
+            this.totalNumberPerson = 0;
+        }else {
+            for (Depementbean depementbean : depements.values()){
+                this.totalNumberPerson += depementbean.calcPersonCount(month);
+            }
+        }
+        return totalNumberPerson;
+    }
 }
