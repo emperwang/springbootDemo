@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wk.web.MonthSumMapper">
+<mapper namespace="com.wk.web.mapper.MonthSumMapper">
   <resultMap id="BaseResultMap" type="com.wk.bean.MonthSum">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="group_name" jdbcType="VARCHAR" property="groupName" />
@@ -109,6 +109,17 @@
       #{firstPersonCount,jdbcType=INTEGER}, #{endPersonCount,jdbcType=INTEGER}, #{depentsId,jdbcType=INTEGER}
       )
   </insert>
+  
+  <insert id="batchInsert" parameterType="java.util.List">
+     INSERT  INTO  month_sum (group_name, month,
+      first_person_count, end_person_count, depents_id)
+      VALUES
+      <foreach collection="list" separator="," item="item">
+        (#{item.groupName},#{item.month},#{item.firstPersonCount},#{item.endPersonCount},
+        #{item.depentsId})
+      </foreach>
+  </insert>
+  
   <insert id="insertSelective" parameterType="com.wk.bean.MonthSum">
     insert into month_sum
     <trim prefix="(" suffix=")" suffixOverrides=",">

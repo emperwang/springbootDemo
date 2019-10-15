@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.wk.web.DepentmentsMapper" >
+<mapper namespace="com.wk.web.mapper.DepentmentsMapper" >
   <resultMap id="BaseResultMap" type="com.wk.bean.Depentments" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="dept_name" property="deptName" jdbcType="VARCHAR" />
