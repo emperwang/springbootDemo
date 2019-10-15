@@ -27,33 +27,41 @@ public class Depementbean implements Serializable {
     // 大区总监入职时间
     private String depetDirectorStartTime;
     // 大区对应的人数
-    private int personCount;
+    private Integer personCount;
 
     // 下辖的店铺,<大区名,<店组名,对应的店组>
     private Map<String,Map<String,Shopbean>> shops = new HashMap<>();
+
+    public Integer getPersonCount(String month) {
+        if (personCount == null){
+            int res = calcPersonCount(month);
+            personCount = res;
+            return personCount;
+        }
+        return personCount;
+    }
 
     /**
      *  把下属店组人数相加得到总的大区人数
      * @return
      */
-    public int calcPersonCount(String month){
+    private int calcPersonCount(String month){
+        int result = 0;
         if (shops.size() <= 0 || depetName == null || depetName.length() <= 0){
-            this.personCount = 0;
-            return personCount;
+            return result;
         }
 
         Map<String, Shopbean> deptShops = shops.get(depetName);
         if (deptShops == null || deptShops.size() <= 0){
-            this.personCount = 0;
-            return personCount;
+            return result;
         }else{
             Collection<Shopbean> shopbeans = deptShops.values();
             for (Shopbean shopbean : shopbeans) {
                 int count = getShopBeanPersonCount(shopbean,month);
-                this.personCount += count;
+                result += count;
             }
         }
-        return personCount;
+        return result;
     }
 
     private int getShopBeanPersonCount(Shopbean shopbean, String month) {
