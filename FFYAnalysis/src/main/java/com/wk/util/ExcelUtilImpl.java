@@ -41,6 +41,10 @@ public abstract class ExcelUtilImpl implements Excelutil {
             log.error("readDataFromExcel IOException : {}",e.getMessage());
         }
         Workbook workbook = getWorkbook(file);
+        doReadData(workbook);
+    }
+
+    private void doReadData(Workbook workbook){
         if (workbook != null){
             Map<Integer,String> titleFields = new HashMap<>(30);
             int numberOfSheets = workbook.getNumberOfSheets();
