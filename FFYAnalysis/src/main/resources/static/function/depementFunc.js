@@ -18,6 +18,46 @@ $(function () {
     });
 })
 
+// 添加操作
+$('#depentment-add-btn').click(function () {
+    $('#addOrUpdateDeptWin').window({
+        title:'添加',
+        closable: true,
+        draggable: true,
+        modal: true,
+        width: 600,
+        height:400,
+        href: "/dept/toAdd.do"
+    });
+});
+
+
+
+// 修改操作
+$('#depentment-edit-btn').click(function () {
+    var ids = $('#deptShowdata').datagrid('getSelections');
+    console.log("edit "+ids);
+    if(ids.length == 1){
+        console.log("into length = 1")
+        toUpdate(ids);
+    }else{
+        showMsg("Please select one item");
+    }
+});
+
+function toUpdate(ids){
+    $('#addOrUpdateDeptWin').window({
+        title:'修改',
+        closable: true,
+        draggable: true,
+        modal: true,
+        width: 600,
+        height:400,
+        href: "/dept/toUpdate.do?id="+ids[0].id,
+    });
+}
+
+
 
 // 删除操作
 $('#depentment-delete-btn').click(function () {

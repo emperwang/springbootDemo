@@ -1,0 +1,54 @@
+<div align="centor" style="text-align: center;margin-top: 20px;">
+    <form id="depentUpdateform" method="post">
+        <input type="hidden" id="depentUpdateId" th:value="${item.id}" name="id">
+        <div>
+            <label for="deptUpdateName">组名:</label>
+            <input class="easyui-validatebox" th:value="${item.deptName}" name="deptName" type="text" id="deptUpdateName" data-options="required:true" />
+        </div>
+        <div>
+            <label for="deptUpdateMonth">月份:</label>
+            <input name="regionId" id="deptUpdateMonth"/>
+            <input  type="hidden" th:value="${item.regionId}" id="deptUpdateMonthVal"/>
+        </div>
+        <div style="text-align: right;">
+            <a href="#" id="depent-update-confirm" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true"/>
+            <a href="#" id="depent-update-cancel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true"/>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#depentUpdateform').form({
+            url: "/deptdata/deptUpdate.do",
+            success: function (data) {
+                if (data == 'success'){
+                    alert("success");
+                    $('#addOrUpdateDeptWin').window('close');
+                    $('#deptShowdata').datagrid('reload');
+                }else{
+                    alert("failed");
+                }
+            }
+        });
+        $('#deptUpdateMonth').combobox({
+            url: '/regiondata/regionCombo.do',
+            method: 'GET',
+            valueField:'id',
+            textField:'text'
+        });
+    })
+    var comboVal = $('#deptUpdateMonthVal').val();
+    $('#deptUpdateMonth').combobox('select',comboVal);
+
+
+// 确认添加或更新
+$('#depent-update-confirm').click(function () {
+    $('#depentUpdateform').form('submit');
+});
+// 取消,复位数据
+$('#depent-update-cancel').click(function () {
+    $('#depentUpdateform').form('reset');
+    // $('#addOrUpdateWin').window('destroy');
+});
+
+</script>

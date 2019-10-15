@@ -1,0 +1,50 @@
+<div align="centor" style="text-align: center;margin-top: 20px;">
+    <form id="deptform" method="post">
+        <div>
+            <label for="deptName">大区:</label>
+            <input class="easyui-validatebox" name="deptName" type="text" id="deptName" data-options="required:true" />
+        </div>
+        <div>
+            <label for="regionId">大部:</label>
+            <input name="regionId" id="regionId"/>
+        </div>
+        <div style="text-align: right;">
+            <a href="#" id="dept-add-confirm" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true"/>
+            <a href="#" id="dept-add-cancel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true"/>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="/function/util/util.js" charset="utf-8"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#deptform').form({
+            url: "/deptdata/deptAdd.do",
+            success: function (data) {
+                if (data == 'success'){
+                    showMsg("提示","success");
+                    $('#addOrUpdateDeptWin').window('close');
+                    $('#deptShowdata').datagrid('reload');
+                }else{
+                    showMsg("提示","failed");
+                }
+            }
+        });
+
+        $('#regionId').combobox({
+            url: '/regiondata/regionCombo.do',
+            method: 'GET',
+            valueField:'id',
+            textField:'text'
+        });
+    })
+    // 确认添加或更新
+    $('#dept-add-confirm').click(function () {
+        $('#deptform').form('submit');
+    });
+    // 取消,复位数据
+    $('#dept-add-cancel').click(function () {
+        $('#deptform').form('reset');
+        // $('#addOrUpdateWin').window('destroy');
+    });
+</script>
