@@ -17,11 +17,11 @@
             url: "/regiondata/regionUpdate.do",
             success: function (data) {
                 if (data == 'success'){
-                    alert("success");
-                    $('#addOrUpdateWin').window('close');
-                    $('#groupdata').datagrid('reload');
+                    showMsg("提示","success");
+                    $('#addOrUpdateRegionWin').window('close');
+                    $('#regionShowdata').datagrid('reload');
                 }else{
-                    alert("failed");
+                    showMsg("提示","failed");
                 }
             }
         })

@@ -38,7 +38,7 @@ $('#region-edit-btn').click(function () {
         console.log("into length = 1")
         toUpdate(ids);
     }else{
-        alert("Please select one item");
+        showMsg("通知","Please select one item");
     }
 });
 
@@ -51,13 +51,6 @@ function toUpdate(ids){
         width: 600,
         height:400,
         href: "/region/toUpdate.do?id="+ids[0].id,
-        onCollapse: function () {
-            console.log("into showUpdateData");
-            $('#groupUpdateId').val(ids[0].id);
-            $('#updateName').val(ids[0].groupName);
-            $('#updateMonth').val(ids[0].month);
-            $('#updatePersonCount').val(ids[0].personCount);
-        }
     });
 }
 
@@ -91,7 +84,7 @@ function batchDeleteGroup(idsArr) {
             $('#regionShowdata').datagrid('reload');
         },
         error: function (date) {
-            alert("delete error");
+            showMsg("提示","delete error");
         }
     });
 }
