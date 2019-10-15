@@ -21,4 +21,10 @@ public interface RegionService {
     int insertRecord(Region region);
 
     DataGradeView<Region> getAllForDataGride();
+
+    Map<String,String> batchDeleteReturnMsg(List<Integer> ids);
+
+    int deleteByPrimaryKey(Integer id);
+
+    boolean checkIdIsInUser(Integer id);
 }

@@ -1,5 +1,6 @@
 package com.wk.web.service.impl;
 
+import com.wk.bean.Depentments;
 import com.wk.bean.MonthSum;
 import com.wk.bean.MonthSumExample;
 import com.wk.bean.bo.Depementbean;
@@ -175,6 +176,20 @@ public class MonthSumServiceImpl implements MonthSumService {
         }
 
         return count;
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.DEFAULT,readOnly = true)
+    public List<MonthSum> selectByDeptId(Integer id) {
+        List<MonthSum> lists = new ArrayList<>();
+        if (id != null){
+            MonthSumExample example = new MonthSumExample();
+            MonthSumExample.Criteria criteria = example.createCriteria();
+            criteria.andDepentsIdEqualTo(id);
+
+            lists.addAll(sumMapper.selectByExample(example));
+        }
+        return lists;
     }
 
     /**

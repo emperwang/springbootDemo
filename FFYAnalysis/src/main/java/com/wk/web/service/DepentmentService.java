@@ -13,9 +13,19 @@ public interface DepentmentService {
 
     Map<String,Integer> getAllDepentments();
 
+    Map<Integer,String> idToName();
+
     int insertDepentmentFromExcel(Collection<Regionsbean> regionsbeans);
 
     List<Depentments> selectByName(String name);
 
     DataGradeView<DepentmentVo> getDataGride();
+
+    List<Depentments> selectByRegionId(Integer id);
+
+    Map<String,String> batchDeleteReturnMsg(List<Integer> ids);
+
+    int deleteByPrimaryKey(Integer id);
+
+    boolean checkIdIsInUser(Integer id);
 }

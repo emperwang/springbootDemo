@@ -25,4 +25,6 @@ public interface MonthSumService {
     DataGradeView<MonthSum> searchFirstMonthSatisifyCount(Integer month, Integer personCount);
 
     int addGroupFromExcel(GroupExcelUtil instance);
+
+    List<MonthSum> selectByDeptId(Integer id);
 }
