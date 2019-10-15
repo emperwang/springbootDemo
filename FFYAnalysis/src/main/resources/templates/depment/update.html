@@ -2,11 +2,11 @@
     <form id="depentUpdateform" method="post">
         <input type="hidden" id="depentUpdateId" th:value="${item.id}" name="id">
         <div>
-            <label for="deptUpdateName">组名:</label>
+            <label for="deptUpdateName">大区:</label>
             <input class="easyui-validatebox" th:value="${item.deptName}" name="deptName" type="text" id="deptUpdateName" data-options="required:true" />
         </div>
         <div>
-            <label for="deptUpdateMonth">月份:</label>
+            <label for="deptUpdateMonth">大部:</label>
             <input name="regionId" id="deptUpdateMonth"/>
             <input  type="hidden" th:value="${item.regionId}" id="deptUpdateMonthVal"/>
         </div>
