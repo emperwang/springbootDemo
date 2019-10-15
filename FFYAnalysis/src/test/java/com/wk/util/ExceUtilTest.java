@@ -1,12 +1,8 @@
 package com.wk.util;
 
-import com.wk.bean.bo.Depementbean;
 import com.wk.bean.bo.GroupExcelReadbean;
-import com.wk.bean.bo.Regionsbean;
 import com.wk.constant.MonthConstant;
 import org.junit.Test;
-
-import java.util.Map;
 
 public class ExceUtilTest {
 
@@ -19,7 +15,7 @@ public class ExceUtilTest {
         System.out.println("**********************************************************************");
         System.out.println(groupExcelReadbean);
         System.out.println("*************************** count *******************************************");
-        Map<String, Regionsbean> regions = groupExcelReadbean.getRegions();
+        /*Map<String, Regionsbean> regions = groupExcelReadbean.getRegions();
         String regionsName = "广州东大部";
         Regionsbean regionsbean = regions.get(regionsName);
         Map<String, Map<String, Depementbean>> depets = regionsbean.getDepets();
@@ -27,7 +23,9 @@ public class ExceUtilTest {
         for (Depementbean depementbean : depementbeanMap.values()) {
             int personCount = depementbean.calcPersonCount(MonthConstant.juneEnd);
             System.out.println("depetment: "+depementbean.getDepetName()+";  personCount is :"+personCount);
-        }
+        }*/
+
+        groupExcelUtil.printTotalNum(MonthConstant.julyEnd);
     }
 
     @Test
