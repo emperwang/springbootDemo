@@ -1,5 +1,6 @@
 package com.wk.web.controller;
 
+import com.wk.bean.views.ComboVo;
 import com.wk.bean.views.DataGradeView;
 import com.wk.bean.views.DepentmentVo;
 import com.wk.constant.ResponseMsg;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -55,5 +57,10 @@ public class DepentmentDataController {
         } else {
             return ResponseMsg.Failed;
         }
+    }
+
+    @PostMapping(value = "deptCombo.do")
+    public List<ComboVo> deptComboData(){
+        return depentmentService.getDeptCombo();
     }
 }

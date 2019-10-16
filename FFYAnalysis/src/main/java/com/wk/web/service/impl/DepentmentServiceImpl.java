@@ -5,6 +5,7 @@ import com.wk.bean.DepentmentsExample;
 import com.wk.bean.MonthSum;
 import com.wk.bean.bo.Depementbean;
 import com.wk.bean.bo.Regionsbean;
+import com.wk.bean.views.ComboVo;
 import com.wk.bean.views.DataGradeView;
 import com.wk.bean.views.DepentmentVo;
 import com.wk.web.mapper.DepentmentsMapper;
@@ -246,5 +247,23 @@ public class DepentmentServiceImpl implements DepentmentService{
         }
 
         return count;
+    }
+
+    @Override
+    public List<ComboVo> getDeptCombo() {
+        List<ComboVo> lists = new ArrayList<>();
+
+        List<Depentments> depentments = depentmentsMapper.selectByExample(null);
+        if (depentments != null && depentments.size() > 0){
+            for (Depentments depentment : depentments) {
+                ComboVo comboVo = new ComboVo();
+                comboVo.setText(depentment.getDeptName());
+                comboVo.setId(depentment.getId());
+                lists.add(comboVo);
+            }
+        }
+
+
+        return lists;
     }
 }

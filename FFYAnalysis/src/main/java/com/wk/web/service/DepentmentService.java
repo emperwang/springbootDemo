@@ -2,6 +2,7 @@ package com.wk.web.service;
 
 import com.wk.bean.Depentments;
 import com.wk.bean.bo.Regionsbean;
+import com.wk.bean.views.ComboVo;
 import com.wk.bean.views.DataGradeView;
 import com.wk.bean.views.DepentmentVo;
 
@@ -34,4 +35,6 @@ public interface DepentmentService {
     int insertRecord(String deptName, Integer regionId);
 
     int updateRecord(Integer id, String deptName, Integer regionId);
+
+    List<ComboVo> getDeptCombo();
 }
