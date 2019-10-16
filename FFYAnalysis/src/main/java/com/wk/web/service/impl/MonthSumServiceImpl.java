@@ -77,7 +77,10 @@ public class MonthSumServiceImpl implements MonthSumService {
                 lists.add(monthSumVo);
             }
         }
-
+        int size = lists.size();
+        if (size >= 0){
+            end = end > size?size:end;
+        }
         dataGradeView.setTotal(lists.size());  // 此处是总页数
         dataGradeView.setRows(lists.subList(start,end));
         return dataGradeView;
@@ -178,7 +181,10 @@ public class MonthSumServiceImpl implements MonthSumService {
                 lists.add(monthSumVo);
             }
         }
-
+        int size = lists.size();
+        if (size >= 0){
+            end = end > size?size:end;
+        }
         DataGradeView<MonthSumVo> dataGradeView = new DataGradeView<>();
         dataGradeView.setRows(lists.subList(start,end));
         dataGradeView.setTotal(lists.size());
