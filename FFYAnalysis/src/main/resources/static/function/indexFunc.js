@@ -11,6 +11,9 @@ $('#tt').tree({
  * @param url  tab要引入的html
  */
 function addTabs(title,url){
+    if (pathCtx != '') {
+        url = '/' + pathCtx + '/' + url;
+    }
     if ($('#dataTab').tabs('exists',title)){
         $('#dataTab').tabs('select',title);
     }else{
