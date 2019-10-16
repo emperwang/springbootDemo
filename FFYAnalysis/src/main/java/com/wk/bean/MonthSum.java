@@ -1,14 +1,14 @@
 package com.wk.bean;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 
 @ToString
 @Setter
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class MonthSum implements Serializable{
     private Integer id;
 
@@ -22,4 +22,18 @@ public class MonthSum implements Serializable{
 
     private Integer depentsId;
 
+    public MonthSum(String groupName, Integer month, Integer endPersonCount, Integer depentsId) {
+        this.groupName = groupName;
+        this.month = month;
+        this.endPersonCount = endPersonCount;
+        this.depentsId = depentsId;
+    }
+
+    public MonthSum(Integer id, String groupName, Integer month, Integer endPersonCount, Integer depentsId) {
+        this.id = id;
+        this.groupName = groupName;
+        this.month = month;
+        this.endPersonCount = endPersonCount;
+        this.depentsId = depentsId;
+    }
 }
