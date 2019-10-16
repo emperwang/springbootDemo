@@ -5,7 +5,7 @@ $(function () { // 页面加载执行
     $('#groupdata').datagrid({
         fitColumns:true,
         pagination:true,
-        pageSize: 1,        // 每页几条数据, 此数据必须在 pageList中
+        pageSize: 5,        // 每页几条数据, 此数据必须在 pageList中
         pageList: [1,5,10, 20, 50, 100, 150, 200],
         pageNumber: 1 ,     // 初始化在第几页
         toolbar: '#group-toolbar',
