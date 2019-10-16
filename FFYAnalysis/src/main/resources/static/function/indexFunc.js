@@ -12,8 +12,9 @@ $('#tt').tree({
  */
 function addTabs(title,url){
     if (pathCtx != '') {
-        url = '/' + pathCtx + '/' + url;
+        url = pathCtx + '/' + url;
     }
+    printMsg("pathCtx : "+pathCtx)
     if ($('#dataTab').tabs('exists',title)){
         $('#dataTab').tabs('select',title);
     }else{

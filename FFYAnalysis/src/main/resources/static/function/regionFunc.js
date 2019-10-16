@@ -12,7 +12,7 @@ $(function () {
             {field:'id',title:'编号',width:100,align:'centor',checkbox:'true'},
             {field:'name',title:'大部',width:100,align:'centor'}]],
         method: "GET",
-        url: "/regiondata/getDataGride.do"
+        url: pathCtx+"/regiondata/getDataGride.do"
     });
 })
 
@@ -26,7 +26,7 @@ $('#region-add-btn').click(function () {
         modal: true,
         width: 600,
         height:400,
-        href: "/region/toAdd.do"
+        href: pathCtx+"/region/toAdd.do"
     });
 });
 
@@ -50,7 +50,7 @@ function toUpdate(ids){
         modal: true,
         width: 600,
         height:400,
-        href: "/region/toUpdate.do?id="+ids[0].id,
+        href: pathCtx+"/region/toUpdate.do?id="+ids[0].id,
     });
 }
 
@@ -73,7 +73,7 @@ $('#region-delete-btn').click(function () {
 // data: ids: 7,8
 function batchDeleteGroup(idsArr) {
     $.ajax({
-        url: "/regiondata/regionDelete.do",
+        url: pathCtx+"/regiondata/regionDelete.do",
         type: "POST",
         data: {'ids':idsArr+''},
         dataType: "text",

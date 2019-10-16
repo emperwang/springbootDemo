@@ -23,11 +23,11 @@ $(function () { // 页面加载执行
             month: $('#month').val(),
             personCount: $('#personCount').val()
         },*/
-        url: "/groupdata/getDataGride.do"
+        url: pathCtx+"/groupdata/getDataGride.do"
     });
 
     $('#group-search').form({
-        url: "/groupdata/searchDataGride.do",
+        url: pathCtx+"/groupdata/searchDataGride.do",
         success: function (json) { // 这里虽然返回是json串,但是仍然需要转换为json对象
             var jsonObj = $.parseJSON(json);
             /******************此处设置,为了下一页上一页访问仍是search的url,故在这里设置一下url
@@ -35,7 +35,7 @@ $(function () { // 页面加载执行
              * **************************/
             var month = $('#month').val();
             var personCount =  $('#personCount').val()
-            $('#groupdata').datagrid('options').url = '/groupdata/searchDataGride.do?month='+month+"&personCount="+personCount;
+            $('#groupdata').datagrid('options').url = pathCtx+'/groupdata/searchDataGride.do?month='+month+"&personCount="+personCount;
             /********************************************/
             $('#groupdata').datagrid('loadData',jsonObj);
         }
@@ -56,7 +56,7 @@ $('#group-add-btn').click(function () {
         modal: true,
         width: 600,
         height:400,
-        href: "/group/toAdd.do"
+        href: pathCtx+"/group/toAdd.do"
     });
 });
 
@@ -80,7 +80,7 @@ function toUpdate(ids){
         modal: true,
         width: 600,
         height:400,
-        href: "/group/toUpdate.do?id="+ids[0].id,
+        href: pathCtx+"/group/toUpdate.do?id="+ids[0].id,
     });
 }
 
@@ -101,7 +101,7 @@ $('#group-delete-btn').click(function () {
 // 批量删除操作
 function batchDeleteGroup(idsArr) {
     $.ajax({
-        url: "/group/groupDelete.do",
+        url: pathCtx+"/group/groupDelete.do",
         type: "POST",
         data: {'ids':idsArr+''},
         dataType: "text",
@@ -119,7 +119,7 @@ function batchDeleteGroup(idsArr) {
 // 重新加载
 $('#group-reload-btn').click(function () {
     // 把url 以及 pageNumber 设置成初试状态
-    $('#groupdata').datagrid('options').url = "/groupdata/getDataGride.do";
+    $('#groupdata').datagrid('options').url = pathCtx+"/groupdata/getDataGride.do";
     $('#groupdata').datagrid('gotoPage',1);  // 跳转到第一页
     $('#groupdata').datagrid('reload');
 });
@@ -133,7 +133,7 @@ $('#group-import-excel-btn').click(function () {
         modal: true,
         width: 600,
         height:400,
-        href: "/group/toUploadExcel.do"
+        href: pathCtx+"/group/toUploadExcel.do"
     });
 });
 // 导出数据到excel
@@ -148,7 +148,7 @@ $('#group-output-excel-btn').click(function () {
     printMsg(jsonData);
     // 这里使用XMLHttpRequest 进行请求
     // downLoadFile("post","/groupdata/downloadExcel.do",jsonData);
-    downFileExcel("post","/groupdata/downloadExcel.do","data.xls","2007",jsonData)
+    downFileExcel("post",pathCtx+"/groupdata/downloadExcel.do","data.xls","2007",jsonData)
 });
 
 function downLoadFile(method,url,data,fileName){
