@@ -19,7 +19,7 @@
 <script type="text/javascript">
     $(function () {
         $('#depentUpdateform').form({
-            url: "/deptdata/deptUpdate.do",
+            url: pathCtx+"/deptdata/deptUpdate.do",
             success: function (data) {
                 if (data == 'success'){
                     showMsg("提示","success");
@@ -31,7 +31,7 @@
             }
         });
         $('#deptUpdateMonth').combobox({
-            url: '/regiondata/regionCombo.do',
+            url: pathCtx+'/regiondata/regionCombo.do',
             method: 'GET',
             valueField:'id',
             textField:'text'

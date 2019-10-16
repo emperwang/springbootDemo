@@ -14,7 +14,7 @@
 <script type="text/javascript">
     $(function () {
         $('#regionform').form({
-            url: "/regiondata/regionAdd.do",
+            url: pathCtx+"/regiondata/regionAdd.do",
             success: function (data) {
                 if (data == 'success'){
                     showMsg("提示","success");

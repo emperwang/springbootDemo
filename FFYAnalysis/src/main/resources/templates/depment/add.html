@@ -19,7 +19,7 @@
 <script type="text/javascript">
     $(function () {
         $('#deptform').form({
-            url: "/deptdata/deptAdd.do",
+            url: pathCtx+"/deptdata/deptAdd.do",
             success: function (data) {
                 if (data == 'success'){
                     showMsg("提示","success");
@@ -32,7 +32,7 @@
         });
 
         $('#regionId').combobox({
-            url: '/regiondata/regionCombo.do',
+            url: pathCtx+'/regiondata/regionCombo.do',
             method: 'GET',
             valueField:'id',
             textField:'text'

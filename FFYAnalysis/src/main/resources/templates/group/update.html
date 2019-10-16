@@ -29,7 +29,7 @@
 <script type="text/javascript">
     $(function () {
         $('#groupUpdateform').form({
-            url: "/group/groupAdd.do",
+            url: pathCtx+"/group/groupAdd.do",
             success: function (data) {
                 if (data == 'success'){
                     showMsg("提示","success");
@@ -41,7 +41,7 @@
             }
         });
         $('#updatedepentsId').combobox({
-            url: '/deptdata/deptCombo.do',
+            url: pathCtx+'/deptdata/deptCombo.do',
             valueField:'id',
             textField:'text'
         });
