@@ -131,7 +131,16 @@ public class MonthSumServiceImpl implements MonthSumService {
      */
     @Override
     @Transactional(isolation = Isolation.DEFAULT,readOnly = true)
-    public DataGradeView<MonthSumVo> searchFirstMonthSatisifyCount(Integer month, Integer personCount) {
+    public DataGradeView<MonthSumVo> searchFirstMonthSatisifyCount(Integer month, Integer personCount,Integer page,Integer rows) {
+        if (page == null){
+            page = 1;
+        }
+        if (rows == null){
+            rows = 1;
+        }
+        int currPage = page - 1;
+        int start = currPage * rows;
+        int end = page * rows;
         Map<Integer, String> deptMaps = depentmentService.idToName();
         // 先查找 month月人数达到的小组
         MonthSumExample example = new MonthSumExample();
@@ -171,7 +180,7 @@ public class MonthSumServiceImpl implements MonthSumService {
         }
 
         DataGradeView<MonthSumVo> dataGradeView = new DataGradeView<>();
-        dataGradeView.setRows(lists);
+        dataGradeView.setRows(lists.subList(start,end));
         dataGradeView.setTotal(lists.size());
         return dataGradeView;
     }

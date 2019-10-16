@@ -23,7 +23,7 @@ public interface MonthSumService {
 
     int updateGroupInfo(MonthSum monthSum);
 
-    DataGradeView<MonthSumVo> searchFirstMonthSatisifyCount(Integer month, Integer personCount);
+    DataGradeView<MonthSumVo> searchFirstMonthSatisifyCount(Integer month, Integer personCount,Integer page,Integer rows);
 
     int addGroupFromExcel(GroupExcelUtil instance);
 
