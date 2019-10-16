@@ -10,12 +10,19 @@
             <input class="easyui-validatebox" th:value="${item.month}" type="text" name="month" id="updateMonth" data-options="required:true" />
         </div>
         <div>
-            <label for="updatePersonCount">人数:</label>
-            <input class="easyui-validatebox" type="text" th:value="${item.personCount}" name="personCount" id="updatePersonCount" data-options="required:true" />
+            <label for="endPersonCount">人数:</label>
+            <input class="easyui-validatebox" type="text" th:value="${item.endPersonCount}" name="endPersonCount" id="endPersonCount" data-options="required:true" />
         </div>
+
+        <div>
+            <label for="updateMonth">大区:</label>
+            <input type="hidden" th:value="${item.depentsId}" id="hiddenDeptId"/>
+            <input name="depentsId" id="updatedepentsId" />
+        </div>
+
         <div style="text-align: right;">
-            <a href="#" id="group-update-confirm" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true"/>
-            <a href="#" id="group-update-cancel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true"/>
+            <a href="#" id="group-update-confirm" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true">确定</a>
+            <a href="#" id="group-update-cancel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">复位</a>
         </div>
     </form>
 </div>
@@ -25,15 +32,25 @@
             url: "/group/groupAdd.do",
             success: function (data) {
                 if (data == 'success'){
-                    alert("success");
+                    showMsg("提示","success");
                     $('#addOrUpdateWin').window('close');
                     $('#groupdata').datagrid('reload');
                 }else{
-                    alert("failed");
+                    showMsg("提示","failed");
                 }
             }
-        })
+        });
+        $('#updatedepentsId').combobox({
+            url: '/deptdata/deptCombo.do',
+            valueField:'id',
+            textField:'text'
+        });
+
     })
+
+    var deptid = $('#hiddenDeptId').val();
+    $('#updatedepentsId').combobox('select',deptid);
+
     // 确认添加或更新
     $('#group-update-confirm').click(function () {
         $('#groupUpdateform').form('submit');

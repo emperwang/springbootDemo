@@ -69,13 +69,6 @@ function toUpdate(ids){
         width: 600,
         height:400,
         href: "/group/toUpdate.do?id="+ids[0].id,
-        onCollapse: function () {
-            console.log("into showUpdateData");
-            $('#groupUpdateId').val(ids[0].id);
-            $('#updateName').val(ids[0].groupName);
-            $('#updateMonth').val(ids[0].month);
-            $('#updatePersonCount').val(ids[0].personCount);
-        }
     });
 }
 
