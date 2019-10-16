@@ -10,19 +10,17 @@
         <label for="month">月份:</label>
         <input class="easyui-validatebox" type="text" name="month" id="month" data-options="required:true" />
         <label for="personCount">人数:</label>
-        <input class="easyui-validatebox" type="text" name="personCount" id="personCount" data-options="required:true" />
-        <a href="#" id="group-search-btn" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true"/>
+        <input class="easyui-validatebox" type="text" name="personCount" id="personCount" data-options="required:true"/>
+        <a href="#" id="group-search-btn" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
     </form>
 </div>
 <div id="groupdata"></div>
 <div id="addOrUpdateWin"></div>
 
-<script type="text/javascript" src="/function/util/util.js" charset="utf-8"></script>
-<script type="text/javascript" src="/function/groupFunc.js" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/function/util/util.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/function/groupFunc.js}" charset="utf-8"></script>
 <!--获取根目录-->
 <script type="text/javascript" th:inline="javascript">
-    /*<![CDATA[*/
     ctxPath = /*[[@{/}]]*/ '';
-    /*]]>*/
     printMsg("contextPath : "+ ctxPath);
 </script>
