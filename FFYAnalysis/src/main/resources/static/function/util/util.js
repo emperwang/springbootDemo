@@ -39,6 +39,9 @@ function getRootPath() {
         ctxPath = protocol + '//' + host + '/' + webName + '/';
     }
     // return ctxPath;
+    if (webName != ''){
+        webName = '/'+webName;
+    }
     return webName;
 }
 
