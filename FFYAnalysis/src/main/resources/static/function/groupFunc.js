@@ -1,4 +1,23 @@
 $(function () { // 页面加载执行
+    var deptComboForEditor={
+        url: pathCtx+'/deptdata/deptCombo.do',
+        valueField:'id',
+        textField:'text',
+        onBeforeLoad: function (param) {
+            var oRecord = importTblObj.datagrid('getSelected');
+            printMsg(param.PART_NUMBER);
+            printMsg(oRecord.PART_NUMBER);
+            printMsg("-----------------------")
+         }
+    };
+
+    function printParam(param){
+        var oRecord = importTblObj.datagrid('getSelected');
+        printMsg(param.PART_NUMBER);
+        printMsg(oRecord.PART_NUMBER);
+        printMsg("-----------------------")
+    }
+
     /**
      * datagride渲染
      * sorter : 自定义排序函数
@@ -10,6 +29,7 @@ $(function () { // 页面加载执行
         pageList: [1,5,10, 20, 50, 100, 150, 200],
         pageNumber: 1 ,     // 初始化在第几页
         toolbar: '#group-toolbar',
+        striped: true,
         columns:[[
             {field:'id',title:'编号',width:100,align:'centor',checkbox:'true'},
             {field:'groupName',title:'组名',width:50,align:'centor'},
@@ -22,8 +42,25 @@ $(function () { // 页面加载执行
                         return a>b?1:-1;
                     }},
             {field:'depentsId',title:'regionId',width:50,align:'centor',hidden:'false'},
-            {field:'deptName',title:'大区',width:50,align:'centor'}
+            {field:'deptName',title:'大区',width:50,align:'centor',editor:{type:'combobox',options:{url: pathCtx+'/deptdata/deptCombo.do',
+                        valueField:'id',textField:'text',onBeforeLoad: printParam(param)}}},
+            {field:'opt',title:'操作',width:100,align:'center',formatter: function(value,row,index){
+                    var str = '';
+                    var e = '<a href="javascript:void(0);" onclick="editData1('+index+')">编辑</a>';//编辑
+                    var s = '<a href="javascript:void(0);" onclick="saveData1('+index+')">保存</a>';//保存
+                    var c = '<a href="javascript:void(0);" onclick="cancleData1('+index+')">取消</a>';//取消
+                    var d = "<a href='javascript:void(0);' onclick='delData1("+index+","+JSON.stringify(row)+");'>删除</a>";//删除
+                    if(row.editing){
+                        str = s + '&nbsp;&nbsp;'+ c + '&nbsp;&nbsp;'+ d;
+                    }else{
+                        str = e + '&nbsp;&nbsp;'+ d;
+                    }
+                    return str;
+                }},
             ]],
+        onDblClickRow: function (rowIndex,rowData) {
+            editData1(rowIndex);
+        },
         remoteSort: false,
         method: "POST",
         // 此处是设置一些 初试查询参数
@@ -224,4 +261,21 @@ function downFileExcel(method,url, fileName, type,data) {
     xhr.addEventListener("loaded",function (ev) {  });
     xhr.addEventListener("error",function (ev) {  });
     xhr.send(data);
+}
+
+function editData1(index){
+    showMsg("通知","edit "+index);
+    $('#groupdata').datagrid('beginEdit',index);
+}
+function saveData1(index){
+    showMsg("通知","save "+index);
+   // $('#groupdata').datagrid('endEdit',index);
+}
+function cancleData1(index){
+    showMsg("通知","cancel "+index);
+    $('#groupdata').datagrid('cancelEdit',index);
+}
+function delData1(index){
+    showMsg("通知","del "+index);
+    //$('#groupdata').datagrid('',index);
 }
