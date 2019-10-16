@@ -19,3 +19,10 @@
 
 <script type="text/javascript" src="/function/util/util.js" charset="utf-8"></script>
 <script type="text/javascript" src="/function/groupFunc.js" charset="utf-8"></script>
+<!--获取根目录-->
+<script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+    ctxPath = /*[[@{/}]]*/ '';
+    /*]]>*/
+    printMsg("contextPath : "+ ctxPath);
+</script>
