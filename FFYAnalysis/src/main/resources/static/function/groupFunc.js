@@ -1,6 +1,7 @@
 $(function () { // 页面加载执行
     /**
      * datagride渲染
+     * sorter : 自定义排序函数
      */
     $('#groupdata').datagrid({
         fitColumns:true,
@@ -12,11 +13,18 @@ $(function () { // 页面加载执行
         columns:[[
             {field:'id',title:'编号',width:100,align:'centor',checkbox:'true'},
             {field:'groupName',title:'组名',width:50,align:'centor'},
-            {field:'month',title:'月份',width:50,align:'centor'},
-            {field:'endPersonCount',title:'人数',width:50,align:'centor'},
+            {field:'month',title:'月份',width:50,align:'centor',sortable:'true',sorter:
+                    function (a,b) {
+                        return a>b?1:-1;
+                    }},
+            {field:'endPersonCount',title:'人数',width:50,align:'centor',sortable:'true',sorter:
+                    function (a,b) {
+                        return a>b?1:-1;
+                    }},
             {field:'depentsId',title:'regionId',width:50,align:'centor',hidden:'false'},
             {field:'deptName',title:'大区',width:50,align:'centor'}
             ]],
+        remoteSort: false,
         method: "POST",
         // 此处是设置一些 初试查询参数
 /*        queryParams :{
