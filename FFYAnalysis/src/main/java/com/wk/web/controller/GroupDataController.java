@@ -43,9 +43,9 @@ public class GroupDataController {
     }
 
     @PostMapping(value = "searchDataGride.do")
-    public DataGradeView<MonthSum> searchDataGrideData(Integer month,Integer personCount){
+    public DataGradeView<MonthSumVo> searchDataGrideData(Integer month,Integer personCount){
         log.info("searchDataGrideData receive param is: month="+month + ", personCount="+personCount);
-        DataGradeView<MonthSum> dataGradeView = monthSumService.searchFirstMonthSatisifyCount(month,personCount);
+        DataGradeView<MonthSumVo> dataGradeView = monthSumService.searchFirstMonthSatisifyCount(month,personCount);
 
         return dataGradeView;
     }

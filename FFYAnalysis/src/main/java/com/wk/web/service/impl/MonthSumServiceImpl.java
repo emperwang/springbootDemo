@@ -116,7 +116,8 @@ public class MonthSumServiceImpl implements MonthSumService {
      */
     @Override
     @Transactional(isolation = Isolation.DEFAULT,readOnly = true)
-    public DataGradeView<MonthSum> searchFirstMonthSatisifyCount(Integer month, Integer personCount) {
+    public DataGradeView<MonthSumVo> searchFirstMonthSatisifyCount(Integer month, Integer personCount) {
+        Map<Integer, String> deptMaps = depentmentService.idToName();
         // 先查找 month月人数达到的小组
         MonthSumExample example = new MonthSumExample();
         MonthSumExample.Criteria criteria = example.createCriteria();
@@ -143,9 +144,20 @@ public class MonthSumServiceImpl implements MonthSumService {
             // 两个小组求差集,即是结果
             monthSums.removeAll(monthSums1);
         }
-        DataGradeView<MonthSum> dataGradeView = new DataGradeView<>();
-        dataGradeView.setRows(monthSums);
-        dataGradeView.setTotal(monthSums.size());
+        List<MonthSumVo> lists = new ArrayList<>();
+
+        if (monthSums != null && monthSums.size() > 0){
+            for (MonthSum monthSum : monthSums) {
+                MonthSumVo monthSumVo = new MonthSumVo();
+                BeanUtils.copyProperties(monthSum,monthSumVo);
+                monthSumVo.setDeptName(deptMaps.get(monthSumVo.getDepentsId()));
+                lists.add(monthSumVo);
+            }
+        }
+
+        DataGradeView<MonthSumVo> dataGradeView = new DataGradeView<>();
+        dataGradeView.setRows(lists);
+        dataGradeView.setTotal(lists.size());
         return dataGradeView;
     }
 
