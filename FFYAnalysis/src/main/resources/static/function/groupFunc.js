@@ -5,8 +5,8 @@ $(function () { // 页面加载执行
     $('#groupdata').datagrid({
         fitColumns:true,
         pagination:true,
-        pageSize: 5,        // 每页几条数据, 此数据必须在 pageList中
-        pageList: [5,10, 20, 50, 100, 150, 200],
+        pageSize: 1,        // 每页几条数据, 此数据必须在 pageList中
+        pageList: [1,5,10, 20, 50, 100, 150, 200],
         pageNumber: 1 ,     // 初始化在第几页
         toolbar: '#group-toolbar',
         columns:[[
@@ -17,7 +17,12 @@ $(function () { // 页面加载执行
             {field:'depentsId',title:'regionId',width:50,align:'centor',hidden:'false'},
             {field:'deptName',title:'大区',width:50,align:'centor'}
             ]],
-        method: "GET",
+        method: "POST",
+        // 此处是设置一些 初试查询参数
+/*        queryParams :{
+            month: $('#month').val(),
+            personCount: $('#personCount').val()
+        },*/
         url: "/groupdata/getDataGride.do"
     });
 
@@ -25,7 +30,13 @@ $(function () { // 页面加载执行
         url: "/groupdata/searchDataGride.do",
         success: function (json) { // 这里虽然返回是json串,但是仍然需要转换为json对象
             var jsonObj = $.parseJSON(json);
-            console.log(jsonObj)
+            /******************此处设置,为了下一页上一页访问仍是search的url,故在这里设置一下url
+             *  在重新加载后,把url设置回来
+             * **************************/
+            var month = $('#month').val();
+            var personCount =  $('#personCount').val()
+            $('#groupdata').datagrid('options').url = '/groupdata/searchDataGride.do?month='+month+"&personCount="+personCount;
+            /********************************************/
             $('#groupdata').datagrid('loadData',jsonObj);
         }
     });
@@ -107,6 +118,9 @@ function batchDeleteGroup(idsArr) {
 
 // 重新加载
 $('#group-reload-btn').click(function () {
+    // 把url 以及 pageNumber 设置成初试状态
+    $('#groupdata').datagrid('options').url = "/groupdata/getDataGride.do";
+    $('#groupdata').datagrid('gotoPage',1);  // 跳转到第一页
     $('#groupdata').datagrid('reload');
 });
 
