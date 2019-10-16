@@ -5,8 +5,9 @@ $(function () { // 页面加载执行
     $('#groupdata').datagrid({
         fitColumns:true,
         pagination:true,
-        pageSize: 10,
-        pageList: [10, 20, 50, 100, 150, 200],
+        pageSize: 5,        // 每页几条数据, 此数据必须在 pageList中
+        pageList: [5,10, 20, 50, 100, 150, 200],
+        pageNumber: 1 ,     // 初始化在第几页
         toolbar: '#group-toolbar',
         columns:[[
             {field:'id',title:'编号',width:100,align:'centor',checkbox:'true'},

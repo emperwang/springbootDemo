@@ -11,7 +11,7 @@ public interface MonthSumService {
 
     List<MonthSum> findAll();
 
-    DataGradeView<MonthSumVo> dataGradeList();
+    DataGradeView<MonthSumVo> dataGradeList(Integer page,Integer rows);
 
     int getTotal();
 

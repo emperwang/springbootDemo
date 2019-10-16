@@ -35,10 +35,14 @@ public class GroupDataController {
 
         return all;
     }
-
+    // page=1&rows=10  分页参数
     @GetMapping(value = "getDataGride.do")
-    public DataGradeView<MonthSumVo> getDataGride(){
-        DataGradeView<MonthSumVo> gradeView = monthSumService.dataGradeList();
+    public DataGradeView<MonthSumVo> getDataGride(Integer page,Integer rows){
+        if (log.isDebugEnabled()){
+            log.debug("group getDataGride.do,receive parameter page = {},rows = {}",page,rows);
+        }
+
+        DataGradeView<MonthSumVo> gradeView = monthSumService.dataGradeList(page,rows);
         return gradeView;
     }
 

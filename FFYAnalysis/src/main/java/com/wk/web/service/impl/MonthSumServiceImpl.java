@@ -46,9 +46,24 @@ public class MonthSumServiceImpl implements MonthSumService {
         return monthSums;
     }
 
+    /**
+     *
+     * @param page  第几页
+     * @param rows  每页几行
+     * @return
+     */
     @Override
     @Transactional(isolation = Isolation.DEFAULT,readOnly = true)
-    public DataGradeView<MonthSumVo> dataGradeList() {
+    public DataGradeView<MonthSumVo> dataGradeList(Integer page,Integer rows) {
+        if (page == null){
+            page = 1;
+        }
+        if (rows == null){
+            rows = 1;
+        }
+        int currPage = page - 1;
+        int start = currPage * rows;
+        int end = page * rows;
         DataGradeView<MonthSumVo> dataGradeView = new DataGradeView<>();
         Map<Integer, String> deptMaps = depentmentService.idToName();
         List<MonthSumVo> lists = new ArrayList<>();
@@ -63,8 +78,8 @@ public class MonthSumServiceImpl implements MonthSumService {
             }
         }
 
-        dataGradeView.setTotal(lists.size());
-        dataGradeView.setRows(lists);
+        dataGradeView.setTotal(lists.size());  // 此处是总页数
+        dataGradeView.setRows(lists.subList(start,end));
         return dataGradeView;
     }
 
