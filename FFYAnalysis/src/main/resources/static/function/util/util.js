@@ -12,6 +12,39 @@ function showMsg(title,msg) {
     });
 }
 
+/**
+ * 结果:
+ *
+ pathName :ffy/index.do
+ webName :ffy
+ protocol : http:
+ host :localhost:8989
+ pathCtx :http://localhost:8989/ffy/
+ 或者
+ */
+function getRootPath() {
+    // var contextPath = /*[[@{/}]]*/ '';  // 此获取contextPath的方式在js不能使用
+    var pathName = window.location.pathname.substr(1);
+    printMsg("pathName :" + pathName);
+    var webName = pathName ==''?'':pathName.substring(0,pathName.indexOf('/'));
+    printMsg("webName :"+webName);
+    var protocol = window.location.protocol;
+    printMsg("protocol : "+protocol);
+    var host = window.location.host;
+    printMsg("host :"+ host);
+    var ctxPath = '';
+    if(webName == '' || webName == undefined) {
+       ctxPath = protocol + '//' + host + '/';
+    } else {
+        ctxPath = protocol + '//' + host + '/' + webName + '/';
+    }
+    // return ctxPath;
+    return webName;
+}
+
+var pathCtx = getRootPath();
+printMsg("pathCtx :"+pathCtx);
+
 // 获取浏览器信息
 function getBrowser() {
     var agent = window.navigator.userAgent;
