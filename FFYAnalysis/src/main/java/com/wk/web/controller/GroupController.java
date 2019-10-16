@@ -43,20 +43,19 @@ public class GroupController {
      * @param id
      * @param groupName
      * @param month
-     * @param personCount
+     * @param endPersonCount
      * @return
      */
     @PostMapping("groupAdd.do")
     @ResponseBody
-    public String groupAddAction(Integer id,String groupName,Integer month,Integer personCount){
-        log.info("receive param id="+ id+ ", groupName="+groupName+", month="+month+", personCount="+personCount);
+    public String groupAddAction(Integer id,String groupName,Integer month,Integer endPersonCount,Integer depentsId){
+        log.info("receive param id="+ id+ ", groupName="+groupName+", month="+month+", endPersonCount="+endPersonCount +
+        ", depentsId=" +depentsId);
         if (id == null) {
-            // MonthSum monthSum = new MonthSum(groupName, month, personCount);
-            MonthSum monthSum = new MonthSum();
+            MonthSum monthSum = new MonthSum(groupName, month, endPersonCount,depentsId);
             monthSumService.addGroup(monthSum);
         }else{
-            // MonthSum monthSum = new MonthSum(id,groupName, month, personCount);
-            MonthSum monthSum = new MonthSum();
+            MonthSum monthSum = new MonthSum(id,groupName, month, endPersonCount,depentsId);
             monthSumService.updateGroupInfo(monthSum);
         }
         return "success";

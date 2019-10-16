@@ -102,6 +102,8 @@ public class MonthSumServiceImpl implements MonthSumService {
     @Override
     @Transactional(isolation = Isolation.DEFAULT)
     public int updateGroupInfo(MonthSum monthSum) {
+        MonthSum monthSum1 = sumMapper.selectByPrimaryKey(monthSum.getId());
+        monthSum.setFirstPersonCount(monthSum1.getFirstPersonCount());
         int count = sumMapper.updateByPrimaryKey(monthSum);
         return count;
     }
