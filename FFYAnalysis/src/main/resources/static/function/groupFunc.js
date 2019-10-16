@@ -100,11 +100,15 @@ $('#group-delete-btn').click(function () {
         showMsg("提示","At least select one");
         return;
     }
-    for (var i=0; i<ids.length;i++) {
-        idsArr.push(ids[i].id);
-        console.log(idsArr);
-    }
-    batchDeleteGroup(idsArr);
+    $.messager.confirm("提示","Do you real want to delete it ?",function (flag) {
+        if (flag){
+            for (var i=0; i<ids.length;i++) {
+                idsArr.push(ids[i].id);
+                console.log(idsArr);
+            }
+            batchDeleteGroup(idsArr);
+        }
+    })
 });
 // 批量删除操作
 function batchDeleteGroup(idsArr) {
