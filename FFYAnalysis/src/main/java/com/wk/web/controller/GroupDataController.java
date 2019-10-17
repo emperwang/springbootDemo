@@ -83,4 +83,15 @@ public class GroupDataController {
             e.printStackTrace();
         }
     }
+
+    /**
+     *  dataGride 批量增加 和 批量更新
+     * @return
+     */
+    @PostMapping(value = "batchOpera.do")
+    public String batchInsertAndUpdate(@RequestBody String groups){
+        log.info("batchOpera.do receive msg is : {}",groups);
+
+        return "success";
+    }
 }
