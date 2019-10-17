@@ -5,10 +5,11 @@
         <a href="#" id="group-upload-cancel-btn" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:false">取消</a>
     </form>
 </div>
+<script type="text/javascript" th:src="@{/function/util/util.js}" charset="utf-8"></script>
 <script type="text/javascript" charset="UTF-8">
     $(function () {
         $('#groupUploadExcel').form({
-            url: '/groupdata/uploadexcel.do',
+            url: pathCtx+'/groupdata/uploadexcel.do',
             onSubmit: function () {
                 var inputValue = $('#exceFile').filebox('getText');
                 // 获取文件后缀,进行文件类型的校验
@@ -40,7 +41,7 @@
             multiple: false,
             accept:'xls,xlsx'
         });
-    })
+    });
     // 提交
     $('#group-upload-confirm-btn').click(function () {
         $('#groupUploadExcel').form('submit');
@@ -50,15 +51,4 @@
         $('#addOrUpdateWin').window('close');
     });
 
-function printMsg(msg){
-    console.log(msg);
-}
-
-function showMsg(title,msg) {
-    $.messager.show({
-        title: title,
-        msg: msg,
-        showType: 'show'
-    });
-}
 </script>
