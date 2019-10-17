@@ -15,7 +15,7 @@ $(function () { // 页面加载执行
         idField: 'id',
         columns:[[
             {field:'id',title:'编号',width:100,align:'centor',checkbox:'true'},
-            {field:'groupName',title:'组名',width:50,align:'centor',editor:{type:'text'}},
+            {field:'groupName',title:'组名',width:50,align:'centor',editor:{type:'textR'}},
             {field:'month',title:'月份',width:50,align:'centor',sortable:'true',sorter:
                     function (a,b) {
                         return a>b?1:-1;
@@ -23,7 +23,7 @@ $(function () { // 页面加载执行
             {field:'endPersonCount',title:'人数',width:50,align:'centor',sortable:'true',sorter:
                     function (a,b) {
                         return a>b?1:-1;
-                    },editor:{type:'text'}},
+                    },editor:{type:'textR'}},
             {field:'depentsId',title:'regionId',width:50,align:'centor',hidden:'false'},
             {field:'deptName',title:'大区',width:50,align:'centor',editor:{type:'combobox',options:{url: pathCtx+'/deptdata/deptCombo.do',
                         valueField:'id',textField:'text',editable: false,onLoadSuccess:function (data) {
@@ -299,10 +299,17 @@ $('#group-add-row-btn').click(function () {
             index: rowIdx+1,
             row:{
                 id:'',
-                // editing: true     // 此可以直接设置 row的一些属性,验证没问题
+                groupName: '',
+                month: '',
+                endPersonCount: '',
+                deptName: '',
+                depentsId: '',
+                editing: true     //添加肯定是要编辑了 ,可以直接设置 row的一些属性,验证没问题
             }
         });
+        $('#groupdata').datagrid('clearSelections');
         $('#groupdata').datagrid('refreshRow',rowIdx+1);
+        $('#groupdata').datagrid('beginEdit',rowIdx+1);
     }
 });
 
@@ -351,6 +358,7 @@ $('#group-ok-btn').click(function () {
             }
         });
     }
+    $('#groupdata').datagrid('reload');
 });
 
 function batchUpdate(dates) {
@@ -408,7 +416,25 @@ function delData1(index){
 // 自定义扩展编辑器
 $.extend($.fn.datagrid.defaults.editors,{
     textR:{
-
+        init: function (container,options) {
+            var input = $('<input type="text" class="datagrid-editable-input textbox textbox-text"' +
+                'style="width: 89px;">').appendTo(container);
+            return input;
+        },
+        getValue:function (target) {
+            return $(target).val();
+        },
+        setValue:function (target, value) {
+            $(target).val(value);
+        },
+        resize:function (target, width) {
+            var input = $(target);
+            if ($._boxModel == true){
+                input.width(width - (input._outerWidth()-input.width()))
+            }else{
+                input.width(width);
+            }
+        }
     }
 });
 
