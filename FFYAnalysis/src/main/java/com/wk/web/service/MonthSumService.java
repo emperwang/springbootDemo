@@ -28,4 +28,6 @@ public interface MonthSumService {
     int addGroupFromExcel(GroupExcelUtil instance);
 
     List<MonthSum> selectByDeptId(Integer id);
+
+    int batchAddAndUpdate(String groups);
 }

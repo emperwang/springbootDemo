@@ -10,6 +10,7 @@ import com.wk.bean.bo.Shopbean;
 import com.wk.bean.views.DataGradeView;
 import com.wk.bean.views.MonthSumVo;
 import com.wk.util.GroupExcelUtil;
+import com.wk.util.JSONUtil;
 import com.wk.web.mapper.MonthSumMapper;
 import com.wk.web.service.DepentmentService;
 import com.wk.web.service.MonthSumService;
@@ -247,6 +248,23 @@ public class MonthSumServiceImpl implements MonthSumService {
             lists.addAll(sumMapper.selectByExample(example));
         }
         return lists;
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.DEFAULT)
+    public int batchAddAndUpdate(String groups) {
+        int count = 0;
+        List<MonthSum> monthSums = JSONUtil.jsonToBeanList(groups, MonthSum.class);
+        if (monthSums != null && monthSums.size() > 0){
+            for (MonthSum monthSum : monthSums) {
+                if (monthSum.getId() != null){
+                    count += sumMapper.updateByPrimaryKey(monthSum);
+                }else{
+                    count += sumMapper.insert(monthSum);
+                }
+            }
+        }
+        return count;
     }
 
     /**

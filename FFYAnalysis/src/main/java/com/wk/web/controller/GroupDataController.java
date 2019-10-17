@@ -5,6 +5,7 @@ import com.wk.bean.views.DataGradeView;
 import com.wk.bean.views.MonthSumVo;
 import com.wk.constant.MonthConstant;
 import com.wk.util.GroupExcelUtil;
+import com.wk.util.JSONUtil;
 import com.wk.web.service.MonthSumService;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.slf4j.Logger;
@@ -91,7 +92,15 @@ public class GroupDataController {
     @PostMapping(value = "batchOpera.do")
     public String batchInsertAndUpdate(@RequestBody String groups){
         log.info("batchOpera.do receive msg is : {}",groups);
+        if (groups != null && groups.length() > 0) {
+             int count = monthSumService.batchAddAndUpdate(groups);
+            List<MonthSum> monthSums = JSONUtil.jsonToBeanList(groups, MonthSum.class);
+            log.info(monthSums.toString());
 
-        return "success";
+            if (count > 0){
+                return "success";
+            }
+        }
+        return "invalid parameter";
     }
 }
