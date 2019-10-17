@@ -63,13 +63,17 @@ $(function () { // 页面加载执行
             $('#groupdata').datagrid('refreshRow',index);
         },
         onAfterEdit: function (index, row,changes) {
-            row.editing = false;
-            var selectRow = $('#groupdata').datagrid('getRows');
-            printMsg(selectRow[index]);
-            var deptId = selectRow[index].deptName;
-            selectRow[index].depentsId= selectRow[index].deptName;
-            var text = getDtaFromJson(deptComboBox,deptId);
-            selectRow[index].deptName = text;
+            row.editing = false;            // changes是修改的field的值,如果其中修改了deptname,才去进行下面的修改
+            printMsg(changes);
+            var deptName = changes['deptName'];
+            if (deptName != undefined) {
+                var selectRow = $('#groupdata').datagrid('getRows');
+                printMsg(selectRow[index]);
+                var deptId = selectRow[index].deptName;
+                selectRow[index].depentsId = selectRow[index].deptName;
+                var text = getDtaFromJson(deptComboBox, deptId);
+                selectRow[index].deptName = text;
+            }
         },
         onCancelEdit: function (index, row) {
             row.editing = false;
