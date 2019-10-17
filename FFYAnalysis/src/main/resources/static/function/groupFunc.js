@@ -1,23 +1,4 @@
 $(function () { // 页面加载执行
-    var deptComboForEditor={
-        url: pathCtx+'/deptdata/deptCombo.do',
-        valueField:'id',
-        textField:'text',
-        onBeforeLoad: function (param) {
-            var oRecord = importTblObj.datagrid('getSelected');
-            printMsg(param.PART_NUMBER);
-            printMsg(oRecord.PART_NUMBER);
-            printMsg("-----------------------")
-         }
-    };
-
-    function printParam(param){
-        var oRecord = importTblObj.datagrid('getSelected');
-        printMsg(param.PART_NUMBER);
-        printMsg(oRecord.PART_NUMBER);
-        printMsg("-----------------------")
-    }
-
     /**
      * datagride渲染
      * sorter : 自定义排序函数
@@ -30,6 +11,7 @@ $(function () { // 页面加载执行
         pageNumber: 1 ,     // 初始化在第几页
         toolbar: '#group-toolbar',
         striped: true,
+        idField: 'id',
         columns:[[
             {field:'id',title:'编号',width:100,align:'centor',checkbox:'true'},
             {field:'groupName',title:'组名',width:50,align:'centor'},
@@ -43,7 +25,7 @@ $(function () { // 页面加载执行
                     }},
             {field:'depentsId',title:'regionId',width:50,align:'centor',hidden:'false'},
             {field:'deptName',title:'大区',width:50,align:'centor',editor:{type:'combobox',options:{url: pathCtx+'/deptdata/deptCombo.do',
-                        valueField:'id',textField:'text',onBeforeLoad: printParam(param)}}},
+                        valueField:'id',textField:'text'}}},
             {field:'opt',title:'操作',width:100,align:'center',formatter: function(value,row,index){
                     var str = '';
                     var e = '<a href="javascript:void(0);" onclick="editData1('+index+')">编辑</a>';//编辑
@@ -68,7 +50,32 @@ $(function () { // 页面加载执行
             month: $('#month').val(),
             personCount: $('#personCount').val()
         },*/
-        url: pathCtx+"/groupdata/getDataGride.do"
+        url: pathCtx+"/groupdata/getDataGride.do",
+        onLoadSuccess: function (data) {
+            $('#groupdata').datagrid('clearSelections');
+        },
+        onBeforeEdit: function (index, row) {
+            row.editing = true;
+            $('#groupdata').datagrid('refreshRow',index);
+        },
+        onAfterEdit: function (index, row) {
+            row.editing = false;
+        },
+        onCancelEdit: function (index, row) {
+            row.editing = false;
+            if (row.id == ''){
+                $('#groupdata').datagrid('updateRow',{
+                    index: index,
+                    row: blankRow
+                });
+            }else{
+                printMsg("onBeforeEdit  else")
+                $('#groupdata').datagrid('updateRow',{
+                    index: index,
+                    rows: row
+                });
+            }
+        }
     });
 
     $('#group-search').form({
@@ -274,6 +281,7 @@ function saveData1(index){
 function cancleData1(index){
     showMsg("通知","cancel "+index);
     $('#groupdata').datagrid('cancelEdit',index);
+    $('#groupdata').datagrid('refreshRow',index);
 }
 function delData1(index){
     showMsg("通知","del "+index);
