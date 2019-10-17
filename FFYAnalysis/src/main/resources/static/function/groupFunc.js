@@ -19,11 +19,11 @@ $(function () { // 页面加载执行
             {field:'month',title:'月份',width:50,align:'centor',sortable:'true',sorter:
                     function (a,b) {
                         return a>b?1:-1;
-                    }},
+                    },editor:{type:'text'}},
             {field:'endPersonCount',title:'人数',width:50,align:'centor',sortable:'true',sorter:
                     function (a,b) {
                         return a>b?1:-1;
-                    }},
+                    },editor:{type:'text'}},
             {field:'depentsId',title:'regionId',width:50,align:'centor',hidden:'false'},
             {field:'deptName',title:'大区',width:50,align:'centor',editor:{type:'combobox',options:{url: pathCtx+'/deptdata/deptCombo.do',
                         valueField:'id',textField:'text',editable: false,onLoadSuccess:function (data) {
@@ -279,6 +279,34 @@ function downFileExcel(method,url, fileName, type,data) {
     xhr.send(data);
 }
 
+/**
+ * 1.情况一: 没有选择行, 则在最后添加一个空行
+ * 2.情况二: 选择行,则在选择行之后,添加一行
+ */
+$('#group-add-row-btn').click(function () {
+    var selets = $('#groupdata').datagrid('getSelections');
+    if (selets == undefined || selets.length <= 0){ // 没有进行选择
+        $('#groupdata').datagrid('appendRow',{
+            id:''
+        });
+    }else{ // 选择了数据
+        if (selets.length > 1){
+            showMsg("提示","please just select one row");
+            return;
+        }
+        var rowIdx = $('#groupdata').datagrid('getRowIndex',selets[0]);
+        $('#groupdata').datagrid('insertRow',{
+            index: rowIdx+1,
+            row:{
+                id:'',
+                // editing: true     // 此可以直接设置 row的一些属性,验证没问题
+            }
+        });
+        $('#groupdata').datagrid('refreshRow',rowIdx+1);
+    }
+});
+
+// editor 删除，修改，添加是 最终的确定按钮
 $('#group-ok-btn').click(function () {
     var delRows = $('#groupdata').datagrid('getChanges','deleted');
     printMsg(delRows);
