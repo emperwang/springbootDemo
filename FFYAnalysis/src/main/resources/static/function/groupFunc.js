@@ -1,3 +1,4 @@
+var deptComboBox ='';
 $(function () { // 页面加载执行
     /**
      * datagride渲染
@@ -6,7 +7,7 @@ $(function () { // 页面加载执行
     $('#groupdata').datagrid({
         fitColumns:true,
         pagination:true,
-        pageSize: 5,        // 每页几条数据, 此数据必须在 pageList中
+        pageSize: 10,        // 每页几条数据, 此数据必须在 pageList中
         pageList: [1,5,10, 20, 50, 100, 150, 200],
         pageNumber: 1 ,     // 初始化在第几页
         toolbar: '#group-toolbar',
@@ -14,7 +15,7 @@ $(function () { // 页面加载执行
         idField: 'id',
         columns:[[
             {field:'id',title:'编号',width:100,align:'centor',checkbox:'true'},
-            {field:'groupName',title:'组名',width:50,align:'centor'},
+            {field:'groupName',title:'组名',width:50,align:'centor',editor:{type:'text'}},
             {field:'month',title:'月份',width:50,align:'centor',sortable:'true',sorter:
                     function (a,b) {
                         return a>b?1:-1;
@@ -25,13 +26,16 @@ $(function () { // 页面加载执行
                     }},
             {field:'depentsId',title:'regionId',width:50,align:'centor',hidden:'false'},
             {field:'deptName',title:'大区',width:50,align:'centor',editor:{type:'combobox',options:{url: pathCtx+'/deptdata/deptCombo.do',
-                        valueField:'id',textField:'text'}}},
+                        valueField:'id',textField:'text',editable: false,onLoadSuccess:function (data) {
+                            printMsg(data);
+                            deptComboBox = data;
+                        }}}},
             {field:'opt',title:'操作',width:100,align:'center',formatter: function(value,row,index){
                     var str = '';
                     var e = '<a href="javascript:void(0);" onclick="editData1('+index+')">编辑</a>';//编辑
                     var s = '<a href="javascript:void(0);" onclick="saveData1('+index+')">保存</a>';//保存
                     var c = '<a href="javascript:void(0);" onclick="cancleData1('+index+')">取消</a>';//取消
-                    var d = "<a href='javascript:void(0);' onclick='delData1("+index+","+JSON.stringify(row)+");'>删除</a>";//删除
+                    var d = "<a href='javascript:void(0);' onclick='delData1("+index+");'>删除</a>";//删除
                     if(row.editing){
                         str = s + '&nbsp;&nbsp;'+ c + '&nbsp;&nbsp;'+ d;
                     }else{
@@ -58,8 +62,14 @@ $(function () { // 页面加载执行
             row.editing = true;
             $('#groupdata').datagrid('refreshRow',index);
         },
-        onAfterEdit: function (index, row) {
+        onAfterEdit: function (index, row,changes) {
             row.editing = false;
+            var selectRow = $('#groupdata').datagrid('getRows');
+            printMsg(selectRow[index]);
+            var deptId = selectRow[index].deptName;
+            selectRow[index].depentsId= selectRow[index].deptName;
+            var text = getDtaFromJson(deptComboBox,deptId);
+            selectRow[index].deptName = text;
         },
         onCancelEdit: function (index, row) {
             row.editing = false;
@@ -69,7 +79,6 @@ $(function () { // 页面加载执行
                     row: blankRow
                 });
             }else{
-                printMsg("onBeforeEdit  else")
                 $('#groupdata').datagrid('updateRow',{
                     index: index,
                     rows: row
@@ -270,13 +279,93 @@ function downFileExcel(method,url, fileName, type,data) {
     xhr.send(data);
 }
 
+$('#group-ok-btn').click(function () {
+    var delRows = $('#groupdata').datagrid('getChanges','deleted');
+    printMsg(delRows);
+    if (delRows != undefined && delRows.length > 0){
+        $.messager.confirm("提示","Do you real want to delete it ?",function (flag) {
+            if (flag){
+                var idsArr = new Array();
+                for (var i=0; i<delRows.length;i++) {
+                    idsArr.push(delRows[i].id);
+                }
+                batchDeleteGroup(idsArr);
+            }
+        });
+    }
+    printMsg("---------------------------------------------------");
+    var uptRows = $('#groupdata').datagrid('getChanges','updated');
+    printMsg(uptRows);
+    printMsg("---------------------------------------------------");
+    if (uptRows != undefined && uptRows.length > 0){
+        $.messager.confirm("提示","Do you real want to update ?",function (flag) {
+            if (flag){
+                var jsonArr = new Array();
+                for(var i = 0;i<uptRows.length;i++){
+                    jsonArr.push(uptRows[i]);
+                }
+                printMsg(jsonArr);
+                batchUpdate(jsonArr);
+            }
+        });
+    }
+    var insertsRow = $('#groupdata').datagrid('getChanges','inserted');
+    printMsg(insertsRow);
+    printMsg("---------------------------------------------------");
+    if (insertsRow != undefined && insertsRow.length > 0){
+        $.messager.confirm("提示","Do you real want to add it ?",function (flag) {
+            if (flag){
+                var jsonArr = new Array();
+                for(var i = 0;i<insertsRow.length;i++){
+                    jsonArr.push(insertsRow[i]);
+                }
+                batchUpdate(jsonArr);
+            }
+        });
+    }
+});
+
+function batchUpdate(dates) {
+    if (dates != undefined && dates.length > 0){
+        $.ajax({
+            url: pathCtx + '/groupdata/batchOpera.do',
+            type: "POST",
+            contentType: 'application/json;charset=UTF-8',  // 设置请求类型
+            data: JSON.stringify(dates),
+            dataType: "text",
+            async: false,
+            success: function (date) {
+                showMsg("提示","operation msg :"+date);
+                $('#groupdata').datagrid('reload');
+            },
+            error: function (date) {
+                showMsg("提示","operation error");
+            }
+        });
+    }
+}
+
+// 从json数组中获取指定key的值
+function getDtaFromJson(jsonObj,id) {
+    for(var i=0;i<jsonObj.length;i++){
+        printMsg("json id : " + jsonObj[i].id);
+        if (jsonObj[i].id == id){
+            return jsonObj[i].text;
+        }
+    }
+}
+
+/*datagride combobox 编辑器的增删改查*/
 function editData1(index){
     showMsg("通知","edit "+index);
     $('#groupdata').datagrid('beginEdit',index);
 }
 function saveData1(index){
     showMsg("通知","save "+index);
-   // $('#groupdata').datagrid('endEdit',index);
+
+    $('#groupdata').datagrid('endEdit',index);
+    $('#groupdata').datagrid('clearSelections');
+    $('#groupdata').datagrid('refreshRow',index);
 }
 function cancleData1(index){
     showMsg("通知","cancel "+index);
@@ -285,5 +374,13 @@ function cancleData1(index){
 }
 function delData1(index){
     showMsg("通知","del "+index);
-    //$('#groupdata').datagrid('',index);
+    $('#groupdata').datagrid('deleteRow',index);
 }
+
+// 自定义扩展编辑器
+$.extend($.fn.datagrid.defaults.editors,{
+    textR:{
+
+    }
+});
+
