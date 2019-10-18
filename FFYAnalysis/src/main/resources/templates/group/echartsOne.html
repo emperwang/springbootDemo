@@ -9,23 +9,49 @@
         var groupEchart = echarts.init(dom);
         var option = {
             title: {
-                text: 'ECharts 入门示例'
+                text: '店组月末人数图'
             },
             tooltip: {},
-            legend: {
-                data:['销量']
+            legend: {   // 指示是谁的图，术语：图例
+                data:[]
             },
             xAxis: {
-                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+                type: 'category',
+                data: []
             },
-            yAxis: {},
+            yAxis: {
+                type: 'value'
+            },
             series: [{
-                name: '销量',
+                name: '',
                 type: 'bar',
-                data: [5, 20, 36, 10, 10, 20]
+                data: []
             }]
         };
-        groupEchart.setOption(option);
+        var selts = $('#groupdata').datagrid('getSelections');
+        $.ajax({
+            url: pathCtx+"/groupdata/echartsOne.do",
+            type:'POST',
+            data: 'id='+selts[0].id,
+            cache: false,
+            async: false,
+            success: function (data) {
+                printMsg(data);
+                $.each(data,function (i,n) {  // i 是索引, n是对应索引位置上的数据
+                    var title = '';
+                    if (i==0){
+                        title = n.title;
+                        option.legend.data.push(n.title);
+                    }else {
+                        option.xAxis.data.push(n.month);
+                        option.series[0].data.push(n.count);
+                        option.series[0].name = title;
+                    }
+                });
+                groupEchart.setOption(option);
+            }
+        });
+
     })
 
 </script>

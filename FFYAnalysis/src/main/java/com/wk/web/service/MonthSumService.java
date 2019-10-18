@@ -8,6 +8,7 @@ import com.wk.util.GroupExcelUtil;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MonthSumService {
 
@@ -36,4 +37,6 @@ public interface MonthSumService {
     Workbook writeDataToExcel(String ids);
 
     List<ComboVo> getMonthCombo();
+
+    List<Map<String,String>> getEchartsOneData(Integer id);
 }

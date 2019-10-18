@@ -26,10 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class MonthSumServiceImpl implements MonthSumService {
@@ -296,6 +293,35 @@ public class MonthSumServiceImpl implements MonthSumService {
         }
 
         return combos;
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.DEFAULT,readOnly = true)
+    public List<Map<String, String>> getEchartsOneData(Integer id) {
+        List<Map<String, String>> lists  = new ArrayList<>();
+        if (id != null){
+            MonthSum monthSum = sumMapper.selectByPrimaryKey(id);
+            if (monthSum != null && monthSum.getGroupName() != null ){
+                MonthSumExample example = new MonthSumExample();
+                HashMap<String,String> title = new HashMap<>(1);
+                title.put("title",monthSum.getGroupName());
+                lists.add(title);
+                MonthSumExample.Criteria criteria = example.createCriteria();
+                criteria.andGroupNameEqualTo(monthSum.getGroupName());
+                List<MonthSum> monthSums = sumMapper.selectByExample(example);
+                if (monthSums != null && monthSums.size() > 0){
+                    for (MonthSum sum : monthSums) {
+                        Integer month = sum.getMonth();
+                        Integer endPersonCount = sum.getEndPersonCount();
+                        HashMap<String,String> map = new HashMap<>(2);
+                        map.put("month",month.toString());
+                        map.put("count",endPersonCount.toString());
+                        lists.add(map);
+                    }
+                }
+            }
+        }
+        return lists;
     }
 
     /**

@@ -19,8 +19,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("groupdata")
@@ -119,5 +123,15 @@ public class GroupDataController {
     public List<ComboVo> getMonthComboVo(){
 
         return monthSumService.getMonthCombo();
+    }
+
+    /**
+     *  group echarts 显示一个店组的 各个月份对应的人数
+     *  找到id对应的店组名字，返回此店组的所有月份的数据
+     * @return <month,personCount>
+     */
+    @PostMapping(value = "echartsOne.do")
+    public List<Map<String,String>> groupEchartsOneData(Integer id){
+        return  monthSumService.getEchartsOneData(id);
     }
 }

@@ -16,6 +16,11 @@ function onBeforeLoad_check_detail(param){
 }
 // echarts 显示
 $('#group-group-one-show-btn').click(function () {
+    var selts = $('#groupdata').datagrid('getSelections');
+    if (selts == undefined || selts.length <= 0){
+        showMsg("提示","Please select one record at least");
+        return;
+    }
     $('#groupEchartsShow').window({
         title:'Histogram',
         closable: true,
