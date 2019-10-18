@@ -207,6 +207,10 @@ $('#group-import-excel-btn').click(function () {
 });
 // 导出数据到excel
 $('#group-output-excel-btn').click(function () {
+    if (checkIfToSave()){
+        showMsg("提示","有未保存的数据,请先保存数据...");
+        return ;
+    }
     var ids = $('#groupdata').datagrid('getSelections');
     printMsg(JSON.stringify(ids));
     if (ids == '' || ids.length == 0){
@@ -316,6 +320,17 @@ $('#group-add-row-btn').click(function () {
         $('#groupdata').datagrid('beginEdit',rowIdx+1);
     }
 });
+// 检查是否有未保存的数据
+function checkIfToSave() {
+    var delRows = $('#groupdata').datagrid('getChanges','deleted');
+    var uptRows = $('#groupdata').datagrid('getChanges','updated');
+    var insertsRow = $('#groupdata').datagrid('getChanges','inserted');
+    if ((delRows != undefined && delRows.length>0)||(uptRows != undefined && uptRows.length>0)
+        ||(insertsRow != undefined && insertsRow.length > 0)){
+        return true;
+    }
+    return false;
+}
 
 // editor 删除，修改，添加是 最终的确定按钮
 $('#group-ok-btn').click(function () {
