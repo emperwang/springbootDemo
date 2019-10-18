@@ -59,7 +59,7 @@ $(function () { // 页面加载执行
             personCount: $('#personCount').val()
         },*/
         url: pathCtx+"/groupdata/getDataGride.do",
-        onBeforeLoad: onBeforeLoad_check_detail ,// 跳转也之前判断是否有数据未保存
+        // onBeforeLoad: onBeforeLoad_check_detail ,// 跳转也之前判断是否有数据未保存
         onLoadSuccess: function (data) {
             $('#groupdata').datagrid('clearSelections');
         },
