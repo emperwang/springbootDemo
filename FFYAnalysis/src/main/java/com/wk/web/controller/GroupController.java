@@ -97,4 +97,10 @@ public class GroupController {
 
         return "group/uploadExcel";
     }
+
+    @GetMapping(value = "groupOneShow.do")
+    public String toEchartsOneShow(){
+
+        return "group/echartsOne";
+    }
 }

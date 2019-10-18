@@ -1,0 +1,31 @@
+<div id="groups-echarts-one-show" style="width: 600px;height:400px;"></div>
+
+
+
+<script type="text/javascript" th:src="@{/echarts/echarts.min.js}" charset="utf-8"></script>
+<script type="text/javascript" charset="UTF-8">
+    $(function () {
+        var dom = document.getElementById("groups-echarts-one-show");
+        var groupEchart = echarts.init(dom);
+        var option = {
+            title: {
+                text: 'ECharts 入门示例'
+            },
+            tooltip: {},
+            legend: {
+                data:['销量']
+            },
+            xAxis: {
+                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+            },
+            yAxis: {},
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        };
+        groupEchart.setOption(option);
+    })
+
+</script>

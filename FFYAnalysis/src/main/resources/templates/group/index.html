@@ -8,6 +8,7 @@
     <a href="#" id="group-output-excel-btn" class="easyui-linkbutton" data-options="iconCls:'icon-page_go',plain:true">export</a>
     <a href="#" id="group-ok-btn" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:true">confirm</a>
     <a href="#" id="group-add-row-btn" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">add-row</a>
+    <a href="#" id="group-group-one-show-btn" class="easyui-linkbutton" data-options="iconCls:'icon-graph',plain:true">Histogram</a>
     <form id="group-search" method="post">
         <label for="month">月份:</label>
         <input class="easyui-validatebox" type="text" name="month" id="month" data-options="required:true" />
@@ -18,7 +19,7 @@
 </div>
 <div id="groupdata"></div>
 <div id="addOrUpdateWin"></div>
-
+<div id="groupEchartsShow"></div>
 <script type="text/javascript" th:src="@{/function/util/util.js}" charset="utf-8"></script>
 <script type="text/javascript" th:src="@{/function/group/groupFunc2.js}" charset="utf-8"></script>
 <script type="text/javascript" th:src="@{/function/group/groupFunc.js}" charset="utf-8"></script>

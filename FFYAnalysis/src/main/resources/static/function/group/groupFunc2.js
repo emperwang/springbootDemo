@@ -14,3 +14,15 @@ function onBeforeLoad_check_detail(param){
         }
     }
 }
+// echarts 显示
+$('#group-group-one-show-btn').click(function () {
+    $('#groupEchartsShow').window({
+        title:'Histogram',
+        closable: true,
+        draggable: true,
+        modal: true,
+        width: 650,
+        height:450,
+        href: pathCtx+"/group/groupOneShow.do"
+    });
+});
