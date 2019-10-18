@@ -13,5 +13,5 @@ public interface Excelutil {
 
     Workbook writeDataToExcel(String json);
 
-    Workbook writeDataToExcel(List data);
+    Workbook writeDataToExcel(List<Object> data);
 }
