@@ -14,8 +14,25 @@ function onBeforeLoad_check_detail(param){
         }
     }
 }
+
+function checkIfToSave() {
+    var delRows = $('#groupdata').datagrid('getChanges','deleted');
+    var uptRows = $('#groupdata').datagrid('getChanges','updated');
+    var insertsRow = $('#groupdata').datagrid('getChanges','inserted');
+    if ((delRows != undefined && delRows.length>0)||(uptRows != undefined && uptRows.length>0)
+        ||(insertsRow != undefined && insertsRow.length > 0)){
+        return true;
+    }
+    return false;
+}
+
 // echarts 显示
 $('#group-group-one-show-btn').click(function () {
+    if(checkIfToSave()){
+        showMsg("通知","please save data first..")
+        return;
+    }
+
     var selts = $('#groupdata').datagrid('getSelections');
     if (selts == undefined || selts.length <= 0){
         showMsg("提示","Please select one record at least");
