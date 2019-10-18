@@ -1,6 +1,7 @@
 package com.wk.web.controller;
 
 import com.wk.bean.MonthSum;
+import com.wk.bean.views.ComboVo;
 import com.wk.bean.views.DataGradeView;
 import com.wk.bean.views.MonthSumVo;
 import com.wk.constant.MonthConstant;
@@ -112,5 +113,11 @@ public class GroupDataController {
             }
         }
         return "invalid parameter";
+    }
+
+    @PostMapping(value = "monthCombo.do")
+    public List<ComboVo> getMonthComboVo(){
+
+        return monthSumService.getMonthCombo();
     }
 }

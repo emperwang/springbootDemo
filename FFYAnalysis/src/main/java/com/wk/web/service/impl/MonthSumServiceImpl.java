@@ -7,6 +7,7 @@ import com.wk.bean.bo.Depementbean;
 import com.wk.bean.bo.GroupExcelReadbean;
 import com.wk.bean.bo.Regionsbean;
 import com.wk.bean.bo.Shopbean;
+import com.wk.bean.views.ComboVo;
 import com.wk.bean.views.DataGradeView;
 import com.wk.bean.views.MonthSumVo;
 import com.wk.util.GroupExcelUtil;
@@ -16,6 +17,7 @@ import com.wk.web.service.DepentmentService;
 import com.wk.web.service.MonthSumService;
 import com.wk.web.service.RegionService;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.tomcat.util.digester.ArrayStack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -276,6 +278,24 @@ public class MonthSumServiceImpl implements MonthSumService {
         instance.setDeptIdToName(deptsMap);
         Workbook workbook = instance.writeDataToExcel(monthSums);
         return workbook;
+    }
+
+    /***
+     *  制作month的combo数据
+     * @return
+     */
+    @Override
+    public List<ComboVo> getMonthCombo() {
+        List<ComboVo> combos = new ArrayList<>(12);
+
+        for (int i=1;i<=12;i++){
+            ComboVo comboVo = new ComboVo();
+            comboVo.setId(i);
+            comboVo.setText(i+"");
+            combos.add(comboVo);
+        }
+
+        return combos;
     }
 
     /**

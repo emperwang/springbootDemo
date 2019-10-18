@@ -1,6 +1,7 @@
 package com.wk.web.service;
 
 import com.wk.bean.MonthSum;
+import com.wk.bean.views.ComboVo;
 import com.wk.bean.views.DataGradeView;
 import com.wk.bean.views.MonthSumVo;
 import com.wk.util.GroupExcelUtil;
@@ -33,4 +34,6 @@ public interface MonthSumService {
     int batchAddAndUpdate(String groups);
 
     Workbook writeDataToExcel(String ids);
+
+    List<ComboVo> getMonthCombo();
 }
