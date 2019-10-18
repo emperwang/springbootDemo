@@ -1,4 +1,5 @@
 var deptComboBox ='';
+var monthComboBox = '';
 $(function () { // 页面加载执行
     /**
      * datagride渲染
@@ -19,7 +20,11 @@ $(function () { // 页面加载执行
             {field:'month',title:'月份',width:50,align:'centor',sortable:'true',sorter:
                     function (a,b) {
                         return a>b?1:-1;
-                    },editor:{type:'text'}},
+                    },editor:{type:'combobox',options:{url: pathCtx+'/groupdata/monthCombo.do',
+                        valueField:'id',textField:'text',editable: false,onLoadSuccess:function (data) {
+                            printMsg(data);
+                            monthComboBox = data;
+                        }}}},
             {field:'endPersonCount',title:'人数',width:50,align:'centor',sortable:'true',sorter:
                     function (a,b) {
                         return a>b?1:-1;
@@ -27,7 +32,6 @@ $(function () { // 页面加载执行
             {field:'depentsId',title:'regionId',width:50,align:'centor',hidden:'false'},
             {field:'deptName',title:'大区',width:50,align:'centor',editor:{type:'combobox',options:{url: pathCtx+'/deptdata/deptCombo.do',
                         valueField:'id',textField:'text',editable: false,onLoadSuccess:function (data) {
-                            printMsg(data);
                             deptComboBox = data;
                         }}}},
             {field:'opt',title:'操作',width:100,align:'center',formatter: function(value,row,index){
