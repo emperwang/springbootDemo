@@ -15,6 +15,7 @@ import com.wk.web.mapper.MonthSumMapper;
 import com.wk.web.service.DepentmentService;
 import com.wk.web.service.MonthSumService;
 import com.wk.web.service.RegionService;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -265,6 +266,16 @@ public class MonthSumServiceImpl implements MonthSumService {
             }
         }
         return count;
+    }
+
+    @Override
+    public Workbook writeDataToExcel(String ids) {
+        Map<Integer, String> deptsMap = depentmentService.idToName();
+        List monthSums = JSONUtil.jsonToBeanList(ids, MonthSum.class);
+        GroupExcelUtil instance = GroupExcelUtil.getInstance();
+        instance.setDeptIdToName(deptsMap);
+        Workbook workbook = instance.writeDataToExcel(monthSums);
+        return workbook;
     }
 
     /**

@@ -7,6 +7,7 @@ import com.wk.constant.MonthConstant;
 import com.wk.util.GroupExcelUtil;
 import com.wk.util.JSONUtil;
 import com.wk.web.service.MonthSumService;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,10 +18,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 @RestController
@@ -74,12 +72,24 @@ public class GroupDataController {
         try {
             BufferedOutputStream outputStream = new BufferedOutputStream(response.getOutputStream());
             response.setHeader("Content-Disposition","demoFile.txt");
-            FileInputStream inputStream = new FileInputStream(new File("F:\\FTPTest\\output.xls"));
-            IOUtils.copy(inputStream,outputStream);
-/*            byte[] bytes = ids.getBytes();
-            outputStream.write(bytes,0,bytes.length);*/
+            Workbook workbook = monthSumService.writeDataToExcel(ids);
+            workbook.write(outputStream);
             outputStream.flush();
             response.flushBuffer();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *  测试下载excel 文件
+     * @param outputStream
+     */
+    private void testDownLoad(BufferedOutputStream outputStream){
+        try {
+            FileInputStream inputStream = new FileInputStream(new File("F:\\FTPTest\\output.xls"));
+            IOUtils.copy(inputStream, outputStream);
+            outputStream.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }

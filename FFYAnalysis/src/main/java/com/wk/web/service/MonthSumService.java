@@ -4,6 +4,7 @@ import com.wk.bean.MonthSum;
 import com.wk.bean.views.DataGradeView;
 import com.wk.bean.views.MonthSumVo;
 import com.wk.util.GroupExcelUtil;
+import org.apache.poi.ss.usermodel.Workbook;
 
 import java.util.List;
 
@@ -30,4 +31,6 @@ public interface MonthSumService {
     List<MonthSum> selectByDeptId(Integer id);
 
     int batchAddAndUpdate(String groups);
+
+    Workbook writeDataToExcel(String ids);
 }
