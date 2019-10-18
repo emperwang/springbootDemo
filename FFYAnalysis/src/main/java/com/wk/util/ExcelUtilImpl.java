@@ -2,8 +2,10 @@ package com.wk.util;
 
 import com.wk.util.abstruct.Excelutil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +22,8 @@ public abstract class ExcelUtilImpl implements Excelutil {
     private static final String suffixXlsx = "xlsx";
     SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
     private boolean isTitle = true;
+    private int columnLength;
+
     /**
      *  读取指定的excel文件
      * @param filePath
@@ -267,11 +271,145 @@ public abstract class ExcelUtilImpl implements Excelutil {
      * @return
      */
     @Override
-    public Workbook writeDataToExcel(List data) {
+    public Workbook writeDataToExcel(List<Object> data) {
         if (data == null && data.size() <= 0){
             throw new RuntimeException("writeDataToExcel parameter can't be null");
         }
-        return null;
+        String sheetName = "personCount";
+        Workbook workbook = wirteDataToExcel(sheetName,data);
+
+        return workbook;
     }
 
+    protected Workbook wirteDataToExcel(String sheetName, List data) {
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet sheet = workbook.createSheet(sheetName);
+        // get column length
+        int columnLength = getColumnLength();
+
+        // 总行数
+        int totalRowNum = data.size() + 2;
+        // 设置列宽
+        for (int i=0; i < columnLength;i++){
+            if (i == 0){
+                sheet.setColumnWidth(i,4800);
+            }else {
+                sheet.setColumnWidth(i,2000);
+            }
+        }
+        // 标题栏
+        HSSFRow titleRow = sheet.createRow(0);
+        // 行高
+        short height = 36*20;
+        titleRow.setHeight(height);
+        HSSFCell cellTitle = titleRow.createCell(0);
+        HSSFCellStyle cellStyle = createStyle(workbook, "黑体", 20,
+                HSSFCellStyle.ALIGN_CENTER,false, true);
+        // 设置样式
+        cellTitle.setCellStyle(cellStyle);
+        cellTitle.setCellValue("FFY");
+        // 合并单元格  起始行  截止行  起始列  截止列
+        sheet.addMergedRegion(new CellRangeAddress(0,0,0,columnLength));
+
+        // 各个列的小标题栏
+        HSSFRow columnTitle = sheet.createRow(1);
+        height = 49*20;
+        columnTitle.setHeight(height);
+        // 列标题栏的 样式
+        HSSFCellStyle columnTitleStyle = createStyle(workbook, "宋体", 12,
+                HSSFCellStyle.ALIGN_CENTER, false, false);
+        
+        createColumnTitleRow(columnTitle,columnTitleStyle,columnLength);
+
+        HSSFCellStyle contentStyle = createStyle(workbook, "宋体", 12,
+                HSSFCellStyle.ALIGN_CENTER, true, false);
+        int rowNum = 2;
+        writeContentToWorkbook(sheet,rowNum,data,contentStyle);
+
+        // last row
+        HSSFRow lastRow = sheet.createRow(totalRowNum);
+        height = 35*20;
+        lastRow.setHeight(height);
+        HSSFCellStyle lastRowCellStyle = createStyle(workbook, "黑体", 8,
+                HSSFCellStyle.ALIGN_LEFT, true, true);
+        HSSFCell cell0 = lastRow.createCell(columnLength - 2);
+        cell0.setCellStyle(lastRowCellStyle);
+        cell0.setCellValue("备注:生成时间");
+        HSSFCell cell1 = lastRow.createCell(columnLength - 1);
+        cell1.setCellStyle(lastRowCellStyle);
+        cell1.setCellValue(DateParseUtil.format(new Date(),"yyyy-MM-dd"));
+        //sheet.addMergedRegion(new CellRangeAddress(totalRowNum,totalRowNum,0,columnLength));
+
+        return workbook;
+    }
+
+    protected abstract void writeContentToWorkbook(HSSFSheet sheet, int rowNum, List<Object> data, HSSFCellStyle contentStyle);
+
+    protected abstract void createColumnTitleRow(HSSFRow columnTitle, HSSFCellStyle columnTitleStyle, int columnLength);
+
+    /**
+     *  创建格式
+     * @param workbook  workbook
+     * @param fontName  字体名字
+     * @param fontHeightInPoints 字体高度
+     * @param aligment 对齐格式
+     * @param border  边界
+     * @param boldWeight 加粗
+     * @return
+     */
+    public HSSFCellStyle createStyle(HSSFWorkbook workbook,String fontName,int fontHeightInPoints,short aligment,
+                                     boolean border,boolean boldWeight){
+
+        HSSFFont font = workbook.createFont();
+        if (boldWeight){
+            // 字体加粗
+            font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+        }
+        font.setFontName(fontName);
+        font.setFontHeightInPoints((short) fontHeightInPoints);
+
+        // create style
+        HSSFCellStyle cellStyle = workbook.createCellStyle();
+        cellStyle.setFont(font);
+        cellStyle.setWrapText(true);
+        cellStyle.setAlignment(aligment);
+        cellStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+        // set border
+        if (border){
+            cellStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+            cellStyle.setBottomBorderColor(HSSFColor.BLACK.index);
+
+            cellStyle.setBorderLeft(HSSFCellStyle.BORDER_THIN);
+            cellStyle.setLeftBorderColor(HSSFColor.BLACK.index);
+
+            cellStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
+            cellStyle.setRightBorderColor(HSSFColor.BLACK.index);
+
+            cellStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
+            cellStyle.setTopBorderColor(HSSFColor.BLACK.index);
+        }
+        return cellStyle;
+    }
+    // 获取列总数
+    protected abstract int getColumnLength();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

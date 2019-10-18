@@ -1,12 +1,18 @@
 package com.wk.util;
 
+import com.wk.bean.MonthSum;
 import com.wk.bean.bo.Depementbean;
 import com.wk.bean.bo.GroupExcelReadbean;
 import com.wk.bean.bo.Regionsbean;
 import com.wk.bean.bo.Shopbean;
 import com.wk.constant.MonthConstant;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -15,10 +21,13 @@ import java.util.Map;
 
 @Slf4j
 @Getter
+@Setter
 public class GroupExcelUtil extends ExcelUtilImpl {
 
     private GroupExcelReadbean groupExcelReadbean = new GroupExcelReadbean();
     private GroupExcelUtil(){}
+
+    private Map<Integer,String> deptIdToName;
 
     /**
      * 0 - 4  regionbean
@@ -36,6 +45,62 @@ public class GroupExcelUtil extends ExcelUtilImpl {
             Shopbean shopbean = exportValueIntoShopbean(values.subList(10,values.size()-1),titleFields);
             putDataIntoBean(regionsbean,depementbean,shopbean);
         }
+    }
+
+    @Override
+    protected void writeContentToWorkbook(HSSFSheet sheet, int rowNum, List<Object> data, HSSFCellStyle contentStyle) {
+        short height = 40*20;
+        for (Object datum : data) {
+            MonthSum sum = (MonthSum)datum;
+            HSSFRow rowTmp = sheet.createRow(rowNum);
+            rowTmp.setHeight(height);
+
+            HSSFCell cell0 = rowTmp.createCell(0);
+            cell0.setCellStyle(contentStyle);
+            cell0.setCellValue(sum.getGroupName());
+
+            HSSFCell cell1 = rowTmp.createCell(1);
+            cell1.setCellStyle(contentStyle);
+            cell1.setCellValue(sum.getMonth());
+
+            HSSFCell cell2 = rowTmp.createCell(2);
+            cell2.setCellStyle(contentStyle);
+            cell2.setCellValue(sum.getEndPersonCount());
+
+            HSSFCell cell3 = rowTmp.createCell(3);
+            cell3.setCellStyle(contentStyle);
+            String deptName = deptIdToName.get(sum.getDepentsId());
+            cell3.setCellValue(deptName);
+
+            rowNum++;
+        }
+    }
+
+    // 创建column标题行
+    @Override
+    protected void createColumnTitleRow(HSSFRow columnTitle, HSSFCellStyle columnTitleStyle, int columnLength) {
+        int count = 0; //groupName month endPersonCount depentsId
+        HSSFCell groupName = columnTitle.createCell(count++);
+        groupName.setCellStyle(columnTitleStyle);
+        groupName.setCellValue("店组");
+
+        HSSFCell month = columnTitle.createCell(count++);
+        month.setCellStyle(columnTitleStyle);
+        month.setCellValue("月份");
+
+        HSSFCell endPersonCount = columnTitle.createCell(count++);
+        endPersonCount.setCellStyle(columnTitleStyle);
+        endPersonCount.setCellValue("月末人数");
+
+        HSSFCell depentsId = columnTitle.createCell(count++);
+        depentsId.setCellStyle(columnTitleStyle);
+        depentsId.setCellValue("大区");
+    }
+    // 获得具体的列数
+    @Override
+    protected int getColumnLength() {
+        int length = MonthSum.class.getDeclaredFields().length - 1;
+        return length;
     }
 
     /**
