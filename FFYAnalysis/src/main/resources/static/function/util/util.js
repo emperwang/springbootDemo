@@ -12,6 +12,13 @@ function showMsg(title,msg) {
     });
 }
 
+function confirmMsg(title,msg) {
+    $.messager.confirm(title,msg,function (flag) {
+        return flag;
+    })
+}
+
+
 /**
  * 结果:
  *
