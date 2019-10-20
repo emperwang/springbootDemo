@@ -1,0 +1,13 @@
+server:
+  port: 9090
+
+
+
+
+log:
+  runtime:
+    level: DEBUG
+
+logpath:
+  runtime:
+    path: ./log
