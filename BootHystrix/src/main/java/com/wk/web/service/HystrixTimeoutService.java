@@ -18,13 +18,14 @@ public class HystrixTimeoutService {
     @HystrixCommand(
             commandKey = "createOrder",
             commandProperties = {
-                @HystrixProperty(name = "execution.timeout.enable",value = "true"),
+                @HystrixProperty(name = "execution.timeout.enabled",value = "true"),
                 @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "3000") //ms
             },
             fallbackMethod = "createOrderFallback"
     )
     public String cteateOrder(){
-        return "order success";
+        String order = restTemplate.getForObject("http://localhost:9090/getOrder.do", String.class);
+        return "order success ,"+order;
     }
 
     // 超时降级方法

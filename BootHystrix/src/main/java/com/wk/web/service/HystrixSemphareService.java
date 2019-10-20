@@ -3,11 +3,15 @@ package com.wk.web.service;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 @Slf4j
 public class HystrixSemphareService {
+    @Autowired
+    private RestTemplate restTemplate;
     // 信号量隔离策略
     @HystrixCommand(
             commandKey = "createOrder",
@@ -18,7 +22,8 @@ public class HystrixSemphareService {
             fallbackMethod = "createOrderFallbackMethodSemaphore"
     )
     public String createOrder(){
-        return "order success";
+        String order = restTemplate.getForObject("http://localhost:9090/getOrder.do", String.class);
+        return "order success,semaphore order :"+order;
     }
 
     public String createOrderFallbackMethodSemaphore(){
