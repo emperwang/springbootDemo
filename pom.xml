@@ -42,6 +42,7 @@
         <module>FFYAnalysis</module>
         <module>springbootLogback</module>
         <module>BootHystrix</module>
+        <module>BootHystrixMock</module>
 
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
