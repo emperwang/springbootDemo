@@ -19,12 +19,19 @@ import java.util.Map;
 @EnableKafka
 @Configuration
 public class KafkabootConfig {
+    /**
+     *  consumerConfig kafkaProducerConfig 两个类主要是用于读取application.yml中相关配置,复用
+     */
     @Autowired
     private KafkaConsumerConfig consumerConfig;
 
     @Autowired
     private KafkaProducerConfig kafkaProducerConfig;
 
+    /**
+     *  consumer的配置
+     * @return
+     */
     public Map<String ,Object> consumerConfigs(){
         Map<String ,Object> config = new HashMap<>();
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
@@ -38,6 +45,10 @@ public class KafkabootConfig {
         return config;
     }
 
+    /**
+     * producer 的配置
+     * @return
+     */
     public Map<String,Object> producerConfig(){
         Map<String,Object> maps = new HashMap<>();
         maps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,kafkaProducerConfig.getBootStrapServer());
@@ -49,6 +60,10 @@ public class KafkabootConfig {
         return maps;
     }
 
+    /**
+     *  用于产出kakfaConsumer ,工厂类
+     * @return
+     */
     @Bean
     public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String,String>>
     kafkaListenerContainerFactory(){
@@ -65,12 +80,20 @@ public class KafkabootConfig {
         return new DefaultKafkaConsumerFactory<>(consumerConfigs());
     }
 
+    /**
+     *  produer的工厂类
+     * @return
+     */
     public ProducerFactory<String,String> producerFactory(){
         DefaultKafkaProducerFactory<String,String> kafkaProducerFactory =
                 new DefaultKafkaProducerFactory(producerConfig());
         return kafkaProducerFactory;
     }
 
+    /**
+     *  kafkaTemplate
+     * @return
+     */
     @Bean
     public KafkaTemplate<String,String> kafkaTemplate(){
 
