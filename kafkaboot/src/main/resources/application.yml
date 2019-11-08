@@ -6,11 +6,14 @@ spring:
       bootstrap-servers: 192.168.72.18:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: -1
+      retries: 3
     consumer:
       bootstrap-servers: 192.168.72.18:9092
       auto-offset-reset: earliest
       group-id: wk-boot-test
       enable-auto-commit: true
+      auto-commit-interval: 1000
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
