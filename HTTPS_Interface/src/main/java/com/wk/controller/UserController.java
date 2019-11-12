@@ -19,4 +19,14 @@ public class UserController {
         entityMap.put("address","bj");
         return new ResponseEntity(entityMap,HttpStatus.OK);
     }
+
+    @GetMapping("getUser.do")
+    public ResponseEntity getUserForAsyncTest() throws InterruptedException {
+        Map<String,String> entityMap = new HashMap<>();
+        entityMap.put("name","zhangsan");
+        entityMap.put("age","20");
+        entityMap.put("address","bj");
+        Thread.sleep(10*1000);
+        return new ResponseEntity(entityMap,HttpStatus.OK);
+    }
 }
