@@ -1,16 +1,13 @@
 server:
   port: 9999
   ssl:
-    key-alias: tomcat
-    key-store: classpath:tomcat.keystore
+    key-alias: sslserver
+    key-store: D:\certificate\server\server.keystore
     key-password: 123456
     key-store-password: 123456
     key-store-provider: SUN
     key-store-type: jks
     enabled: true
     client-auth: want     # 控制是否是双向认证
-    trust-store: classpath:serverTrust.key
+    trust-store: D:\certificate\server\serverTrust
     trust-store-password: 123456
-spring:
-  profiles:
-    active: pro
