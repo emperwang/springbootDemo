@@ -12,6 +12,7 @@ import org.springframework.util.concurrent.SuccessCallback;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.AsyncRestTemplate;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 @Slf4j
@@ -19,6 +20,26 @@ public class AsynTemplateController {
 
     @Autowired
     private AsyncRestTemplate asyncRestTemplate;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @GetMapping(value = "synget.do")
+    public String synGet(){
+        String url = "http://192.168.72.1:8888/getUser";
+        // 设置请求头
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        String json = "{\"name\":\"wang\"}";
+        HttpEntity<String> httpEntity = new HttpEntity<String>(json,httpHeaders);
+
+        ResponseEntity<String> entity = restTemplate.getForEntity(url, String.class);
+        int statusCodeValue = entity.getStatusCodeValue();
+        String body = entity.getBody();
+        log.info("statusCodeValue ={}, body={}",statusCodeValue,body);
+        return "success";
+    }
+
     @GetMapping(value = "asynget.do")
     public String AsyncGet(){
         String url = "http://192.168.72.1:8888/getUser";
