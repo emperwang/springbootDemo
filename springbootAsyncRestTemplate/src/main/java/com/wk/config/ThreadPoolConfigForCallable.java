@@ -3,10 +3,12 @@ package com.wk.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.concurrent.ConcurrentTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 @Configuration
@@ -47,6 +49,19 @@ public class ThreadPoolConfigForCallable {
             @Override
             public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
                 configurer.setTaskExecutor(taskExecutor());
+            }
+        };
+    }
+
+    /**
+     *  第二种配置 springmvc的线程池
+     * @return
+     */
+    public WebMvcConfigurer anotherConfig(){
+        return new WebMvcConfigurer() {
+            @Override
+            public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
+                configurer.setTaskExecutor(new ConcurrentTaskExecutor(Executors.newFixedThreadPool(50)));
             }
         };
     }
