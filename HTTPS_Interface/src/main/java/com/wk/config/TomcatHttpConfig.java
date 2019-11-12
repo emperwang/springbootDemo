@@ -51,7 +51,7 @@ public class TomcatHttpConfig {
         connector.setSecure(true);
         connector.setPort(9999);
         // 设置TLS/SSL密钥信息
-        protocolHandler.setSSLEnabled(true);
+/*        protocolHandler.setSSLEnabled(true);
         protocolHandler.setKeystoreFile("");
         protocolHandler.setKeystorePass("");
 
@@ -59,7 +59,7 @@ public class TomcatHttpConfig {
         protocolHandler.setKeyPass("");
 
         protocolHandler.setTruststoreFile("");
-        protocolHandler.setTruststorePass("");
+        protocolHandler.setTruststorePass("");*/
 
         return connector;
     }
