@@ -18,8 +18,6 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 @Configuration
-// 注解开启使用STOMP协议来传输基于代理(message broker)的消息
-// 这时控制器支持使用@Mesagemapping进行配置
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
     private static Logger log = LoggerFactory.getLogger(WebSocketConfig.class);
@@ -31,20 +29,28 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
     // 注册stomp协议的节点，并映射指定的url
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        // 注册一个STOMP的endpoint，并指定使用SockJS协议
+        // server端的连接点
         registry.addEndpoint("/endpointStomp")
-                .setAllowedOrigins("*")
-                .withSockJS();
+                .setAllowedOrigins("*")  // 允许所有的连接
+                .withSockJS();          // 使用sockJS
     }
     // 配置消息代理
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        // topic对应广播消息
-        // user对应点对点配置
+        // 设置代理broker
         registry.enableSimpleBroker("/topic","/user");
-        registry.setUserDestinationPrefix("/user");
+        //registry.setUserDestinationPrefix("/user"); // 设置用户的前缀
+
+        // 为所有的server端的目的地添加前缀,如 这里的@MessageMapping("/welcome"),访问时使用 /app/welcome
+        //registry.setApplicationDestinationPrefixes("/app");
     }
 
+    /**
+     *  拦截器的添加
+     *  stomp发送数据时，分为：命令段, header 段, data 段
+     *  此处的操作就是当命令时connect时,对header中的token进行了过滤
+     * @param registration
+     */
     @Override
     public void configureClientInboundChannel(ChannelRegistration registration) {
         registration.interceptors(new ImmutableMessageChannelInterceptor(){

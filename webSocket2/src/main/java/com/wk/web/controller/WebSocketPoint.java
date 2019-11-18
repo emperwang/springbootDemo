@@ -23,10 +23,6 @@ public class WebSocketPoint {
     private SimpMessagingTemplate messagingTemplate;
 
     private Map<String,Integer> userMap = new HashMap<>();
-    @RequestMapping("socketpoint.do")
-    public String pointHello(){
-        return "socketPoint";
-    }
 
     @RequestMapping("pointsend.do")
     @ResponseBody
@@ -37,11 +33,11 @@ public class WebSocketPoint {
     }
 
     @MessageMapping("/point")
-    public String receiveMsg(@RequestBody String name, @Headers Map<String ,Object> headers){
+    public void receiveMsg(@RequestBody String name, @Headers Map<String ,Object> headers){
         log.info("headers is:"+headers.toString());
         log.info("receive msg is:"+name);
         String name1 = JSON.parseObject(name).getString("name");
-        userMap.put(name1,null);
-        return "receive ok";
+        String msg = JSON.parseObject(name).getString("msg");
+        messagingTemplate.convertAndSendToUser(name1,"/queue/getResponse",msg);
     }
 }

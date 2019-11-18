@@ -33,6 +33,7 @@ public class WebSocketController {
         return "receive ok";
     }
     @MessageMapping("/welcomeSend")
+    //SendTo 此操作是: 有数据发送到welcomeSend时,数据会被发送到/topic/getResponse此目的
     @SendTo("/topic/getResponse")
     public String revAndSend(String name){
         log.info("receive msg is:"+name);

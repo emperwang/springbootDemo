@@ -7,13 +7,18 @@
 <body>
 <h3>hello web socket</h3>
 <div>
-    <label>Please Input Your Name</label>
-    <input type="text" id="name">
+    <label>Please Input Your Name:</label>
+    <input type="text" id="name" readonly="readonly" th:value="${name}"><br/>
+    <label for="toUser">The person you want to send:</label>
+    <input type="text" id="toUser"/><br/>
+    <label for="message">The Msg you want to send:</label>
+    <input type="text" id="message"><br/>
     <button id="send" onclick="sendMsg();">Send Msg</button>
     <button id="connect" onclick="connect();">Connect</button>
     <button id="close" onclick="disconnect();">Close Connect</button>
 </div>
-<p id="response"></p>
+<div id="response"></div>
+
 <script th:src="@{/js/jquery.min.js}"></script>
 <script th:src="@{/plugins/sockjs.min.js}"></script>
 <script th:src="@{/plugins/stomp.js}"></script>

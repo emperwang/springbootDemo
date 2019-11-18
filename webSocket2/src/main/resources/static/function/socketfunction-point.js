@@ -23,10 +23,11 @@ function connect() {
         })
     });
 }
+
 function showResponse(msg) {
     var response = $("#response");
 
-    response.append("<p>" +msg+ "</p>");
+    response.append("<p>" +msg+ "</p><br/>");
 }
 function disconnect() {
     if (stompClient != null){
@@ -39,7 +40,9 @@ function disconnect() {
 // 发送消息
 function sendMsg(){
     var name = $("#name").val();
-    console.log("send msg is:"+name);
+    var touser = $("#toUser").val();
+    var msg = $("#message").val();
+    console.log("send user is :"+name + " , receive user is :"+touser);
 
-    stompClient.send("/point",{},JSON.stringify({'name': name}));
+    stompClient.send("/point",{},JSON.stringify({'name': touser,"msg":"this msg from "+name+", msg is:"+msg}));
 }
