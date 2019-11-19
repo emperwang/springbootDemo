@@ -72,4 +72,16 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
             }
         });
     }
+
+    @Override
+    public void configureClientOutboundChannel(ChannelRegistration registration) {
+        registration.interceptors(new ImmutableMessageChannelInterceptor(){
+            @Override
+            public void postSend(Message<?> message, MessageChannel channel, boolean sent) {
+                String headers = message.getHeaders().toString();
+                Object payload = message.getPayload();
+                log.info("payload:{},headers: {}",payload.toString(),headers);
+            }
+        });
+    }
 }
