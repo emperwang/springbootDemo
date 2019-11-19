@@ -44,6 +44,7 @@
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>static/**</include>
+                    <include>templates/**</include>
                 </includes>
             </resource>
             <!--过滤配置文件到config目录-->
