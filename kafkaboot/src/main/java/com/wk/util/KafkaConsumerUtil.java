@@ -13,7 +13,7 @@ public class KafkaConsumerUtil {
     private static Logger logger = LoggerFactory.getLogger(KafkaConsumerUtil.class);
 
     ExecutorService executorService = new ThreadPoolExecutor(10,50,
-            60, TimeUnit.SECONDS,new LinkedBlockingQueue<>(),new ThreadPoolExecutor.CallerRunsPolicy());
+            60, TimeUnit.SECONDS,new LinkedBlockingQueue<Runnable>(),new ThreadPoolExecutor.CallerRunsPolicy());
 
     public KafkaConsumerUtil(){
         for(int i=0;i<10;i++){
