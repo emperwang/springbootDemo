@@ -9,4 +9,8 @@ public interface UserBeanService {
     int insertAndDelete(UserBean user);
 
     List<UserBean> getAllUserBean();
+
+    List<UserBean> getBeanOrder();
+
+    List<UserBean> getDistinct();
 }

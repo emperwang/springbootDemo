@@ -1,6 +1,7 @@
 package com.wk.ServiceImpl;
 
 import com.wk.Entity.UserBean;
+import com.wk.Entity.UserBeanExample;
 import com.wk.IService.UserBeanService;
 import com.wk.mapper.UserBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -41,5 +44,29 @@ public class UserBeanServiceImpl implements UserBeanService {
     public List<UserBean> getAllUserBean() {
         List<UserBean> userBeans = userBeanMapper.selectByExample(null);
         return userBeans;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,readOnly = true)
+    public List<UserBean> getBeanOrder() {
+        List<UserBean> lists = new ArrayList<>();
+        UserBeanExample example = new UserBeanExample();
+        example.setOrderByClause("id");
+        UserBeanExample.Criteria criteria = example.createCriteria();
+        criteria.andAddressIn(Arrays.asList("bj","nj"));
+        lists = userBeanMapper.selectByExample(example);
+        return lists;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,readOnly = true)
+    public List<UserBean> getDistinct() {
+        List<UserBean> lists = new ArrayList<>();
+        UserBeanExample example = new UserBeanExample();
+        example.setDistinct(true);
+        UserBeanExample.Criteria criteria = example.createCriteria();
+        criteria.andAddressIn(Arrays.asList("bj","nj"));
+        lists = userBeanMapper.selectByExample(example);
+        return lists;
     }
 }
