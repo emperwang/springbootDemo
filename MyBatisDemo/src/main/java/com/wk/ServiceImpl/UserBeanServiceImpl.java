@@ -51,7 +51,19 @@ public class UserBeanServiceImpl implements UserBeanService {
     public List<UserBean> getBeanOrder() {
         List<UserBean> lists = new ArrayList<>();
         UserBeanExample example = new UserBeanExample();
-        example.setOrderByClause("id");
+        example.setOrderByClause(" id  desc");
+        UserBeanExample.Criteria criteria = example.createCriteria();
+        criteria.andAddressIn(Arrays.asList("bj","nj"));
+        lists = userBeanMapper.selectByExample(example);
+        return lists;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,readOnly = true)
+    public List<UserBean> getBeanOrderAsc() {
+        List<UserBean> lists = new ArrayList<>();
+        UserBeanExample example = new UserBeanExample();
+        example.setOrderByClause(" id  ASC");
         UserBeanExample.Criteria criteria = example.createCriteria();
         criteria.andAddressIn(Arrays.asList("bj","nj"));
         lists = userBeanMapper.selectByExample(example);
@@ -67,6 +79,22 @@ public class UserBeanServiceImpl implements UserBeanService {
         UserBeanExample.Criteria criteria = example.createCriteria();
         criteria.andAddressIn(Arrays.asList("bj","nj"));
         lists = userBeanMapper.selectByExample(example);
+        return lists;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,readOnly = true)
+    public List<UserBean> selectByIdOrderDesc() {
+        List<UserBean> lists = new ArrayList<>();
+        lists = userBeanMapper.selectByIdOrderDesc();
+        return lists;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,readOnly = true)
+    public List<UserBean> selectByIdOrderAsc() {
+        List<UserBean> lists = new ArrayList<>();
+        lists = userBeanMapper.selectByIdOrderAsc();
         return lists;
     }
 }

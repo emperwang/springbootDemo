@@ -44,17 +44,34 @@ public class UserController {
         return userBean.toString();
     }
 
-    @GetMapping("idorder.do")
+    @GetMapping("idorder1.do")
     @ResponseBody
-    public List<UserBean> getOrder(){
+    public List<UserBean> getOrderDesc1(){
         return beanService.getBeanOrder();
+    }
+
+    @GetMapping("idorder2.do")
+    @ResponseBody
+    public List<UserBean> getOrderAsc1(){
+        return beanService.getBeanOrderAsc();
     }
 
     @GetMapping("distinct.do")
     @ResponseBody
     public List<UserBean> getBeanDistinct(){
-
         return beanService.getDistinct();
+    }
+
+    @GetMapping("idorderDesc.do")
+    @ResponseBody
+    public List<UserBean> getOrderDesc(){
+        return beanService.selectByIdOrderDesc();
+    }
+
+    @GetMapping("idorderAsc.do")
+    @ResponseBody
+    public List<UserBean> getOrderAsc(){
+        return beanService.selectByIdOrderAsc();
     }
 
     @RequestMapping(value = "/test",method = RequestMethod.GET)

@@ -21,6 +21,10 @@ public interface UserBeanMapper {
 
     UserBean selectByPrimaryKey(Integer id);
 
+    List<UserBean> selectByIdOrderDesc();
+
+    List<UserBean> selectByIdOrderAsc();
+
     int updateByExampleSelective(@Param("record") UserBean record, @Param("example") UserBeanExample example);
 
     int updateByExample(@Param("record") UserBean record, @Param("example") UserBeanExample example);

@@ -83,6 +83,21 @@
       order by ${orderByClause}
     </if>
   </select>
+
+  <select id="selectByIdOrderDesc" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from user
+   order BY id DESC
+  </select>
+
+  <select id="selectByIdOrderAsc" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from user
+    order BY id ASC
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

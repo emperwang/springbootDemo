@@ -10,7 +10,13 @@ public interface UserBeanService {
 
     List<UserBean> getAllUserBean();
 
+    List<UserBean> getBeanOrderAsc();
+
     List<UserBean> getBeanOrder();
 
     List<UserBean> getDistinct();
+
+    List<UserBean> selectByIdOrderDesc();
+
+    List<UserBean> selectByIdOrderAsc();
 }
