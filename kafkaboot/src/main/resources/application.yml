@@ -16,6 +16,7 @@ spring:
       auto-commit-interval: 1000
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      max-poll-records: 500
 
 logpath:
   runtime:
