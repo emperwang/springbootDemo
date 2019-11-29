@@ -19,4 +19,6 @@ public interface UserBeanService {
     List<UserBean> selectByIdOrderDesc();
 
     List<UserBean> selectByIdOrderAsc();
+
+    List<UserBean> selectLikeByName();
 }

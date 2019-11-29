@@ -97,4 +97,15 @@ public class UserBeanServiceImpl implements UserBeanService {
         lists = userBeanMapper.selectByIdOrderAsc();
         return lists;
     }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,readOnly = true)
+    public List<UserBean> selectLikeByName() {
+        List<UserBean> lists = new ArrayList<>();
+        UserBeanExample example = new UserBeanExample();
+        UserBeanExample.Criteria criteria = example.createCriteria();
+        criteria.andNameLike("a%");
+        lists = userBeanMapper.selectByExample(example);
+        return lists;
+    }
 }

@@ -73,6 +73,11 @@ public class UserController {
     public List<UserBean> getOrderAsc(){
         return beanService.selectByIdOrderAsc();
     }
+    @GetMapping("like.do")
+    @ResponseBody
+    public List<UserBean> getUserByLike(){
+        return beanService.selectLikeByName();
+    }
 
     @RequestMapping(value = "/test",method = RequestMethod.GET)
     @ResponseBody
