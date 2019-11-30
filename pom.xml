@@ -44,6 +44,7 @@
         <module>BootHystrix</module>
         <module>BootHystrixMock</module>
         <module>springbootAsyncRestTemplate</module>
+        <module>MybatisMultiSource</module>
 
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
