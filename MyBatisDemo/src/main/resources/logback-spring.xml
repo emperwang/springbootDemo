@@ -173,7 +173,7 @@
         </root>
     </springProfile> -->
 
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="CONSOLE" />
 <!--        <appender-ref ref="DEBUG_FILE" />
         <appender-ref ref="INFO_FILE" />

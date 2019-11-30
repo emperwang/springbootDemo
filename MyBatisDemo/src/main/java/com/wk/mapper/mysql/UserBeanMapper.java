@@ -1,4 +1,4 @@
-package com.wk.mapper;
+package com.wk.mapper.mysql;
 
 import com.wk.Entity.UserBean;
 import com.wk.Entity.UserBeanExample;

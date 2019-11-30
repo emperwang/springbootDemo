@@ -2,7 +2,7 @@ package com.wk.ServiceImpl;
 
 import com.wk.Entity.User;
 import com.wk.IService.IUserService;
-import com.wk.mapper.UserMapper;
+import com.wk.mapper.mysql.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

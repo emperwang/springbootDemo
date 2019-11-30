@@ -3,7 +3,7 @@ package com.wk.ServiceImpl;
 import com.wk.Entity.UserBean;
 import com.wk.Entity.UserBeanExample;
 import com.wk.IService.UserBeanService;
-import com.wk.mapper.UserBeanMapper;
+import com.wk.mapper.mysql.UserBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;

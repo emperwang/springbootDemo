@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan(basePackages = {"com.wk.mapper"})
+@MapperScan(basePackages = {"com.wk.mapper.mysql"})
 public class MainStarter {
     public static void main(String[] args) {
         SpringApplication.run(MainStarter.class,args);
