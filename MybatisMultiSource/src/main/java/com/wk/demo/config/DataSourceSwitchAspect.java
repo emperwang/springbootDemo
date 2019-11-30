@@ -1,13 +1,14 @@
 package com.wk.demo.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Order(value = -100)
+@Order(value = -1)
 @Component
 @Slf4j
 @Aspect
@@ -31,5 +32,17 @@ public class DataSourceSwitchAspect {
     public void db2(){
         log.info("check db2..");
         DbContextHolder.setDbType(DBTypeEnum.db2);
+    }
+
+    @After("db1Aspect()")
+    public void db1After(){
+        log.info("db1 after");
+        DbContextHolder.removeDbType();
+    }
+
+    @After("db2Aspect()")
+    public void db2After(){
+        log.info("db2 after");
+        DbContextHolder.removeDbType();
     }
 }
