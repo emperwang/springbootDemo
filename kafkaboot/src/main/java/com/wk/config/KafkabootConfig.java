@@ -72,7 +72,8 @@ public class KafkabootConfig {
         factory.setConsumerFactory(consumerFactory());
         factory.getContainerProperties().setPollTimeout(1500);
         factory.setBatchListener(true);
-//        factory.getContainerProperties().setAckMode();
+        // 设置手动提交
+        //factory.getContainerProperties().setAckMode(AbstractMessageListenerContainer.AckMode.MANUAL);
         return factory;
     }
 
