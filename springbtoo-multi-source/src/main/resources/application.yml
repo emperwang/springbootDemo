@@ -1,0 +1,20 @@
+server:
+  servlet:
+    context-path: /
+  port: 8989
+spring:
+  application:
+    name: sources
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      master:
+        url: jdbc:mysql://localhost:3306/ssm?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+        username: root
+        password: admin
+        driver-class-name: com.mysql.jdbc.Driver
+      slave:
+        url: jdbc:postgresql://192.168.72.18:5432/test
+        username: root
+        password: admin
+        driver-class-name: org.postgresql.Driver
