@@ -46,6 +46,7 @@
         <module>springbootAsyncRestTemplate</module>
         <!--<module>MybatisMultiSource</module>-->
         <module>springbtoo-multi-source</module>
+        <module>springboot-i18n</module>
 
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>

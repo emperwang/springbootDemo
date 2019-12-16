@@ -1,0 +1,26 @@
+server:
+  port: 8989
+  servlet:
+    context-path: /
+
+
+spring:
+  messages:
+    encoding: UTF-8
+    basename: i18n/messages
+    cache-duration: 3600
+  thymeleaf:
+    cache: false
+
+
+logpath:
+  runtime:
+    path: ./
+  event:
+    path: ./
+  access:
+    path: ./
+log:
+  level:
+    runtime: DEBUG
+

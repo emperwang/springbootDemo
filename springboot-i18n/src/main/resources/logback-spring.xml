@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="encoder.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} NFVO-AM-CONTROLLER [%thread] %-5level %logger - %msg%n"/>
+    <springProperty scope="context" name="runtime.path" source="logpath.runtime.path" />
+    <springProperty scope="context" name="event.path" source="logpath.event.path" />
+    <springProperty scope="context" name="access.path" source="logpath.access.path" />
+    <springProperty scope="context" name="runtime.level" source="log.level.runtime" />
+    <springProperty scope="context" name="hostname" source="host.name" />
+    <!--<property name="log.path" value="logs"/>-->
+    <appender name="runtime" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${runtime.path}/runtime_${hostname}.log</File>
+        <Prudent>false</Prudent>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${runtime.path}/runtime_%d{yyyyMMdd}.log.gz</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>${encoder.pattern}</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <appender name="eventLoggerAppender"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${event.path}/event_${hostname}.log</File>
+        <Prudent>false</Prudent>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${event.path}/event_%d{yyyyMMdd}.log.gz</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>${encoder.pattern}</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>${encoder.pattern}</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <appender name="accessAppender"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${access.path}/access_${hostname}.log</File>
+        <Prudent>false</Prudent>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${access.path}/access_%d{yyyyMMdd}_${hostname}.log.gz</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS};%msg%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <logger name="com.wk"  additivity="true" level="DEBUG">
+        <appender-ref ref="runtime" />
+    </logger>
+    <logger name="eventLogger"  additivity="true" level="TRACE">
+        <appender-ref ref="eventLoggerAppender" />
+    </logger>
+    <logger name="accessLogger"  additivity="true" level="TRACE">
+        <appender-ref ref="accessAppender" />
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>
+
