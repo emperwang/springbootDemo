@@ -98,6 +98,20 @@
     order BY id ASC
   </select>
 
+  <select id="selectPages" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    LIMIT #{offset}, #{limits}
+  </select>
+  
+  <select id="selectPagesWithMap" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    LIMIT #{start}, #{end}
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

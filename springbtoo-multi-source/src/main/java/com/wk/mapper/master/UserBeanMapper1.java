@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface UserBeanMapper1 {
@@ -26,6 +27,29 @@ public interface UserBeanMapper1 {
     List<UserBean> selectByIdOrderDesc();
 
     List<UserBean> selectByIdOrderAsc();
+
+    /**
+     * descripiton:
+     *   mysql 分页查询
+     * @author: wk
+     * @params: offset : 偏移；  limits: 设置总数
+     * @returns:
+     * @time: 16:47
+     * @modifier:
+     * @since:
+     */
+    List<UserBean> selectPages(@Param("offset") Integer offset,@Param("limits") Integer limits);
+    /**
+     * descripiton:
+     * 分页查询 使用map传参
+     * @author: wk
+     * @params:
+     * @returns:
+     * @time: 16:49
+     * @modifier:
+     * @since:
+     */
+    List<UserBean> selectPagesWithMap(Map<String,Object> map);
 
     int updateByExampleSelective(@Param("record") UserBean record, @Param("example") UserBeanExample example);
 

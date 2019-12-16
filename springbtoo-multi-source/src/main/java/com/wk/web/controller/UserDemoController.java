@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -33,6 +34,27 @@ public class UserDemoController {
         List<AmCollectorSource> all = collectorService.getAll();
         log.info("all Collector:{}", all.toString());
         return all;
+    }
+
+    @GetMapping(value = "page.do")
+    public String pagesDemo(){
+        List<UserBean> pages = userService.getPages(2, 10);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("start",2);
+        map.put("end", 5);
+        List<UserBean> pageWithMap = userService.getPageWithMap(map);
+
+        List<AmCollectorSource> pages1 = collectorService.getPages(2, 5);
+
+        List<AmCollectorSource> pageWithMap1 = collectorService.getPageWithMap(map);
+
+        log.info("user pages: {}", pages);
+        log.info("user map:{}", pageWithMap);
+
+        log.info("collcetor pages:{}", pages1);
+        log.info("collector maps :{}", pageWithMap1);
+
+        return "success";
     }
 
 }

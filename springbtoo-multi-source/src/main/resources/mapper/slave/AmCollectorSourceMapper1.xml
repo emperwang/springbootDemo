@@ -105,6 +105,23 @@
       order by ${orderByClause}
     </if>
   </select>
+
+
+  <select id="selectPages" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from am_collection_source
+    LIMIT  #{limits} offset #{offset}
+  </select>
+
+  <select id="selectPagesWithMap" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from am_collection_source
+    LIMIT #{end} offset #{start}
+  </select>
+
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
