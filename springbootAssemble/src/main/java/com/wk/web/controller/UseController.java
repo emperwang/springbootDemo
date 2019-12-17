@@ -1,18 +1,15 @@
 package com.wk.web.controller;
 
 import com.wk.bean.User;
-import com.wk.config.GetConfigValue;
 import com.wk.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
-import java.util.Properties;
 
 @RestController
 public class UseController {
@@ -30,5 +27,11 @@ public class UseController {
         //GetConfigValue test1 = GetConfigValue.GetInstace();
         //String test11 = test1.getValue("test1");
         return "";
+    }
+
+    @DeleteMapping(value = "del.do",consumes = {"application/json;charset=UTF-8"})
+    public String getDeleteEntityBody(@RequestBody String body){
+        System.out.println("receive msg :" + body);
+        return "success";
     }
 }
