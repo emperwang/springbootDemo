@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wk.mapper.slave.AlarmSequenceAnalyzeMapper" >
+  <resultMap id="BaseResultMap" type="com.wk.entity.slave.AlarmSequenceAnalyze" >
+    <id column="auto_id" property="autoId" jdbcType="INTEGER" />
+    <result column="source_id" property="sourceId" jdbcType="VARCHAR" />
+    <result column="alarm_seq" property="alarmSeq" jdbcType="INTEGER" />
+    <result column="event_time" property="eventTime" jdbcType="TIMESTAMP" />
+    <result column="if_complete_analysis" property="ifCompleteAnalysis" jdbcType="BIT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <resultMap id="BaseResultCusPro" type="com.wk.entity.slave.AlarmSequenceAnalyze" >
+    <id column="auto_id" property="autoId" jdbcType="INTEGER" />
+    <result column="alarm_seq" property="alarmSeq" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    auto_id, source_id, alarm_seq, event_time, if_complete_analysis, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wk.entity.slave.AlarmSequenceAnalyzeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from alarm_sequence_analyze
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+
+  <select id="selectSourceIds" resultType="java.lang.String">
+    select DISTINCT source_id from alarm_sequence_analyze tmp where tmp.if_complete_analysis = 'false';
+  </select>
+
+  <select id="checkLostSeq" resultType="java.lang.Integer">
+    SELECT alarm_seq from alarm_sequence_analyze WHERE source_id = #{sourceId}
+      AND alarm_seq IN (
+      <foreach collection="list" item="itm" separator=",">
+        (#{itm})
+      </foreach>
+      )  ORDER BY alarm_seq ASC;
+  </select>
+
+  <select id="getUnAnalyzeBySourceIdWithLimits" resultMap="BaseResultCusPro">
+    SELECT auto_id, alarm_seq,update_time  from alarm_sequence_analyze WHERE source_id = #{sourceId}
+    AND if_complete_analysis = 'false' ORDER BY alarm_seq  ASC limit #{limits};
+  </select>
+
+
+  <select id="getUnAnalyzeBySourceIdNoLimits" parameterType="java.lang.String">
+    SELECT <include refid="Base_Column_List" />  from alarm_sequence_analyze WHERE source_id = #{sourceId}
+    AND if_complete_analysis = 'false' ORDER BY alarm_seq  ASC ;
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from alarm_sequence_analyze
+    where auto_id = #{autoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from alarm_sequence_analyze
+    where auto_id = #{autoId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wk.entity.slave.AlarmSequenceAnalyzeExample" >
+    delete from alarm_sequence_analyze
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wk.entity.slave.AlarmSequenceAnalyze" >
+  <selectKey resultType="java.lang.Integer" keyProperty="autoId" order="BEFORE" >
+    select nextval('alarm_sequence_analyze_auto_id_seq'::regclass) as autoId
+  </selectKey>
+    insert into alarm_sequence_analyze (auto_id, source_id, alarm_seq, 
+      event_time, if_complete_analysis, update_time
+      )
+    values (#{autoId,jdbcType=INTEGER}, #{sourceId,jdbcType=VARCHAR}, #{alarmSeq,jdbcType=INTEGER}, 
+      #{eventTime,jdbcType=TIMESTAMP}, #{ifCompleteAnalysis,jdbcType=BIT}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into alarm_sequence_analyze (auto_id, source_id, alarm_seq,
+      event_time, if_complete_analysis, update_time
+      ) VALUES
+      <foreach collection="list" item="record" separator="," >
+        (
+        (select nextval('alarm_sequence_analyze_auto_id_seq'::regclass) as autoId),#{record.sourceId,jdbcType=VARCHAR},
+        #{record.alarmSeq,jdbcType=INTEGER},#{record.eventTime,jdbcType=TIMESTAMP},
+        #{record.ifCompleteAnalysis,jdbcType=BIT}, #{record.updateTime,jdbcType=TIMESTAMP}
+        )
+      </foreach>
+  </insert>
+  <insert id="insertSelective" parameterType="com.wk.entity.slave.AlarmSequenceAnalyze" >
+    insert into alarm_sequence_analyze
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="autoId != null" >
+        auto_id,
+      </if>
+      <if test="sourceId != null" >
+        source_id,
+      </if>
+      <if test="alarmSeq != null" >
+        alarm_seq,
+      </if>
+      <if test="eventTime != null" >
+        event_time,
+      </if>
+      <if test="ifCompleteAnalysis != null" >
+        if_complete_analysis,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="autoId != null" >
+        #{autoId,jdbcType=INTEGER},
+      </if>
+      <if test="sourceId != null" >
+        #{sourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmSeq != null" >
+        #{alarmSeq,jdbcType=INTEGER},
+      </if>
+      <if test="eventTime != null" >
+        #{eventTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ifCompleteAnalysis != null" >
+        #{ifCompleteAnalysis,jdbcType=BIT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wk.entity.slave.AlarmSequenceAnalyzeExample" resultType="java.lang.Integer" >
+    select count(*) from alarm_sequence_analyze
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update alarm_sequence_analyze
+    <set >
+      <if test="record.autoId != null" >
+        auto_id = #{record.autoId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sourceId != null" >
+        source_id = #{record.sourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alarmSeq != null" >
+        alarm_seq = #{record.alarmSeq,jdbcType=INTEGER},
+      </if>
+      <if test="record.eventTime != null" >
+        event_time = #{record.eventTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ifCompleteAnalysis != null" >
+        if_complete_analysis = #{record.ifCompleteAnalysis,jdbcType=BIT},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update alarm_sequence_analyze
+    set auto_id = #{record.autoId,jdbcType=INTEGER},
+      source_id = #{record.sourceId,jdbcType=VARCHAR},
+      alarm_seq = #{record.alarmSeq,jdbcType=INTEGER},
+      event_time = #{record.eventTime,jdbcType=TIMESTAMP},
+      if_complete_analysis = #{record.ifCompleteAnalysis,jdbcType=BIT},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+  <update id="updateIfCompleteByPrimaryKey" parameterType="com.wk.entity.slave.AlarmSequenceAnalyze">
+    update alarm_sequence_analyze set if_complete_analysis = #{ifCompleteAnalysis,jdbcType=BIT}
+      where auto_id = #{autoId,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.wk.entity.slave.AlarmSequenceAnalyze" >
+    update alarm_sequence_analyze
+    <set >
+      <if test="sourceId != null" >
+        source_id = #{sourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmSeq != null" >
+        alarm_seq = #{alarmSeq,jdbcType=INTEGER},
+      </if>
+      <if test="eventTime != null" >
+        event_time = #{eventTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ifCompleteAnalysis != null" >
+        if_complete_analysis = #{ifCompleteAnalysis,jdbcType=BIT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where auto_id = #{autoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wk.entity.slave.AlarmSequenceAnalyze" >
+    update alarm_sequence_analyze
+    set source_id = #{sourceId,jdbcType=VARCHAR},
+      alarm_seq = #{alarmSeq,jdbcType=INTEGER},
+      event_time = #{eventTime,jdbcType=TIMESTAMP},
+      if_complete_analysis = #{ifCompleteAnalysis,jdbcType=BIT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where auto_id = #{autoId,jdbcType=INTEGER}
+  </update>
+</mapper>
