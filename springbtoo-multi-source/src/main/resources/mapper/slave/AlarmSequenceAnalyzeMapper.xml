@@ -108,7 +108,7 @@
 
   <select id="getUnAnalyzeBySourceIdWithLimits" resultMap="BaseResultCusPro">
     SELECT auto_id, alarm_seq,update_time  from alarm_sequence_analyze WHERE source_id = #{sourceId}
-    AND if_complete_analysis = 'false' ORDER BY alarm_seq  ASC limit #{limits};
+    AND if_complete_analysis = 'false' AND update_time &gt;= #{start}  and update_time &lt;= #{end} ORDER BY alarm_seq  ASC limit #{limits};
   </select>
 
 

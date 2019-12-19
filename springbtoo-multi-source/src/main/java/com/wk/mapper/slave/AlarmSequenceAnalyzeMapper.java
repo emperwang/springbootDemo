@@ -4,6 +4,7 @@ import com.wk.entity.slave.AlarmSequenceAnalyze;
 import com.wk.entity.slave.AlarmSequenceAnalyzeExample;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface AlarmSequenceAnalyzeMapper {
@@ -23,7 +24,10 @@ public interface AlarmSequenceAnalyzeMapper {
 
     List<String> selectSourceIds();
 
-    List<AlarmSequenceAnalyze> getUnAnalyzeBySourceIdWithLimits(@Param("sourceId") String sourceId, @Param("limits") Integer limits);
+    List<AlarmSequenceAnalyze> getUnAnalyzeBySourceIdWithLimits(@Param("sourceId") String sourceId,
+                                                                @Param("limits") Integer limits,
+                                                                @Param("start")Date start,
+                                                                @Param("end") Date end);
 
     List<AlarmSequenceAnalyze> getUnAnalyzeBySourceIdNoLimits(String sourceId);
 
