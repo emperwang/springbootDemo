@@ -54,6 +54,7 @@
                 <targetPath>config</targetPath>
                 <includes>
                     <include>application.yml</include>
+                    <include>*.xml</include>
                     <include>application-${profileActive}.yml</include>
                     <include>**/*.properties</include>
                 </includes>
