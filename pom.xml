@@ -47,6 +47,8 @@
         <!--<module>MybatisMultiSource</module>-->
         <module>springbtoo-multi-source</module>
         <module>springboot-i18n</module>
+        <module>springbootsecurity</module>
+        <module>springboot_springSession</module>
 
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
@@ -55,7 +57,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.4.RELEASE</version>
+        <version>2.0.8.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 

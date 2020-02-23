@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+    <div th:align="left" sec:authorize="isAuthenticated()">
+        登录名:  <span sec:authentication="name"></span>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+        <a th:href="@{/logout}">注销</a>
+    </div>
+    <div sec:authorize="!isAuthenticated()">
+        <a th:href="@{/login}">登陆</a>
+    </div>
+    <div th:align="centor">
+    <div >
+        <h1>welcome to security</h1>
+    </div>
+
+    <div id="role1" sec:authorize="hasRole('role1')">
+        <label for="role1">role1</label>
+        <a th:href="@{/role1/1}">role1</a>
+        <a th:href="@{/role1/11}">role11</a>
+        <a th:href="@{/role1/12}">role12</a>
+    </div>
+
+    <div id="role2" sec:authorize="hasRole('role2')">
+        <label for="role2">role2</label>
+        <a th:href="@{/role2/2}">role2</a>
+        <a th:href="@{/role2/21}">role21</a>
+        <a th:href="@{/role2/22}">role22</a>
+    </div>
+
+    <div id="role3" sec:authorize="hasRole('role3')">
+        <label for="role3">role3</label>
+        <a th:href="@{/role3/3}">role3</a>
+        <a th:href="@{/role3/31}">role31</a>
+        <a th:href="@{/role3/32}">role32</a>
+    </div>
+   </div>
+</body>
+</html>
