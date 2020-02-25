@@ -49,6 +49,7 @@
         <module>springboot-i18n</module>
         <module>springbootsecurity</module>
         <module>springboot_springSession</module>
+        <module>fcaps-socket-sever</module>
 
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
