@@ -23,7 +23,9 @@ public class QuartzUtil {
     public void addSimpleJob(Class<? extends Job> jobClass,String jobName,String jobGroupName,int seconds) throws SchedulerException {
         JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(jobName, jobGroupName).build();
         SimpleTrigger simpleTrigger = TriggerBuilder.newTrigger().withIdentity(jobName, jobGroupName)
-                .withSchedule(SimpleScheduleBuilder.repeatSecondlyForever(seconds))
+                .withSchedule(SimpleScheduleBuilder.repeatSecondlyForever(seconds)
+                        // 超时处理机制
+                        .withMisfireHandlingInstructionNextWithExistingCount())
                 .startNow().build();
         sched.scheduleJob(jobDetail,simpleTrigger);
         if (!sched.isShutdown()){
