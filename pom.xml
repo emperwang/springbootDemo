@@ -50,6 +50,8 @@
         <module>springbootsecurity</module>
         <module>springboot_springSession</module>
         <module>fcaps-socket-sever</module>
+        <module>springboot_ExHandlerLocal</module>
+        <module>springboot_ExHandlerglobal</module>
 
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
