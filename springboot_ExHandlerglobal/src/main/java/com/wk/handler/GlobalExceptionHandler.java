@@ -14,7 +14,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity handler(Throwable ex){
-        log.info(ex.getLocalizedMessage());
+        // log.info(ex.getLocalizedMessage());
         log.error(ex.getMessage());
         HashMap<String, String> map = new HashMap<>();
         map.put("code","500");

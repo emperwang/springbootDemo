@@ -21,4 +21,10 @@ public class ExceptionController1 {
         log.info("into NullPointerException");
         throw new NullPointerException("null point exception");
     }
+
+    @GetMapping("ex3.do")
+    public String genExce3() {
+        log.info("into NullPointerException");
+        return "ok";
+    }
 }
