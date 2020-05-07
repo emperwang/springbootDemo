@@ -2,6 +2,7 @@ package com.wk.constants;
 
 public class ExceptionKey {
 
+    public static final Integer InvalidTokenKey = 202000;
     // servlet, before controller
     public static final Integer NoHandlerFoundExceptionKey = 202001;
     public static final Integer HttpRequestMethodNotSupportedExceptionKey=202002;
@@ -16,5 +17,7 @@ public class ExceptionKey {
     public static final Integer ConversionNotSupportedExceptionKey=202011;
     public static final Integer MissingServletRequestPartExceptionKey = 202012;
     public static final Integer AsyncRequestTimeoutExceptionKey = 202013;
+
+    // business
 
 }
