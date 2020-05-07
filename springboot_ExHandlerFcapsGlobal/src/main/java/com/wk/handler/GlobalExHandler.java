@@ -1,5 +1,6 @@
 package com.wk.handler;
 
+import com.wk.constants.ServletExKey;
 import com.wk.exception.NfvoException;
 import com.wk.util.ExUtil;
 import com.wk.util.JSONUtil;
@@ -84,10 +85,19 @@ public class GlobalExHandler {
             AsyncRequestTimeoutException.class
     })
     @ResponseBody
-    public String handleServletException(Exception e){
+    public ResponseEntity handleServletException(Exception e){
         log.error(ExUtil.buildErrorMessage(e));
         // 对应异常和code的映射处理 key=e.getClass().getSimpleName()
-        return e.getMessage();
+        Integer resove = ServletExKey.resove(e.getClass().getSimpleName());
+        Map<String,String> res = new HashMap<>();
+        if (resove == -1){
+            res.put("code", "201111");
+            res.put("message", e.getMessage());
+        }else {
+            res.put("code", resove.toString());
+            res.put("message", e.getMessage());
+        }
+        return ResponseUtil.getResponse(HttpStatus.INTERNAL_SERVER_ERROR, JSONUtil.beanToJson(res));
     }
 
     /**
@@ -96,10 +106,11 @@ public class GlobalExHandler {
      * @return
      */
     @ExceptionHandler(value = BindException.class)
-    @ResponseBody
-    public String handleBindException(BindException e){
+    // @ResponseBody
+    public ResponseEntity handleBindException(BindException e){
         log.error("参数绑定异常: ", e);
-        return wrapperBindingResult(e.getBindingResult());
+        String res = wrapperBindingResult(e.getBindingResult());
+        return ResponseUtil.getResponse(HttpStatus.BAD_REQUEST, res);
     }
 
     /**
@@ -108,11 +119,11 @@ public class GlobalExHandler {
      * @return
      */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    @ResponseBody
-    public String handleValidException(MethodArgumentNotValidException e){
+    // @ResponseBody
+    public ResponseEntity handleValidException(MethodArgumentNotValidException e){
         log.error(ExUtil.buildErrorMessage(e));
-
-        return wrapperBindingResult(e.getBindingResult());
+        String res = wrapperBindingResult(e.getBindingResult());
+        return ResponseUtil.getResponse(HttpStatus.BAD_REQUEST, res);
     }
 
     private String wrapperBindingResult(BindingResult bindingResult){
@@ -134,11 +145,11 @@ public class GlobalExHandler {
      * @return
      */
     @ExceptionHandler
-    @ResponseBody
-    public String handleException(Exception e){
+    // @ResponseBody
+    public ResponseEntity handleException(Exception e){
         log.error("process other exception.{}",e.getClass().getSimpleName());
         log.error(ExUtil.buildErrorMessage(e));
-
-        return StringUtils.isEmpty(e.getMessage())?"system error":e.getMessage();
+        String msg = StringUtils.isEmpty(e.getMessage()) ? "system error" : e.getMessage();
+        return ResponseUtil.getResponse(HttpStatus.INTERNAL_SERVER_ERROR, msg);
     }
 }
