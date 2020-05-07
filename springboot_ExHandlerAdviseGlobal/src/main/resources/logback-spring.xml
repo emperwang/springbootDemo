@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="encoder.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} NFVO-AM-CONTROLLER [%thread] %-5level %logger - %msg%n"/>
+    <springProperty scope="context" name="runtime.level" source="log.level.runtime" />
+    <springProperty scope="context" name="runtime.path" source="log.runtime.path" />
+    <springProperty scope="context" name="hostname" source="host.name" />
+    <property name="MAX_FILE_SIZE" value="100MB"/>
+    <property name="MAX_HISTORY" value="30"/>
+    <property name="TOTAL_SIZE_CAP" value="10GB"/>
+
+    <!--<property name="log.path" value="logs"/>-->
+    <appender name="runtime" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${runtime.path}/runtime_${hostname}.log</File>
+        <Prudent>false</Prudent>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${runtime.path}/runtime_%d{yyyyMMdd}_%i.log.gz</FileNamePattern>
+            <MaxHistory>${MAX_HISTORY}</MaxHistory>
+            <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+            <totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>${encoder.pattern}</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <appender name="eventLoggerAppender"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${runtime.path}/event_${hostname}.log</File>
+        <Prudent>false</Prudent>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${runtime.path}/event_%d{yyyyMMdd}_%i.log.gz</FileNamePattern>
+            <MaxHistory>${MAX_HISTORY}</MaxHistory>
+            <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+            <totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>${encoder.pattern}</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>${encoder.pattern}</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <appender name="accessAppender"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${runtime.path}/access_${hostname}.log</File>
+        <Prudent>false</Prudent>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${runtime.path}/access_%d{yyyyMMdd}_${hostname}_%i.log.gz</FileNamePattern>
+            <MaxHistory>${MAX_HISTORY}</MaxHistory>
+            <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+            <totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS};%msg%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!--<logger name="com.ericsson"  additivity="true" level="${runtime.level}">
+        <appender-ref ref="runtime" />
+    </logger>
+    <logger name="eventLogger"  additivity="true" level="TRACE">
+        <appender-ref ref="eventLoggerAppender" />
+    </logger>
+    <logger name="accessLogger"  additivity="true" level="TRACE">
+        <appender-ref ref="accessAppender" />
+    </logger>-->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
+
