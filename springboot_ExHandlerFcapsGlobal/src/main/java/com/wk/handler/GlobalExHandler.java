@@ -84,7 +84,7 @@ public class GlobalExHandler {
             AsyncRequestTimeoutException.class
     })
     @ResponseBody
-    public String hadleServletException(Exception e){
+    public String handleServletException(Exception e){
         log.error(ExUtil.buildErrorMessage(e));
         // 对应异常和code的映射处理 key=e.getClass().getSimpleName()
         return e.getMessage();
