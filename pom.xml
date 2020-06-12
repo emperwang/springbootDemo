@@ -55,6 +55,7 @@
         <module>springboot_ExhandlerGlobal2</module>
         <module>springboot_ExHandlerAdviseGlobal</module>
         <module>springboot_ExHandlerFcapsGlobal</module>
+        <module>springboot_mocktext</module>
 
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
