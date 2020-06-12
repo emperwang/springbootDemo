@@ -4,6 +4,7 @@
 target
 logs
 log
+*.log
 .class
 classes
 .idea
