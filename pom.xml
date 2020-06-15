@@ -75,11 +75,12 @@
         </dependency>
 
         <!-- spring-boot-devtools 热部署-->
-       <!-- <dependency>
+       <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional> &lt;!&ndash; 表示依赖不会传递 &ndash;&gt;
-        </dependency>-->
+           <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
 
         <!-- 绑定数据使用 -->
         <dependency>
@@ -93,4 +94,17 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <finalName>kai.boot</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
