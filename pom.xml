@@ -8,55 +8,9 @@
     <artifactId>SbootProject</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>websocket</module>
-        <module>webSocket2</module>
-        <module>LogoReplace</module>
-        <module>InterceptorDemo</module>
-        <module>ThymeleafDemo</module>
-        <module>SwaggerDemo</module>
-        <module>ElasticsearchDemo</module>
-        <module>RabbitmQDemo</module>
-        <module>Shiredemo</module>
-        <module>ActuatorDemo</module>
-        <module>UploadDownloadDemo</module>
-        <module>SafetyDemo</module>
-        <module>GenerateMybatisDemo</module>
-        <module>SingleRedisDemo</module>
-        <module>SpringbootWebServiceDemo</module>
-        <module>QuartzDemo</module>
-        <module>MyBatisDemo</module>
-        <module>HTTPS_Interface</module>
-        <module>Dubbo/DubboAPI</module>
-        <module>Dubbo/DubboProvider</module>
-        <module>Dubbo/DubboConsumer</module>
-        <module>Dubbo/DubboProvider-bean</module>
-        <module>Dubbo/DubboConsumer-bean</module>
-        <module>Dubbo/DubboProvider-xml</module>
-        <!--<module>Dubbo/DubboProvider-xml-hystrix</module>-->
-        <module>Dubbo/DubboConsumer-xml</module>
-        <module>Redis-Test</module>
-        <module>solr-demo</module>
-        <module>kafkaboot</module>
-        <module>springbootAssemble</module>
-        <module>ElasticJobBoot</module>
         <module>FFYAnalysis</module>
-        <module>springbootLogback</module>
-        <module>BootHystrix</module>
-        <module>BootHystrixMock</module>
-        <module>springbootAsyncRestTemplate</module>
         <!--<module>MybatisMultiSource</module>-->
-        <module>springbtoo-multi-source</module>
-        <module>springboot-i18n</module>
-        <module>springbootsecurity</module>
-        <module>springboot_springSession</module>
         <module>fcaps-socket-sever</module>
-        <module>springboot_ExHandlerLocal</module>
-        <module>springboot_ExHandlerglobal</module>
-        <module>springboot_ExhandlerGlobal2</module>
-        <module>springboot_ExHandlerAdviseGlobal</module>
-        <module>springboot_ExHandlerFcapsGlobal</module>
-        <module>springboot_mocktext</module>
-
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
     <packaging>pom</packaging>
@@ -107,4 +61,92 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>springboot-global-exception</id>
+            <modules>
+                <module>springboot_ExHandlerLocal</module>
+                <module>springboot_ExHandlerglobal</module>
+                <module>springboot_ExhandlerGlobal2</module>
+                <module>springboot_ExHandlerAdviseGlobal</module>
+                <module>springboot_ExHandlerFcapsGlobal</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>springboot-integration</id>
+            <modules>
+                <module>springboot-multi-source</module>
+                <module>springboot-i18n</module>
+                <module>springboot-security</module>
+                <module>springboot_springSession</module>
+                <module>springboot-LogoReplace</module>
+                <module>springboot-Interceptor</module>
+                <module>springboot-Elasticsearch</module>
+                <module>springboot-rabbitMQ</module>
+                <module>springboot-shire</module>
+                <module>springboot-actuator</module>
+                <module>springboot-thymeleaf</module>
+                <module>springboot-swaggerDemo</module>
+                <module>springboot-uploadDownload</module>
+                <module>springboot-webServiceDemo</module>
+                <module>springboot-assemble</module>
+                <module>springboot-logback</module>
+                <module>springboot-asyncRestTemplate</module>
+                <module>springboot-safety</module>
+                <module>springboot-generatemybatis</module>
+                <module>springboot-singleRedis</module>
+                <module>springboot-quartz</module>
+                <module>springboot-myBatis</module>
+                <module>springboot-https</module>
+                <module>springboot-rediscluster</module>
+                <module>springboot-solr</module>
+                <module>springboot-kafka</module>
+                <module>springboot-ElasticJob</module>
+                <module>springboot-Hystrix</module>
+                <module>springboot-hystrixMock</module>
+                <module>springboot_mocktext</module>
+                <module>springboot-websocket</module>
+                <module>springboot-webSocket2</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>spring-test</id>
+            <modules>
+                <module>springboot_mocktext</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>websocket</id>
+            <modules>
+                <module>springboot-websocket</module>
+                <module>springboot-webSocket2</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>spring-hystrix</id>
+            <modules>
+                <module>springboot-Hystrix</module>
+                <module>springboot-hystrixMock</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>dubbo</id>
+            <modules>
+                <module>Dubbo/DubboAPI</module>
+                <module>Dubbo/DubboProvider</module>
+                <module>Dubbo/DubboConsumer</module>
+                <module>Dubbo/DubboProvider-bean</module>
+                <module>Dubbo/DubboConsumer-bean</module>
+                <module>Dubbo/DubboProvider-xml</module>
+                <!--<module>Dubbo/DubboProvider-xml-hystrix</module>-->
+                <module>Dubbo/DubboConsumer-xml</module>
+            </modules>
+        </profile>
+    </profiles>
 </project>
