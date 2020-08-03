@@ -14,6 +14,7 @@
         <module>fcaps-socket-sever</module>
         <module>springboot-lifecycle</module>
         <module>springboot-mybatis-txTemplate</module>
+        <module>springboot-servlet</module>
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
     <packaging>pom</packaging>
