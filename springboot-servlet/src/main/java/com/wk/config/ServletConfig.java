@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@ServletComponentScan("com.wk")
 public class ServletConfig {
 
     // 通过bean来创建一个servlet
