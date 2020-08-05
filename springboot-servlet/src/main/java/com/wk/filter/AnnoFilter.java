@@ -13,7 +13,7 @@ public class AnnoFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("this is AnnoFilter init");
+        System.out.println("this is AnnoFilter doFilter");
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
