@@ -15,6 +15,7 @@
         <module>springboot-lifecycle</module>
         <module>springboot-mybatis-txTemplate</module>
         <module>springboot-servlet</module>
+        <module>springboot-advice-example</module>
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
     <packaging>pom</packaging>
