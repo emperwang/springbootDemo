@@ -1,6 +1,7 @@
 package com.wk.demo.config;
 
 import com.wk.demo.controller.ControllerInterface;
+import com.wk.demo.controller.HandlerRequestImpl;
 import com.wk.demo.interceptor.MyInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -41,6 +42,11 @@ public class InterceptorConfig implements WebMvcConfigurer{
     @Bean("/controlleridx")
     public ControllerInterface controllerInterface(){
         return new ControllerInterface();
+    }
+
+    @Bean("/request")
+    public HandlerRequestImpl handlerRequest(){
+        return new HandlerRequestImpl();
     }
 
 }
