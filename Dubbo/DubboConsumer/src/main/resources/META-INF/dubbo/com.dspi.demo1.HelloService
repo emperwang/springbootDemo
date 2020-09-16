@@ -1,0 +1,2 @@
+dog=com.dspi.demo1.DogHelloServiceImpl
+human=com.dspi.demo1.HumanHelloServiceImpl
