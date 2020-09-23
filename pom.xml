@@ -17,6 +17,8 @@
         <module>springboot-servlet</module>
         <module>springboot-advice-example</module>
         <module>springboot-cusomter-executor</module>
+        <module>springboot-dynamic-datasource-baomidou</module>
+        <module>springboot-dynamicsource-seata</module>
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
     <packaging>pom</packaging>

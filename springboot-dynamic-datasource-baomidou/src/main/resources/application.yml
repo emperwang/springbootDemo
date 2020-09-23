@@ -1,0 +1,19 @@
+server:
+  port: 9999
+spring:
+  datasource:
+    dynamic:
+      primary: users    # 设置默认的数据源或者数据源足,默认为master
+      datasource:
+        orders:
+          url:  jdbc:mysql://127.0.0.1:3306/t_orders?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+          driver-class-name: com.mysql.jdbc.Driver
+          username: root
+          password: admin
+        users:
+          url:  jdbc:mysql://127.0.0.1:3306/t_user?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+          driver-class-name: com.mysql.jdbc.Driver
+          username: root
+          password: admin
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
