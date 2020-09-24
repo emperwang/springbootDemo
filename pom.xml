@@ -21,6 +21,10 @@
         <module>springboot-dynamicsource-seata</module>
         <module>springboot-dynamic-datasource-baomidou02</module>
         <module>springboot-dynamic-datasource-mybatis</module>
+        <module>springboot-dynamic-datasource-springdataJpa</module>
+        <module>springboot-dynamic-datasource-jdbcTemplate</module>
+        <module>springboot-dynamic-datasource-shardingJdbc-01</module>
+        <module>springboot-dynamic-datasource-shardingJdbc-02</module>
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
     <packaging>pom</packaging>
