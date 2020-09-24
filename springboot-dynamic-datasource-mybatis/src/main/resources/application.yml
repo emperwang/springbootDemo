@@ -1,0 +1,17 @@
+server:
+  port: 9999
+spring:
+  # datasource 数据源配置内容
+  datasource:
+    # order 数据源
+  orders:
+    jdbc-url: jdbc:mysql://127.0.0.1:3306/test_orders?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: admin
+  # user 数据源
+  users:
+    jdbc-url: jdbc:mysql://127.0.0.1:3306/test_orders?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: admin

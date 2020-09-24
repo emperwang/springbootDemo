@@ -20,6 +20,7 @@
         <module>springboot-dynamic-datasource-baomidou</module>
         <module>springboot-dynamicsource-seata</module>
         <module>springboot-dynamic-datasource-baomidou02</module>
+        <module>springboot-dynamic-datasource-mybatis</module>
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
     <packaging>pom</packaging>
