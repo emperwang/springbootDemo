@@ -11,7 +11,7 @@
         id, user_id
     </sql>
 
-    <select id="selectById" parameterType="Integer" resultType="com.wk.entity.Order">
+    <select id="selectById" parameterType="Integer" resultMap="bmap">
         SELECT
         <include refid="FIELDS" />
         FROM orders

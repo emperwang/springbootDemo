@@ -13,7 +13,7 @@
         id, username,password,create_time
     </sql>
 
-    <select id="selectById" parameterType="Integer" resultType="com.wk.entity.User">
+    <select id="selectById" parameterType="Integer" resultMap="bmap">
         SELECT
         <include refid="FIELDS" />
         FROM users
