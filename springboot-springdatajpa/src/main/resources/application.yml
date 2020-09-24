@@ -1,0 +1,12 @@
+server:
+  port: 19999
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/testjpa?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: admin
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
