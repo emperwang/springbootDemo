@@ -1,0 +1,37 @@
+server:
+  port: 19999
+spring:
+  datasource:
+    # 动态数据源的配置内容
+    dynamic:
+      primary: master # 设置迷人的数据源或者数据源组, 默认为 master
+      datasource:
+        # 订单 orders 主库的数据源配置
+        master:
+          url: jdbc:mysql://127.0.0.1:3306/test_orders?useSSL=false&useUnicode-true&characterEncoding=UTF-8
+          driver-class-name: com.mysql.jdbc.Driver
+          username: root
+          password: admin
+        # 订单 orders 从库数据源配置
+        slave_1:
+          url: jdbc:mysql://127.0.0.1:3306/test_orders01?useSSL=false&useUnicode-true&characterEncoding=UTF-8
+          driver-class-name: com.mysql.jdbc.Driver
+          username: root
+          password: admin
+        slave_2:
+          url: jdbc:mysql://127.0.0.1:3306/test_orders02?useSSL=false&useUnicode-true&characterEncoding=UTF-8
+          driver-class-name: com.mysql.jdbc.Driver
+          username: root
+          password: admin
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+# 此处配置了多个数据源
+# master 订单库的主库
+# slave_1  slave_2 订单库的两个从库
+
+# * 在dynamic-datasource-spring-boot-starter中,多个相同角色的数据源可以形成一个数据源组.
+# 判断标准是: 数据源名以下划线 _ 分隔后的首部即为组名.如:slave_1,slave_2就形成了slave组
+
+logging:
+  level:
+    com.wk.mapper: debug
