@@ -26,6 +26,7 @@
         <module>springboot-dynamic-datasource-shardingJdbc-02</module>
         <module>springboot-springdatajpa</module>
         <module>springboot-springJdbcTemplate</module>
+        <module>springboot-dynamic-datasource-seata-at</module>
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
     <packaging>pom</packaging>
