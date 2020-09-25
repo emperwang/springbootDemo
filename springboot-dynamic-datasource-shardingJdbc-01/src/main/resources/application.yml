@@ -1,0 +1,32 @@
+server:
+  port: 1999
+
+spring:
+  # shardingSphere 配置项
+  shardingsphere:
+    datasource:
+      names: ds-orders, ds-users
+      ds-orders:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/t_orders?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: admin
+      ds-users:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/t_user?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: admin
+    sharding:
+      tables:
+        # orders 表配置
+        orders:
+          actualDataNodes: ds-orders.orders # 映射到ds-orders 数据源的orders表
+        users:
+          actualDataNodes: ds-users.users # 映射到ds-users数据源的users表
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+logging:
+  level:
+    com.wk.mapper: debug
