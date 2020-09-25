@@ -1,0 +1,36 @@
+spring:
+  # shardingSphare 配置项
+  shardingsphere:
+    # 数据源配置
+    datasource:
+      names: ds-master,ds-slave-1,ds-slave-2
+      # 订单主数据库配置
+      ds-master:
+        type: com.zaxxer.hikari.HikariDataSource # 使用 Hikari 数据库连接池
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/t_orders?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: admin
+      # 订单从数据库配置
+      ds-slave-1:
+        type: com.zaxxer.hikari.HikariDataSource # 使用 Hikari 数据库连接池
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/t_orders01?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: admin
+      ds-slave-2:
+        type: com.zaxxer.hikari.HikariDataSource # 使用 Hikari 数据库连接池
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/t_orders02?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: admin
+    # 读写分离配置, 对应YamlMasterSlaveRuleConfiguration
+    masterslave:
+      name: ms    # 名字,任意,需要保证唯一
+      master-data-source-name: ds-master # 主数据库源
+      slave-data-source-names: ds-slave-1,ds-slave-2 # 从数据库源
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+logging:
+  level:
+    com.wk.mapper: debug
