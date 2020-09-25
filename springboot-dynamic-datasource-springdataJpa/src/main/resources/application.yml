@@ -1,0 +1,21 @@
+server:
+  port: 19999
+spring:
+  datasource:
+    # 订单数据源配置
+    orders:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/t_orders?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: admin
+    # 用户数据源配置
+    users:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/t_user?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: admin
+  jpa:
+    show-sql: true  # 打印sql
+    hibernate:  # 配置内容，对应HibernateProperties 类
+      ddl-auto: none
+
