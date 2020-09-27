@@ -1,0 +1,20 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: order-service
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/seata_order?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: admin
+# seata 配置项
+seata:
+  application-id: ${spring.application.name}
+  tx-service-group: ${spring.application.name}-group
+  # 服务配置项 对应serviceProperties类
+  service:
+    vgroup-mapping:
+      order-service-group: default
+    grouplist:
+      default: 127.0.0.1:8091

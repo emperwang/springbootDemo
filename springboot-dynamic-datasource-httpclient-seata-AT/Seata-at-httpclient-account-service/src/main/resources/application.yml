@@ -1,0 +1,21 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: account-service
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/seata_amount?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: admin
+seata:
+  application-id: ${spring.application.name}
+  tx-service-group: ${spring.application.name}-group
+  service:
+    vgroup-mapping:
+      account-service-group: default
+    grouplist:
+      default: 127.0.0.1:8091
+logging:
+  level:
+    com.wk.mapper: debug
