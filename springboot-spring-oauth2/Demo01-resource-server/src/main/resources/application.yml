@@ -1,0 +1,14 @@
+server:
+  port: 8093
+
+security:
+  oauth2:
+    # oauth2 client 配置, 对应 OAuthClientProperties 类
+    client:
+      client-id: clientapp
+      client-secret: 112233
+      # OAuth2 resource配置,对应 ResourceServerProperties 类
+    resource:
+      tokenInfoUri: http://127.0.0.1:8092/oauth/check_token
+    # 访问令牌获取 url, 自定义
+    access-token-uri: http://127.0.0.1:8092/oauth/token
