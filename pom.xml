@@ -28,6 +28,7 @@
         <module>springboot-springJdbcTemplate</module>
         <module>springboot-dynamic-datasource-seata-at</module>
         <module>springboot-dynamic-datasource-httpclient-seata-AT</module>
+        <module>springboot-springWebflux</module>
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
     <packaging>pom</packaging>
