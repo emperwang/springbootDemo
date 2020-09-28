@@ -11,6 +11,8 @@
     <modules>
         <module>Demo01-authorization-with-resource-owner-password-credentials</module>
         <module>Demo01-resource-server</module>
+        <module>Demo02-authorization-server-with-authorization-code</module>
+        <module>Demo02-resource-server</module>
     </modules>
     <modelVersion>4.0.0</modelVersion>
 
