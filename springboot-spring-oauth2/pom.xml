@@ -15,6 +15,8 @@
         <module>Demo02-resource-server</module>
         <module>Demo03-authorization-server-wjth-implicit</module>
         <module>Demo03-resource-server</module>
+        <module>Demo04-resource-server</module>
+        <module>Demo04-authorization-server-with-client-credentials</module>
     </modules>
     <modelVersion>4.0.0</modelVersion>
 
