@@ -13,6 +13,8 @@
         <module>Demo01-resource-server</module>
         <module>Demo02-authorization-server-with-authorization-code</module>
         <module>Demo02-resource-server</module>
+        <module>Demo03-authorization-server-wjth-implicit</module>
+        <module>Demo03-resource-server</module>
     </modules>
     <modelVersion>4.0.0</modelVersion>
 
