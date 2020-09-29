@@ -1,0 +1,9 @@
+server:
+  port: 8902
+
+netty:
+  port: 8091
+
+logging:
+  level:
+    com.wk: debug

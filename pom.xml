@@ -30,6 +30,7 @@
         <module>springboot-dynamic-datasource-httpclient-seata-AT</module>
         <module>springboot-springWebflux</module>
         <module>springboot-spring-oauth2</module>
+        <module>springboot-netty</module>
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
     <packaging>pom</packaging>
