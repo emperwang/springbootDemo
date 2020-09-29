@@ -10,6 +10,27 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>Demo02-resource-server</artifactId>
+    <properties>
+        <!-- 依赖相关配置 -->
+        <spring.boot.version>2.2.4.RELEASE</spring.boot.version>
+        <!-- 插件相关配置 -->
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+    </properties>
 
+    <dependencies>
+        <!-- 实现对 Spring MVC 的自动配置 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- 实现对 Spring Security OAuth2 的自动配置 -->
+        <dependency>
+            <groupId>org.springframework.security.oauth.boot</groupId>
+            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>
