@@ -31,6 +31,7 @@
         <module>springboot-springWebflux</module>
         <module>springboot-spring-oauth2</module>
         <module>springboot-netty</module>
+        <module>springboot-websocket-parent</module>
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
     <packaging>pom</packaging>
@@ -127,8 +128,8 @@
                 <module>springboot-Hystrix</module>
                 <module>springboot-hystrixMock</module>
                 <module>springboot_mocktext</module>
-                <module>springboot-websocket</module>
-                <module>springboot-webSocket2</module>
+<!--                <module>springboot-websocket</module>-->
+<!--                <module>springboot-webSocket2</module>-->
             </modules>
         </profile>
 
@@ -136,14 +137,6 @@
             <id>spring-test</id>
             <modules>
                 <module>springboot_mocktext</module>
-            </modules>
-        </profile>
-
-        <profile>
-            <id>websocket</id>
-            <modules>
-                <module>springboot-websocket</module>
-                <module>springboot-webSocket2</module>
             </modules>
         </profile>
 
