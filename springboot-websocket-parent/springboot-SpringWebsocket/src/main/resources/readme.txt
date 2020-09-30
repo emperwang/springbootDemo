@@ -1,5 +1,4 @@
-基于tomcat的websocket
-
+基于spring的websocket
 测试的前台网站:
 http://www.easyswoole.com/wstool.html
 

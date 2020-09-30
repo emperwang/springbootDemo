@@ -15,6 +15,7 @@
         <module>springboot-websocket</module>
         <module>springboot-webSocket2</module>
         <module>springboot-websocket-multi</module>
+        <module>springboot-SpringWebsocket</module>
     </modules>
 
 </project>
