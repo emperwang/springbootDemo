@@ -33,6 +33,7 @@
         <module>springboot-netty</module>
         <module>springboot-websocket-parent</module>
         <module>springboot-bannerColor</module>
+        <module>springboot-dynamic-profile</module>
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
     <packaging>pom</packaging>
