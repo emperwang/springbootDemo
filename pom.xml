@@ -32,6 +32,7 @@
         <module>springboot-spring-oauth2</module>
         <module>springboot-netty</module>
         <module>springboot-websocket-parent</module>
+        <module>springboot-bannerColor</module>
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
     <packaging>pom</packaging>
