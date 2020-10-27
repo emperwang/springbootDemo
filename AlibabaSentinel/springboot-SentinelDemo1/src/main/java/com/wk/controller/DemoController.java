@@ -20,4 +20,11 @@ public class DemoController {
     public String test(){
         return "test";
     }
+
+    // 模拟访问延迟
+    @GetMapping("sleep")
+    public String sleep() throws InterruptedException {
+        Thread.sleep(2000);
+        return "sleep";
+    }
 }
