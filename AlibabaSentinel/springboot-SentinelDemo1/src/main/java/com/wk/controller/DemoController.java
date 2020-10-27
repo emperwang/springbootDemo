@@ -1,5 +1,6 @@
 package com.wk.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,5 +27,11 @@ public class DemoController {
     public String sleep() throws InterruptedException {
         Thread.sleep(2000);
         return "sleep";
+    }
+    // 热点数据模拟
+    @GetMapping("/pinfo")
+    @SentinelResource("demo_product_info_hot")
+    public String productInfo(String id){
+        return "商品编号:"+id;
     }
 }
