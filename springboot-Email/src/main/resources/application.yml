@@ -1,0 +1,16 @@
+server:
+  port: 9080
+
+spring:
+  mail:
+    default-encoding: UTF-8
+    host: smtp.163.com
+    username: kai_f_wang@163.com
+    password: HYDRHRSUDZUKNWUI #邮箱授权码
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
