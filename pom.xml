@@ -35,6 +35,7 @@
         <module>springboot-bannerColor</module>
         <module>springboot-dynamic-profile</module>
         <module>AlibabaSentinel</module>
+        <module>springboot-VerificationCode</module>
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
     <packaging>pom</packaging>
