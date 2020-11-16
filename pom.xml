@@ -8,7 +8,6 @@
     <artifactId>SbootProject</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>MybatisMultiSource</module>
         <module>FFYAnalysis</module>
         <!--<module>MybatisMultiSource</module>-->
         <module>fcaps-socket-sever</module>
@@ -99,7 +98,12 @@
                 <module>springboot_ExHandlerFcapsGlobal</module>
             </modules>
         </profile>
-
+        <profile>
+            <id>spring-multi-source</id>
+            <modules>
+                <module>MybatisMultiSource</module>
+            </modules>
+        </profile>
         <profile>
             <id>springboot-integration</id>
             <modules>

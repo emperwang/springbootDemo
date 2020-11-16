@@ -14,7 +14,11 @@ spring:
         password: admin
         driver-class-name: com.mysql.jdbc.Driver
       slave:
-        url: jdbc:postgresql://192.168.72.18:5432/test
-        username: root
-        password: admin
+        # localhost
+        #url: jdbc:postgresql://192.168.30.15:5432/postgres
+        #username: fcaps_am
+        #password: fcaps_am
+        url: jdbc:postgresql://192.168.30.15:5432/postgres
+        username: fcaps_am
+        password: fcaps_am
         driver-class-name: org.postgresql.Driver
