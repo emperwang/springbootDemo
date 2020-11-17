@@ -105,6 +105,7 @@ public class DruidConfig {
         wallConfig.setNoneBaseStatementAllow(true); // 允许一次执行多条语句
         WallFilter wallFilter = new WallFilter();
         wallFilter.setConfig(wallConfig);
+        filters.add(wallFilter);
         dataSource.setProxyFilters(filters);
 
         return dataSource;
