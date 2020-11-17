@@ -1,6 +1,9 @@
 package com.wk.config;
 
+import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.wall.WallConfig;
+import com.alibaba.druid.wall.WallFilter;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,6 +17,8 @@ import javax.sql.DataSource;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 @Configuration
@@ -94,6 +99,14 @@ public class DruidConfig {
             e.printStackTrace();
         }
         dataSource.setConnectProperties(properties);
+        List<Filter> filters = new ArrayList<>();
+        WallConfig wallConfig = new WallConfig();
+        wallConfig.setMultiStatementAllow(true);    // 允许执行多条语句
+        wallConfig.setNoneBaseStatementAllow(true); // 允许一次执行多条语句
+        WallFilter wallFilter = new WallFilter();
+        wallFilter.setConfig(wallConfig);
+        dataSource.setProxyFilters(filters);
+
         return dataSource;
     }
     @Bean
