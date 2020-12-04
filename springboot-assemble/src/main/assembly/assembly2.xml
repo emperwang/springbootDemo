@@ -16,6 +16,7 @@
             <scope>runtime</scope>
             <fileMode>755</fileMode>
             <directoryMode>755</directoryMode>
+            <!-- 依赖的jar包解压缩到目的jar包中 -->
             <unpack>true</unpack>
             <unpackOptions>
                 <encoding>UTF-8</encoding>
