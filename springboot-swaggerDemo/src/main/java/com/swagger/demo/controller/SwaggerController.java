@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Api(value = "用户接口",tags = {"dogapi"}) //接口简要标注,对中文支持不太好
-@RequestMapping("swagger")
+//@RequestMapping("swagger")
 public class SwaggerController {
 
     @RequestMapping("test.do")
