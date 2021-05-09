@@ -1,0 +1,5 @@
+server:
+  port: 9696
+spring:
+  application:
+    name: schedule-task
