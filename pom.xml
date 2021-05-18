@@ -38,6 +38,7 @@
         <module>springboot-Email</module>
         <module>springboot-JwtToken</module>
         <module>springboot-scheduleTask</module>
+        <module>springboot_userManager</module>
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
     <packaging>pom</packaging>
