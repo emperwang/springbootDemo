@@ -13,4 +13,11 @@ public class HelloController {
 
         return "hello";
     }
+
+    @GetMapping("getstr1.do")
+    @ResponseBody
+    public String getString1(){
+
+        return "{\"name\":\"123\"}";
+    }
 }
