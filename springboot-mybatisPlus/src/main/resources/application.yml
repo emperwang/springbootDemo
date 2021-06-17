@@ -1,0 +1,10 @@
+server:
+  port: 8989
+spring:
+  application:
+    name: spring-mybatis-plus
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.30.15:5432/postgres
+    username: fcaps_am
+    password: fcaps_am
