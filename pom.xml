@@ -40,6 +40,7 @@
         <module>springboot-scheduleTask</module>
         <module>springboot_userManager</module>
         <module>springboot-mybatisPlus</module>
+        <module>springboot-validated</module>
         <!--<module>Dubbo/DubboConsumer-xml-hystrix</module>-->
     </modules>
     <packaging>pom</packaging>
