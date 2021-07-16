@@ -17,10 +17,14 @@ import java.lang.annotation.*;
 public @interface Contains {
 
     boolean required() default true;
+    // 不允许使用 valid开头的参数或函数
+    //String[] validaddr() default {};
 
-    String message() default "message";
+    String[] addr() default {};
 
-    Class<?>[] groups() default {Default.class};
+    String message() default "not a valid address";
+
+    Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 }

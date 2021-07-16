@@ -16,16 +16,20 @@ import java.util.List;
  */
 public class MyValidate implements ConstraintValidator<Contains,String> {
 
-    private List<String> results = Arrays.asList("bj","nj","gz","sh");
+    // private List<String> results = Arrays.asList("bj","nj","gz","sh");
+    private List<String> results;
     private boolean required;
     @Override
     public void initialize(Contains constraintAnnotation) {
         required = constraintAnnotation.required();
+        results = Arrays.asList(constraintAnnotation.addr());
     }
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        
+        if (required){
+            return results.contains(value);
+        }
         return false;
     }
 }
