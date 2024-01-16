@@ -1,20 +1,36 @@
 package com.stu.manage.entiry;
 
-import java.util.Date;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.util.List;
 
 /**
  * @author: Sparks
  * @Date: 2024/1/15 21:42
  * @Description
  */
-
+@TableName("stu_user")
 public class User {
+    @TableId
+    private Long uid;
     private String username;
     private String password;
     private String email;
     private String phoneNumber;
-    private Date createTime;
-    private Date updateTime;
+    private String rids;
+    private List<Role> roles;
+    private String createTime;
+    private String updateTime;
+
+    public Long getUid() {
+        return uid;
+    }
+
+    public void setUid(Long uid) {
+        this.uid = uid;
+    }
 
     public String getUsername() {
         return username;
@@ -48,19 +64,35 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    public Date getUpdateTime() {
+    public String getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public String getRids() {
+        return rids;
+    }
+
+    public void setRids(String rids) {
+        this.rids = rids;
     }
 }

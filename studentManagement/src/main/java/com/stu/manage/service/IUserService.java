@@ -11,6 +11,13 @@ import java.util.List;
  */
 public interface IUserService {
 
-
     List<User> listUsers();
+
+    int deleteUserById(int id);
+
+    int deleteByUids(List<Integer> ids);
+
+    int updateUserById(User u);
+
+    int saveUser(User u);
 }

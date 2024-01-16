@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8090
   servlet:
     context-path: /api/v1
 spring:
@@ -21,3 +21,4 @@ spring:
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
