@@ -1,12 +1,13 @@
 package com.stu.manage.controller;
 
+import com.stu.manage.entiry.CommonResult;
 import com.stu.manage.entiry.User;
 import com.stu.manage.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,15 +23,17 @@ public class UserController {
     private IUserService userService;
 
     @GetMapping(value = "list")
-    public List<User> getUser(){
+    public CommonResult<User> getUser(){
         List<User> users = userService.listUsers();
-        return users;
+        CommonResult.CommonResultBuilder<User> builder = new CommonResult.CommonResultBuilder();
+        return builder.counts(users.size()).results(users).build();
     }
 
 
     @DeleteMapping(value = "deleteId/{id}")
-    public int deleteUserById(@PathVariable(name = "id") int id){
-        return userService.deleteUserById(id);
+    public ResponseEntity deleteUserById(@PathVariable(name = "id") int id){
+        int ct = userService.deleteUserById(id);
+        return ct>0?ResponseEntity.status(HttpStatus.NO_CONTENT).build():ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
 
@@ -47,8 +50,8 @@ public class UserController {
 
 
     @PostMapping(value = "save")
-    public int saveUser(@RequestBody User u){
-        return userService.saveUser(u);
+    public ResponseEntity saveUser(@RequestBody User u){
+        return userService.saveUser(u)>0?ResponseEntity.status(HttpStatus.CREATED).build():ResponseEntity.status(HttpStatus.BAD_REQUEST).body("");
     }
 
 }

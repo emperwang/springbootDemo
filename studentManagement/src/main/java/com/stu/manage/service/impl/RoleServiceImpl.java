@@ -21,6 +21,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
 
     private RoleMapper roleMapper;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-DD HH:mm:ss");
+
     @Override
     public List<Role> listRoles() {
         return roleMapper.listAllRoles();
