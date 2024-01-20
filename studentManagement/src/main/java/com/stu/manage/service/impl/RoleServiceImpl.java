@@ -28,12 +28,12 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     }
 
     @Override
-    public int deleteRoleById(int id) {
+    public int deleteRoleById(long id) {
         return roleMapper.deleteById(id);
     }
 
     @Override
-    public int deleteRolesByIds(List<Integer> ids) {
+    public int deleteRolesByIds(List<Long> ids) {
         return roleMapper.deleteBatchIds(ids);
     }
 
@@ -44,10 +44,10 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     }
 
     @Override
-    public int saveRole(Role r) {
+    public Role saveRole(Role r) {
         r.setCreateTime(formatter.format(LocalDateTime.now()));
         r.setUpdateTime(formatter.format(LocalDateTime.now()));
-        return roleMapper.insert(r);
+        return roleMapper.insert(r)>0?r:null;
     }
 
 

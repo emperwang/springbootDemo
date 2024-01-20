@@ -13,11 +13,11 @@ public interface IRoleService {
 
     List<Role> listRoles();
 
-    int deleteRoleById(int id);
+    int deleteRoleById(long id);
 
-    int deleteRolesByIds(List<Integer> ids);
+    int deleteRolesByIds(List<Long> ids);
 
     int updateRolesById(Role r);
 
-    int saveRole(Role r);
+    Role saveRole(Role r);
 }

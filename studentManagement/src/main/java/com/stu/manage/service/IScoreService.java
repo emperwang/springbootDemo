@@ -12,4 +12,12 @@ import java.util.List;
 public interface IScoreService {
 
     List<Score> listScores();
+
+    int deleteScoreById(long id);
+
+    int deleteScoreByIds(List<Long> ids);
+
+    int updateScoreById(Score r);
+
+    Score saveScore(Score r);
 }

@@ -19,5 +19,5 @@ public interface IUserService {
 
     int updateUserById(User u);
 
-    int saveUser(User u);
+    User saveUser(User u);
 }

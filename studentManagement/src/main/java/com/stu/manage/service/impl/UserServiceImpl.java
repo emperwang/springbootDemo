@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -63,14 +62,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public int saveUser(User u) {
+    public User saveUser(User u) {
         if (StringUtils.isEmpty(u.getRids())){
             u.setRids("2");
         }
 
         u.setCreateTime(formatter.format(LocalDateTime.now()));
         u.setUpdateTime(formatter.format(LocalDateTime.now()));
-        return userMapper.insert(u);
+        int ct = userMapper.insert(u);
+        return ct>0?u:null;
     }
 
 

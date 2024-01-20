@@ -4,9 +4,9 @@ import com.stu.manage.entiry.CommonResult;
 import com.stu.manage.entiry.Role;
 import com.stu.manage.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,7 +29,29 @@ public class RoleController {
     }
 
 
+    @DeleteMapping(value = "deleteId/{id}")
+    public ResponseEntity deleteRoleById(@PathVariable(name = "id") long id){
+        int ct = roleService.deleteRoleById(id);
+        return ct>0?ResponseEntity.status(HttpStatus.NO_CONTENT).build():ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
 
+
+    @DeleteMapping(value = "deleteIds")
+    public int deleteRoleByMultipleIds(@RequestParam(name = "ids",required = true) List<Long> ids){
+        return roleService.deleteRolesByIds(ids);
+    }
+
+
+    @PutMapping(value = "updateById")
+    public int updateRole(@RequestBody Role u){
+        return roleService.updateRolesById(u);
+    }
+
+
+    @PostMapping(value = "save")
+    public ResponseEntity saveRole(@RequestBody Role u){
+        return roleService.saveRole(u)!=null?ResponseEntity.status(HttpStatus.CREATED).body(u):ResponseEntity.status(HttpStatus.BAD_REQUEST).body("");
+    }
 
     @Autowired
     public void setRoleService(IRoleService roleService) {

@@ -1,6 +1,7 @@
 package com.stu.manage.service;
 
 import com.stu.manage.entiry.Certificate;
+import com.stu.manage.entiry.Score;
 
 import java.util.List;
 
@@ -12,4 +13,12 @@ import java.util.List;
 public interface ICertificateService {
 
     List<Certificate> listCerts();
+
+    int deleteCertById(long id);
+
+    int deleteCertByIds(List<Long> ids);
+
+    int updateCertById(Certificate r);
+
+    Certificate saveCert(Certificate r);
 }
