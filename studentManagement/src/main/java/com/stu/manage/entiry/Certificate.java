@@ -1,5 +1,6 @@
 package com.stu.manage.entiry;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -10,7 +11,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
  */
 @TableName("stu_certificate")
 public class Certificate {
-    @TableId
+    @TableId(value = "pid", type = IdType.AUTO)
     private Long pid;
 
     private Long uid;
