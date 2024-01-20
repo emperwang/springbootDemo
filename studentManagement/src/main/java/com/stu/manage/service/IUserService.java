@@ -13,9 +13,9 @@ public interface IUserService {
 
     List<User> listUsers();
 
-    int deleteUserById(int id);
+    int deleteUserById(long id);
 
-    int deleteByUids(List<Integer> ids);
+    int deleteByUids(List<Long> ids);
 
     int updateUserById(User u);
 

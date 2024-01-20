@@ -1,5 +1,6 @@
 package com.stu.manage.entiry;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -10,7 +11,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
  */
 @TableName("stu_score")
 public class Score {
-    @TableId
+    @TableId(value = "sid", type = IdType.AUTO)
     private Long sid;
 
     private Long uid;

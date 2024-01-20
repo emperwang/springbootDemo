@@ -8,6 +8,7 @@ import com.stu.manage.mapper.UserMapper;
 import com.stu.manage.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -43,13 +44,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public int deleteUserById(int id) {
+    public int deleteUserById(long id) {
         int i = userMapper.deleteById(id);
         return i;
     }
 
     @Override
-    public int deleteByUids(List<Integer> ids) {
+    public int deleteByUids(List<Long> ids) {
         int count = userMapper.deleteBatchIds(ids);
         return count;
     }
@@ -63,6 +64,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public int saveUser(User u) {
+        if (StringUtils.isEmpty(u.getRids())){
+            u.setRids("2");
+        }
+
         u.setCreateTime(formatter.format(LocalDateTime.now()));
         u.setUpdateTime(formatter.format(LocalDateTime.now()));
         return userMapper.insert(u);

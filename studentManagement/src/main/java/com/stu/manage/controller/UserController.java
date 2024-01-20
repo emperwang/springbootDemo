@@ -31,14 +31,14 @@ public class UserController {
 
 
     @DeleteMapping(value = "deleteId/{id}")
-    public ResponseEntity deleteUserById(@PathVariable(name = "id") int id){
+    public ResponseEntity deleteUserById(@PathVariable(name = "id") long id){
         int ct = userService.deleteUserById(id);
         return ct>0?ResponseEntity.status(HttpStatus.NO_CONTENT).build():ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
 
     @DeleteMapping(value = "deleteIds")
-    public int deleteUserByMultipleIds(@RequestParam(name = "ids",required = true) List<Integer> ids){
+    public int deleteUserByMultipleIds(@RequestParam(name = "ids",required = true) List<Long> ids){
         return userService.deleteByUids(ids);
     }
 
