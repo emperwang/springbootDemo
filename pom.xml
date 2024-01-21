@@ -60,12 +60,12 @@
         </dependency>
 
         <!-- spring-boot-devtools 热部署-->
-       <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-           <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
+<!--       <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-devtools</artifactId>-->
+<!--           <scope>runtime</scope>-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
 
         <!-- 绑定数据使用 -->
         <dependency>
