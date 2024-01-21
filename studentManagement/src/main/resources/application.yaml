@@ -18,6 +18,12 @@ spring:
       path: /h2
       settings:
         web-allow-others: false
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10M
+      max-request-size: 10M
+
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
