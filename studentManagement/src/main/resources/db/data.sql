@@ -24,5 +24,4 @@ insert into stu_score values
 (12, 5,'zhaosi',63,76,86,91,92,'20131',LOCALTIMESTAMP,LOCALTIMESTAMP);
 
 insert into stu_certificate values
-(1, 3,'zhangsan','/pic/','2012',LOCALTIMESTAMP,LOCALTIMESTAMP,LOCALTIMESTAMP),
-(2, 3,'zhangsan','/test/','2013',LOCALTIMESTAMP,LOCALTIMESTAMP,LOCALTIMESTAMP);
+(1, 3,'zhangsan','/api/v1/images/2024-01-21_13_56_39_4d0fd56b95.jpg','2012',LOCALTIMESTAMP,LOCALTIMESTAMP,LOCALTIMESTAMP)
