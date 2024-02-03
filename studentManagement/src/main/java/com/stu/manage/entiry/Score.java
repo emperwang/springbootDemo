@@ -17,18 +17,22 @@ public class Score {
     private Long uid;
 
     private String username;
+    //
+    private String academicYear;
 
-    private int english;
+    // 1 上学期,2下学期
+    private int semester;
 
-    private int physical;
+    private int score;
 
-    private int math;
+    private String course;
 
-    private int compute;
+    private float credit;
 
-    private int java;
+    // 1 必修, 2 选秀
+    private int courseNature;
 
-    private String grade;
+    private float gradePointAverage;
 
     private String createTime;
 
@@ -58,52 +62,60 @@ public class Score {
         this.username = username;
     }
 
-    public int getEnglish() {
-        return english;
+    public String getAcademicYear() {
+        return academicYear;
     }
 
-    public void setEnglish(int english) {
-        this.english = english;
+    public void setAcademicYear(String academicYear) {
+        this.academicYear = academicYear;
     }
 
-    public int getPhysical() {
-        return physical;
+    public int getSemester() {
+        return semester;
     }
 
-    public void setPhysical(int physical) {
-        this.physical = physical;
+    public void setSemester(int semester) {
+        this.semester = semester;
     }
 
-    public int getMath() {
-        return math;
+    public int getScore() {
+        return score;
     }
 
-    public void setMath(int math) {
-        this.math = math;
+    public void setScore(int score) {
+        this.score = score;
     }
 
-    public int getCompute() {
-        return compute;
+    public String getCourse() {
+        return course;
     }
 
-    public void setCompute(int compute) {
-        this.compute = compute;
+    public void setCourse(String course) {
+        this.course = course;
     }
 
-    public int getJava() {
-        return java;
+    public float getCredit() {
+        return credit;
     }
 
-    public void setJava(int java) {
-        this.java = java;
+    public void setCredit(float credit) {
+        this.credit = credit;
     }
 
-    public String getGrade() {
-        return grade;
+    public int getCourseNature() {
+        return courseNature;
     }
 
-    public void setGrade(String grade) {
-        this.grade = grade;
+    public void setCourseNature(int courseNature) {
+        this.courseNature = courseNature;
+    }
+
+    public float getGradePointAverage() {
+        return gradePointAverage;
+    }
+
+    public void setGradePointAverage(float gradePointAverage) {
+        this.gradePointAverage = gradePointAverage;
     }
 
     public String getCreateTime() {
