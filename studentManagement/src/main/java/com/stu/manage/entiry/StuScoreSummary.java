@@ -11,6 +11,8 @@ public class StuScoreSummary {
 
     private String academicYear;
 
+    private int semester;
+
     private String columns;
 
 
@@ -36,5 +38,13 @@ public class StuScoreSummary {
 
     public void setColumns(String columns) {
         this.columns = columns;
+    }
+
+    public int getSemester() {
+        return semester;
+    }
+
+    public void setSemester(int semester) {
+        this.semester = semester;
     }
 }

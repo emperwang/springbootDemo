@@ -55,6 +55,14 @@ public class ScoreServiceImpl extends ServiceImpl<ScoreMapper, Score> implements
         return scoreMapper.insert(r)>0?r:null;
     }
 
+    @Override
+    public List<Score> listScoreByAcademicYearAndSemester(String year, int semester) {
+        QueryWrapper<Score> scoreQueryWrapper = new QueryWrapper<>();
+        scoreQueryWrapper.eq("academic_year", year);
+        scoreQueryWrapper.eq("semester", semester);
+        return scoreMapper.selectList(scoreQueryWrapper);
+    }
+
 
     @Autowired
     public void setScoreMapper(ScoreMapper scoreMapper) {

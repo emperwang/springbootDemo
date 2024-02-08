@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: Sparks
@@ -29,10 +30,16 @@ public class ScoreSummaryController {
         return ResponseEntity.ok(listAllSummary);
     }
 
-    @GetMapping("listbyyear/{year}")
-    public ResponseEntity<StuScoreSummary> listByYear(@PathVariable("year") String year){
-        return ResponseEntity.ok(stuScoreSummaryService.getColumnByYear(year));
+    @GetMapping("listbyyear/{year}/{semester}")
+    public ResponseEntity<StuScoreSummary> listByYear(@PathVariable("year") String year,@PathVariable("semester") int semester){
+        return ResponseEntity.ok(stuScoreSummaryService.getColumnByYear(year, semester));
     }
+
+    @GetMapping("groupScore/{year}/{semester}")
+    public ResponseEntity<List<Map>> groupScoreByYearAndUser(@PathVariable("year") String year,@PathVariable("semester") int semester){
+        return ResponseEntity.ok(stuScoreSummaryService.groupScoreByUserAndYear(year,semester));
+    }
+
 
     @Autowired
     public void setStuScoreSummaryService(IStuScoreSummaryService stuScoreSummaryService) {

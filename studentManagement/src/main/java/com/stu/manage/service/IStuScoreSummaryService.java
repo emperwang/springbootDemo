@@ -3,6 +3,7 @@ package com.stu.manage.service;
 import com.stu.manage.entiry.StuScoreSummary;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: Sparks
@@ -13,5 +14,7 @@ public interface IStuScoreSummaryService {
 
     List<StuScoreSummary> listAllSummary();
 
-    StuScoreSummary getColumnByYear(String year);
+    StuScoreSummary getColumnByYear(String year,int semester);
+
+    List<Map> groupScoreByUserAndYear(String year, int semester);
 }

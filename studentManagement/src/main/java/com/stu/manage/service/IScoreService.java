@@ -20,4 +20,6 @@ public interface IScoreService {
     int updateScoreById(Score r);
 
     Score saveScore(Score r);
+
+    List<Score> listScoreByAcademicYearAndSemester(String year, int semester);
 }
