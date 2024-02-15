@@ -1,7 +1,7 @@
 package com.stu.manage.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.stu.manage.entiry.User;
+import com.stu.manage.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

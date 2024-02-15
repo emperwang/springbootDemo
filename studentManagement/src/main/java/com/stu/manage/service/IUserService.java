@@ -1,6 +1,6 @@
 package com.stu.manage.service;
 
-import com.stu.manage.entiry.User;
+import com.stu.manage.entity.User;
 
 import java.util.List;
 

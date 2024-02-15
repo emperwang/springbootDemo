@@ -1,6 +1,6 @@
 package com.stu.manage.service.impl;
 
-import com.stu.manage.entiry.ImageResponse;
+import com.stu.manage.entity.ImageResponse;
 import com.stu.manage.service.IImageService;
 import com.stu.manage.utils.TimeFormatUtil;
 import com.stu.manage.utils.UUIDUtils;

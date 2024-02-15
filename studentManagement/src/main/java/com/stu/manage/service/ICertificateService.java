@@ -1,7 +1,6 @@
 package com.stu.manage.service;
 
-import com.stu.manage.entiry.Certificate;
-import com.stu.manage.entiry.Score;
+import com.stu.manage.entity.Certificate;
 
 import java.util.List;
 

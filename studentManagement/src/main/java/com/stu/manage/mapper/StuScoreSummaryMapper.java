@@ -1,8 +1,10 @@
 package com.stu.manage.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.stu.manage.entiry.StuScoreSummary;
+import com.stu.manage.entity.StuScoreSummary;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * @author: Sparks
@@ -12,4 +14,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface StuScoreSummaryMapper extends BaseMapper<StuScoreSummary> {
 
+
+    void batchInsert(List<StuScoreSummary> summaryList);
 }

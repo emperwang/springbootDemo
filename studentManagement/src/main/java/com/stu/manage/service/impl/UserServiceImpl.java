@@ -1,8 +1,8 @@
 package com.stu.manage.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.stu.manage.entiry.Role;
-import com.stu.manage.entiry.User;
+import com.stu.manage.entity.Role;
+import com.stu.manage.entity.User;
 import com.stu.manage.mapper.RoleMapper;
 import com.stu.manage.mapper.UserMapper;
 import com.stu.manage.service.IUserService;

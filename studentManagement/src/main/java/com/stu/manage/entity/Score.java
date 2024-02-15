@@ -1,4 +1,4 @@
-package com.stu.manage.entiry;
+package com.stu.manage.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -23,13 +23,13 @@ public class Score {
     // 1 上学期,2下学期
     private int semester;
 
-    private int score;
+    private float score;
 
     private String course;
 
     private float credit;
 
-    // 1 必修, 2 选秀
+    // 1 必修, 2 选修
     private int courseNature;
 
     private float gradePointAverage;
@@ -78,11 +78,11 @@ public class Score {
         this.semester = semester;
     }
 
-    public int getScore() {
+    public float getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(float score) {
         this.score = score;
     }
 

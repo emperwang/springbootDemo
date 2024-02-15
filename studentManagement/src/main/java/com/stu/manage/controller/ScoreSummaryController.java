@@ -1,6 +1,6 @@
 package com.stu.manage.controller;
 
-import com.stu.manage.entiry.StuScoreSummary;
+import com.stu.manage.entity.StuScoreSummary;
 import com.stu.manage.service.IStuScoreSummaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

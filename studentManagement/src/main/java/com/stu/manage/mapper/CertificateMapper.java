@@ -1,7 +1,7 @@
 package com.stu.manage.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.stu.manage.entiry.Certificate;
+import com.stu.manage.entity.Certificate;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

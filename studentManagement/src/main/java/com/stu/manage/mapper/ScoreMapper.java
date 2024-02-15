@@ -1,8 +1,10 @@
 package com.stu.manage.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.stu.manage.entiry.Score;
+import com.stu.manage.entity.Score;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * @author: Sparks
@@ -11,4 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface ScoreMapper extends BaseMapper<Score> {
+
+    void batchInsert(List<Score> scores);
 }

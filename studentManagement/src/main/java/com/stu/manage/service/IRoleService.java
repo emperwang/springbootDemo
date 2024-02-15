@@ -1,6 +1,6 @@
 package com.stu.manage.service;
 
-import com.stu.manage.entiry.Role;
+import com.stu.manage.entity.Role;
 
 import java.util.List;
 

@@ -1,8 +1,7 @@
 package com.stu.manage.controller;
 
-import com.stu.manage.entiry.Certificate;
-import com.stu.manage.entiry.CommonResult;
-import com.stu.manage.entiry.Role;
+import com.stu.manage.entity.Certificate;
+import com.stu.manage.entity.CommonResult;
 import com.stu.manage.service.ICertificateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

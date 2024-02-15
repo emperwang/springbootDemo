@@ -20,4 +20,9 @@ public class ColumnConstant {
     public static final String INTELLECTUAL = "intellectualScore";
 
     public static final String SCORE_SUMMARY = "scoreSummary";
+
+    public static final String EDUCATION_SCORE = "德育成绩";
+    public static final String SPORT = "体育";
+    public static final String SPORTS = "体美劳";
+
 }

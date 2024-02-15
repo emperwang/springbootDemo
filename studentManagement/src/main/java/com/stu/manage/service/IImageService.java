@@ -1,6 +1,6 @@
 package com.stu.manage.service;
 
-import com.stu.manage.entiry.ImageResponse;
+import com.stu.manage.entity.ImageResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 /**

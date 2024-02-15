@@ -1,7 +1,7 @@
 package com.stu.manage.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.stu.manage.entiry.Role;
+import com.stu.manage.entity.Role;
 import com.stu.manage.mapper.RoleMapper;
 import com.stu.manage.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;

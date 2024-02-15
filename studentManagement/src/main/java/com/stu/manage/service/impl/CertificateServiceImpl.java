@@ -2,7 +2,7 @@ package com.stu.manage.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.stu.manage.entiry.Certificate;
+import com.stu.manage.entity.Certificate;
 import com.stu.manage.mapper.CertificateMapper;
 import com.stu.manage.service.ICertificateService;
 import com.stu.manage.utils.TimeFormatUtil;

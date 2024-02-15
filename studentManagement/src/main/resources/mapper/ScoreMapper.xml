@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stu.manage.mapper.ScoreMapper">
+
+    <insert id="batchInsert" parameterType="com.stu.manage.entity.Score">
+        INSERT INTO stu_score ( uid, username, academic_year, semester,score,course,credit,course_nature,
+        grade_point_average,create_time,update_time ) values
+        <foreach collection="list" item="user" separator=",">
+            (#{user.uid},#{user.username},#{user.academicYear},#{user.semester},#{user.score}
+            ,#{user.course},#{user.credit},#{user.courseNature},#{user.gradePointAverage},LOCALTIMESTAMP,LOCALTIMESTAMP)
+        </foreach>
+    </insert>
+
+</mapper>

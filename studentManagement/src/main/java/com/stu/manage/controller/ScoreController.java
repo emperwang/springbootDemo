@@ -1,14 +1,13 @@
 package com.stu.manage.controller;
 
-import com.stu.manage.entiry.CommonResult;
-import com.stu.manage.entiry.Role;
-import com.stu.manage.entiry.Score;
-import com.stu.manage.service.IRoleService;
+import com.stu.manage.entity.CommonResult;
+import com.stu.manage.entity.Score;
 import com.stu.manage.service.IScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -55,6 +54,12 @@ public class ScoreController {
         return scoreService.saveScore(u)!=null?ResponseEntity.status(HttpStatus.CREATED).body(u):ResponseEntity.status(HttpStatus.BAD_REQUEST).body("");
     }
 
+    @PostMapping(value = "upload")
+    public ResponseEntity uploadScore(MultipartFile file){
+        List<Score> scores = scoreService.batchInsert(file);
+
+        return ResponseEntity.ok().body(scores);
+    }
 
     @Autowired
     public void setScoreService(IScoreService scoreService) {

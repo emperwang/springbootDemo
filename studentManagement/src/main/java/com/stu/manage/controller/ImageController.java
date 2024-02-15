@@ -1,7 +1,7 @@
 package com.stu.manage.controller;
 
-import com.stu.manage.entiry.ImageResponse;
-import com.stu.manage.entiry.StatusResult;
+import com.stu.manage.entity.ImageResponse;
+import com.stu.manage.entity.StatusResult;
 import com.stu.manage.service.IImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

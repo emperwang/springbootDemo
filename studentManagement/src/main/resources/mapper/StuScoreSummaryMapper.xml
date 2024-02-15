@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stu.manage.mapper.StuScoreSummaryMapper">
+
+    <insert id="batchInsert" parameterType="com.stu.manage.entity.StuScoreSummary">
+        INSERT INTO stu_score_summary ( academic_year,semester,columns ) values
+        <foreach collection="list" item="sum" separator=",">
+            (#{sum.academicYear},#{sum.semester},#{sum.columns})
+        </foreach>
+    </insert>
+
+</mapper>

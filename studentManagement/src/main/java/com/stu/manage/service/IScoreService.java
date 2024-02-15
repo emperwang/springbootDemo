@@ -1,6 +1,7 @@
 package com.stu.manage.service;
 
-import com.stu.manage.entiry.Score;
+import com.stu.manage.entity.Score;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface IScoreService {
     Score saveScore(Score r);
 
     List<Score> listScoreByAcademicYearAndSemester(String year, int semester);
+
+    List<Score> batchInsert(MultipartFile file);
 }

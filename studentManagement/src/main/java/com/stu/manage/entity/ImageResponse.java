@@ -1,4 +1,4 @@
-package com.stu.manage.entiry;
+package com.stu.manage.entity;
 
 /**
  * @author: Sparks

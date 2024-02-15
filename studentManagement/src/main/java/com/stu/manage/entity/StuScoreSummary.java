@@ -1,13 +1,18 @@
-package com.stu.manage.entiry;
+package com.stu.manage.entity;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 
 /**
  * @author: Sparks
  * @Date: 2024/2/7 21:26
  * @Description
  */
+@TableName("stu_score_summary")
 public class StuScoreSummary {
-
-    private long ssid;
+    @TableId(value = "ssid", type = IdType.AUTO)
+    private Long ssid;
 
     private String academicYear;
 

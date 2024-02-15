@@ -1,16 +1,25 @@
 package com.stu.manage.service.impl;
 
+import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.stu.manage.entiry.Score;
+import com.stu.manage.entity.Score;
+import com.stu.manage.entity.StuScoreSummary;
+import com.stu.manage.listener.ExcelEventListener;
 import com.stu.manage.mapper.ScoreMapper;
 import com.stu.manage.service.IScoreService;
+import com.stu.manage.service.IStuScoreSummaryService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author: Sparks
@@ -18,10 +27,14 @@ import java.util.List;
  * @Description
  */
 @Service
+@Slf4j
 public class ScoreServiceImpl extends ServiceImpl<ScoreMapper, Score> implements IScoreService {
 
     private ScoreMapper scoreMapper;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-DD HH:mm:ss");
+    private IStuScoreSummaryService stuScoreSummaryService;
+
+
     @Override
     public List<Score> listScores() {
         QueryWrapper<Score> scoreQueryWrapper = new QueryWrapper<>();
@@ -63,9 +76,42 @@ public class ScoreServiceImpl extends ServiceImpl<ScoreMapper, Score> implements
         return scoreMapper.selectList(scoreQueryWrapper);
     }
 
+    @Override
+    public List<Score> batchInsert(MultipartFile file) {
+        // 解析excel, 获取成绩,以及课程表
+        ExcelEventListener eventListener = new ExcelEventListener();
+        try {
+            EasyExcel.read(file.getInputStream(),eventListener).sheet(0).doRead();
+        } catch (IOException e) {
+            log.error("batch insert error: ", e);
+        }
+        List<Score> scores = eventListener.getScores();
+        // 保存成绩
+        scoreMapper.batchInsert(scores);
+        // 保存课程
+        Map<String, String> courses = eventListener.getAcademicToCourses();
+
+        List<StuScoreSummary> summaryList = courses.entrySet().stream().map(entry -> {
+            String[] s = entry.getKey().split("_");
+            String columns = entry.getValue();
+            StuScoreSummary stuScoreSummary = new StuScoreSummary();
+            stuScoreSummary.setAcademicYear(s[0]);
+            stuScoreSummary.setSemester(Integer.parseInt(s[1]));
+            stuScoreSummary.setColumns(columns);
+            return stuScoreSummary;
+        }).collect(Collectors.toList());
+        stuScoreSummaryService.saveSummary(summaryList);
+        return scores;
+    }
+
 
     @Autowired
     public void setScoreMapper(ScoreMapper scoreMapper) {
         this.scoreMapper = scoreMapper;
+    }
+
+    @Autowired
+    public void setStuScoreSummaryService(IStuScoreSummaryService stuScoreSummaryService) {
+        this.stuScoreSummaryService = stuScoreSummaryService;
     }
 }

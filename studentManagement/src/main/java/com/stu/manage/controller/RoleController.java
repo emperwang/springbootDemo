@@ -1,7 +1,7 @@
 package com.stu.manage.controller;
 
-import com.stu.manage.entiry.CommonResult;
-import com.stu.manage.entiry.Role;
+import com.stu.manage.entity.CommonResult;
+import com.stu.manage.entity.Role;
 import com.stu.manage.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,6 @@
 package com.stu.manage.service;
 
-import com.stu.manage.entiry.StuScoreSummary;
+import com.stu.manage.entity.StuScoreSummary;
 
 import java.util.List;
 import java.util.Map;
@@ -17,4 +17,6 @@ public interface IStuScoreSummaryService {
     StuScoreSummary getColumnByYear(String year,int semester);
 
     List<Map> groupScoreByUserAndYear(String year, int semester);
+
+    List<StuScoreSummary> saveSummary(List<StuScoreSummary> stuScoreSummary);
 }
