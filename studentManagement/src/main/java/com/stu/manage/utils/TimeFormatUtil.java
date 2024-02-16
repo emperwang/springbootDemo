@@ -10,11 +10,11 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Description
  */
 public class TimeFormatUtil {
-    public static final String format1 = "YYYY-MM-DD HH:mm:ss";
-    public static final String format2 = "YYYY-MM-DD_HH_mm_ss";
+    public static final String format1 = "YYYY-MM-dd HH:mm:ss";
+    public static final String format2 = "YYYY-MM-dd_HH_mm_ss";
 
-    private static ThreadLocal<DateTimeFormatter> threadLocal = ThreadLocal.withInitial(() -> DateTimeFormatter.ofPattern("YYYY-MM-DD HH:mm:ss"));
-    private static ThreadLocal<DateTimeFormatter> suffix = ThreadLocal.withInitial(() -> DateTimeFormatter.ofPattern("YYYY-MM-DD_HH_mm_ss"));
+    private static ThreadLocal<DateTimeFormatter> threadLocal = ThreadLocal.withInitial(() -> DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss"));
+    private static ThreadLocal<DateTimeFormatter> suffix = ThreadLocal.withInitial(() -> DateTimeFormatter.ofPattern("YYYY-MM-dd_HH_mm_ss"));
 
     private static Map<String,ThreadLocal<DateTimeFormatter>> formats = new ConcurrentHashMap<>(2);
 

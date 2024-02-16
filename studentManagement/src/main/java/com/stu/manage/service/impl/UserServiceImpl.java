@@ -6,6 +6,7 @@ import com.stu.manage.entity.User;
 import com.stu.manage.mapper.RoleMapper;
 import com.stu.manage.mapper.UserMapper;
 import com.stu.manage.service.IUserService;
+import com.stu.manage.utils.TimeFormatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -31,7 +32,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     private RoleMapper roleMapper;
 
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-DD HH:mm:ss");
+    private DateTimeFormatter formatter = TimeFormatUtil.getFormat(TimeFormatUtil.format1);
 
     private Map<Long,User> userCache = new ConcurrentHashMap<>();
 

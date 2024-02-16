@@ -11,6 +11,7 @@ import com.stu.manage.mapper.ScoreMapper;
 import com.stu.manage.service.IScoreService;
 import com.stu.manage.service.IStuScoreSummaryService;
 import com.stu.manage.service.IUserService;
+import com.stu.manage.utils.TimeFormatUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ import java.util.stream.Collectors;
 public class ScoreServiceImpl extends ServiceImpl<ScoreMapper, Score> implements IScoreService {
 
     private ScoreMapper scoreMapper;
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-DD HH:mm:ss");
+    private DateTimeFormatter formatter = TimeFormatUtil.getFormat(TimeFormatUtil.format1);
     private IStuScoreSummaryService stuScoreSummaryService;
     private IUserService userService;
 
