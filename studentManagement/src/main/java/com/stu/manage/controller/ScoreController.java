@@ -22,12 +22,18 @@ public class ScoreController {
 
     private IScoreService scoreService;
 
-
     @GetMapping("list")
     public CommonResult<Score> listScore(){
         CommonResult.CommonResultBuilder<Score> builder = new CommonResult.CommonResultBuilder<>();
         List<Score> scores = scoreService.listScores();
         return builder.counts(scores.size()).results(scores).build();
+    }
+
+    @GetMapping("listScoreByUidYearSemester/{uid}/{year}/{semester}")
+    public ResponseEntity listScoreByUidYearAndSemester(@PathVariable("uid") String uid,
+                                                        @PathVariable("year") String year,
+                                                        @PathVariable("semester") String semester){
+        return ResponseEntity.ok(scoreService.getScoreByUidYearAndSemester(uid,year,semester));
     }
 
     @DeleteMapping(value = "deleteId/{id}")

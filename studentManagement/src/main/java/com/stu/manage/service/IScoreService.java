@@ -4,6 +4,7 @@ import com.stu.manage.entity.Score;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: Sparks
@@ -25,4 +26,6 @@ public interface IScoreService {
     List<Score> listScoreByAcademicYearAndSemester(String year, int semester);
 
     List<Score> batchInsert(MultipartFile file);
+
+    Map<String,String> getScoreByUidYearAndSemester(String uid, String year, String semester);
 }

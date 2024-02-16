@@ -23,7 +23,7 @@ create table if not exists  stu_score (
     uid BIGINT not null,
     username varchar(50) NOT NULL COMMENT 'user name',
 	academic_year varchar(50) NOT NULL COMMENT '学年',
-	semester int NOT NULL COMMENT '学年',
+	semester int NOT NULL COMMENT '学期',
 	score float NOT NULL COMMENT '成绩',
     course varchar(50) NOT NULL COMMENT '课程',
     credit float NOT NULL COMMENT '学分',

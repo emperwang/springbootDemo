@@ -49,10 +49,35 @@ public class StuScoreSummaryImpl extends ServiceImpl<StuScoreSummaryMapper, StuS
 
     @Override
     public List<Map> groupScoreByUserAndYear(String year, int semester) {
-        List<Map> lists = new ArrayList<>();
+        // 0 学年综测成绩( 上下学期综合平均值)
+        // 1 上学期的综测成绩
+        // 2 下学期的综测成绩
+        if (semester == 0){
+            // 上学期综测
+            List<Map> summary = getOneSemesterScoreSummary(year, 1);
+            // 下学期综测
+            List<Map> summary1 = getOneSemesterScoreSummary(year, 2);
+            // 学年
+            summary.stream().forEach(map -> {
+                Optional<Map> optional = summary1.stream().filter(m -> ((String) m.get(ColumnConstant.SSID)).equalsIgnoreCase((String) map.get(ColumnConstant.SSID))).findFirst();
+                if (optional.isPresent()){
+                    double aDouble = Double.parseDouble((String)optional.get().get(ColumnConstant.SCORE_SUMMARY));
+                    double bDouble = Double.parseDouble((String)map.get(ColumnConstant.SCORE_SUMMARY));
+                    double tmp = (aDouble+bDouble)/2;
+                    map.put(ColumnConstant.SCORE_SUMMARY,String.format("%.2f", tmp));
+                }
+            });
+            return summary;
+        }else{
+            return getOneSemesterScoreSummary(year, semester);
+        }
+
+    }
+
+    private List<Map> getOneSemesterScoreSummary(String year, int semester){
         List<Score> scores = scoreService.listScoreByAcademicYearAndSemester(year, semester);
         Map<Long, List<Score>> listMap = scores.stream().collect(Collectors.groupingBy(Score::getUid));
-        lists = listMap.entrySet().stream().map(entry -> {
+        return listMap.entrySet().stream().map(entry -> {
             Map<String, String> map = new ConcurrentHashMap<>();
             Long key = entry.getKey();
             map.put(ColumnConstant.SSID, key.toString());
@@ -92,8 +117,6 @@ public class StuScoreSummaryImpl extends ServiceImpl<StuScoreSummaryMapper, StuS
             map.put(ColumnConstant.SCORE_SUMMARY, String.format("%.2f", scoreSummary));
             return map;
         }).collect(Collectors.toList());
-
-        return lists;
     }
 
     @Override

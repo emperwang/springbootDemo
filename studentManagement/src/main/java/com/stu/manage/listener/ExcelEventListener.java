@@ -88,6 +88,7 @@ public class ExcelEventListener extends AnalysisEventListener<Map<Integer,String
         int semester = Integer.parseInt(data.get(2));
 
         if (!uids.contains(uid)){
+            uids.add(uid);
             User user = new User();
             user.setUid(uid);
             user.setUsername(userName);

@@ -3,6 +3,7 @@ package com.stu.manage.service.impl;
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.stu.manage.constant.ColumnConstant;
 import com.stu.manage.entity.Score;
 import com.stu.manage.entity.StuScoreSummary;
 import com.stu.manage.entity.User;
@@ -22,6 +23,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 /**
@@ -109,6 +111,22 @@ public class ScoreServiceImpl extends ServiceImpl<ScoreMapper, Score> implements
         List<User> users = eventListener.getUsers();
         userService.batchInsert(users);
         return scores;
+    }
+
+    @Override
+    public Map<String, String> getScoreByUidYearAndSemester(String uid, String year, String semester) {
+        QueryWrapper<Score> scoreQueryWrapper = new QueryWrapper<>();
+        scoreQueryWrapper.eq("academic_year", year);
+        scoreQueryWrapper.eq("semester", semester);
+        scoreQueryWrapper.eq("uid", uid);
+        List<Score> scores = scoreMapper.selectList(scoreQueryWrapper);
+        Map<String, String> res = new ConcurrentHashMap<>(20);
+        res.put(ColumnConstant.USERNAME, scores.get(0).getUsername());
+        scores.stream().forEach(sc -> {
+            res.put(sc.getCourse(), String.format("%2f", sc.getScore()));
+        });
+
+        return res;
     }
 
 
