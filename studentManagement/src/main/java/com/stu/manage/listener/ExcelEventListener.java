@@ -6,13 +6,11 @@ import com.alibaba.excel.metadata.data.ReadCellData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stu.manage.constant.ColumnConstant;
 import com.stu.manage.entity.Score;
+import com.stu.manage.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -37,11 +35,17 @@ public class ExcelEventListener extends AnalysisEventListener<Map<Integer,String
     // 学期 学年对应的课程
     private Map<String,String> academicToCourses;
 
+    // 学生信息
+    private Set<Long> uids;
+    private List<User> users;
+
     public ExcelEventListener() {
         this.heads = new ArrayList<>(20);
         this.scores = new ArrayList<>(20);
         this.scoreToCredit = new ConcurrentHashMap<>(10);
         this.academicToCourses = new ConcurrentHashMap<>(10);
+        this.uids = new HashSet<>(20);
+        this.users = new ArrayList<>(20);
     }
 
     @Override
@@ -78,10 +82,17 @@ public class ExcelEventListener extends AnalysisEventListener<Map<Integer,String
     }
 
     private void convertToScore(Map<Integer, String> data){
-        long uid = Long.parseLong(data.get(3));
+        Long uid = Long.parseLong(data.get(3));
         String userName = data.get(4);
         String acadmic = data.get(1);
         int semester = Integer.parseInt(data.get(2));
+
+        if (!uids.contains(uid)){
+            User user = new User();
+            user.setUid(uid);
+            user.setUsername(userName);
+            users.add(user);
+        }
 
         String academicKey = String.join("_", acadmic, data.get(2));
         if (!academicToCourses.containsKey(academicKey)){
@@ -117,5 +128,9 @@ public class ExcelEventListener extends AnalysisEventListener<Map<Integer,String
 
     public Map<String, String> getAcademicToCourses() {
         return academicToCourses;
+    }
+
+    public List<User> getUsers() {
+        return users;
     }
 }

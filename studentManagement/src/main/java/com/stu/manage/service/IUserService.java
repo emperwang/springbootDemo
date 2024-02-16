@@ -20,4 +20,6 @@ public interface IUserService {
     int updateUserById(User u);
 
     User saveUser(User u);
+
+    List<User> batchInsert(List<User> users);
 }

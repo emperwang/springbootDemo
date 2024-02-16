@@ -3,10 +3,7 @@ insert into stu_user values
 (2, 'test','test','test2@qq.com','2','1911817756',LOCALTIMESTAMP,LOCALTIMESTAMP),
 (3, 'zhangsan','test','zhangsan@qq.com','2','1911817756',LOCALTIMESTAMP,LOCALTIMESTAMP),
 (4, 'wangwu','test','wangwu@qq.com','2','1911817756',LOCALTIMESTAMP,LOCALTIMESTAMP),
-(5, 'zhaosi','test','zhaosi@qq.com','2','1911817756',LOCALTIMESTAMP,LOCALTIMESTAMP),
-(201400002761, '王梦飞','test','wangfei@qq.com','2','1911817756',LOCALTIMESTAMP,LOCALTIMESTAMP),
-(201400002758, '王岩','test','wangyan@qq.com','2','1911817756',LOCALTIMESTAMP,LOCALTIMESTAMP),
-(201400004119, '王豪琪','test','haoqi@qq.com','2','1911817756',LOCALTIMESTAMP,LOCALTIMESTAMP);
+(5, 'zhaosi','test','zhaosi@qq.com','2','1911817756',LOCALTIMESTAMP,LOCALTIMESTAMP);
 
 insert into stu_role values
 (1, 'admin','/admin,/role,/user,/certificate',LOCALTIMESTAMP,LOCALTIMESTAMP),

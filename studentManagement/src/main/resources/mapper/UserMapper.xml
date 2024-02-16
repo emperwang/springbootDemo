@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stu.manage.mapper.UserMapper">
+
+    <insert id="batchInsert" parameterType="com.stu.manage.entity.User">
+        INSERT INTO stu_user ( uid, username, password, email,rids,phone_number,create_time,update_time ) values
+        <foreach collection="list" item="user" separator=",">
+            (#{user.uid},#{user.username},#{user.password},#{user.email},#{user.rids}
+            ,#{user.phoneNumber},LOCALTIMESTAMP,LOCALTIMESTAMP)
+        </foreach>
+    </insert>
+
+</mapper>

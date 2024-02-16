@@ -10,10 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 /**
@@ -29,6 +32,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     private RoleMapper roleMapper;
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-DD HH:mm:ss");
+
+    private Map<Long,User> userCache = new ConcurrentHashMap<>();
+
+    @PostConstruct
+    public void postOperation(){
+        List<User> users = listUsers();
+        users.stream().forEach(u -> {
+            userCache.put(u.getUid(), u);
+        });
+    }
 
     @Override
     public List<User> listUsers() {
@@ -71,6 +84,29 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         u.setUpdateTime(formatter.format(LocalDateTime.now()));
         int ct = userMapper.insert(u);
         return ct>0?u:null;
+    }
+
+    @Override
+    public List<User> batchInsert(List<User> users) {
+        // filter内存中没有的数据
+        List<User> list = users.stream().filter(u -> !userCache.containsKey(u.getUid())).collect(Collectors.toList());
+        // 设置默认配置
+        list.stream().forEach(u -> {
+            if (StringUtils.isEmpty(u.getPassword())){
+                u.setPassword("123456");
+            }
+            if (StringUtils.isEmpty(u.getEmail())){
+                u.setEmail("123@163.com");
+            }
+            if (StringUtils.isEmpty(u.getRids())){
+                u.setRids("2");
+            }
+            if (StringUtils.isEmpty(u.getPhoneNumber())){
+                u.setPhoneNumber("17111912011");
+            }
+        });
+        userMapper.batchInsert(list);
+        return list;
     }
 
 

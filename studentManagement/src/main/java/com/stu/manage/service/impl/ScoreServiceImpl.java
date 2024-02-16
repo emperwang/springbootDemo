@@ -5,10 +5,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.stu.manage.entity.Score;
 import com.stu.manage.entity.StuScoreSummary;
+import com.stu.manage.entity.User;
 import com.stu.manage.listener.ExcelEventListener;
 import com.stu.manage.mapper.ScoreMapper;
 import com.stu.manage.service.IScoreService;
 import com.stu.manage.service.IStuScoreSummaryService;
+import com.stu.manage.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +35,7 @@ public class ScoreServiceImpl extends ServiceImpl<ScoreMapper, Score> implements
     private ScoreMapper scoreMapper;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-DD HH:mm:ss");
     private IStuScoreSummaryService stuScoreSummaryService;
-
+    private IUserService userService;
 
     @Override
     public List<Score> listScores() {
@@ -101,6 +103,10 @@ public class ScoreServiceImpl extends ServiceImpl<ScoreMapper, Score> implements
             return stuScoreSummary;
         }).collect(Collectors.toList());
         stuScoreSummaryService.saveSummary(summaryList);
+
+        // 保存学生信息
+        List<User> users = eventListener.getUsers();
+        userService.batchInsert(users);
         return scores;
     }
 
@@ -113,5 +119,10 @@ public class ScoreServiceImpl extends ServiceImpl<ScoreMapper, Score> implements
     @Autowired
     public void setStuScoreSummaryService(IStuScoreSummaryService stuScoreSummaryService) {
         this.stuScoreSummaryService = stuScoreSummaryService;
+    }
+
+    @Autowired
+    public void setUserService(IUserService userService) {
+        this.userService = userService;
     }
 }
